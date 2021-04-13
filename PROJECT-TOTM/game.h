@@ -22,6 +22,7 @@ public:
 	sf::Sprite sprite1;
 	sf::Texture texture;
 	const bool running() const;
+	//test walls,remove later
 	sf::RectangleShape test[8];
 	//functions
 	void pollevents();
