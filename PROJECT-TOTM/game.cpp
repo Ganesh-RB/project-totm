@@ -3,6 +3,8 @@
 //private functions
 void game::initvariables()
 {
+	/*These lines are only to intialize some walls to test player movement,
+	will be removed later on*/
 	for (int i = 0; i < 7; i++) {
 		test[i].setFillColor(sf::Color::Blue);
 	}
