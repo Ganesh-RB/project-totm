@@ -1,6 +1,6 @@
 #include "player.h"
 #include <iostream>
-enum move_dir_no { MOVE_NULL, MOVE_LEFT, MOVE_RIGHT, MOVE_DOWN, MOVE_TOP };
+enum move_dir_no { MOVE_NULL, MOVE_LEFT, MOVE_RIGHT, MOVE_DOWN, MOVE_UP };
 void player::initvariables()
 {
 	this->movementspeed = 15.0f;
@@ -48,7 +48,7 @@ void player::getendtrail(int num)
 	case MOVE_DOWN:
 		end_trail = sf::Vector2f(pb.left, pb.top + pb.height);
 		break;
-	case MOVE_TOP:
+	case MOVE_UP:
 		end_trail = sf::Vector2f(pb.left, pb.top);
 		break;
 	default:
@@ -82,7 +82,7 @@ void player::updateinput()
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
 			moving = true;
-			movedirection = MOVE_TOP;
+			movedirection = MOVE_UP;
 			start_trail = sf::Vector2f(pb.left , pb.top+pb.height);
 		}
 	}
@@ -99,7 +99,7 @@ void player::updateinput()
 		case MOVE_DOWN:
 			this->shape.move( 0.f, this->movementspeed*dt*time_mult);
 			break;
-		case MOVE_TOP:
+		case MOVE_UP:
 			this->shape.move(0.f,-this->movementspeed*dt*time_mult);
 			break;
 		default:
@@ -138,7 +138,7 @@ void player::updatewindowcollision(sf::RenderTarget * target)
 		if ((fabs(start_trail.x -end_trail.x)>playerbounds.width+5.f) || (fabs(start_trail.y - end_trail.y) > playerbounds.height + 5.f))
 		{
 			trails.push_back(curr_trail(&start_trail, &end_trail));
-			std::cout << "number of elements in trail vector are " << trails.size() << std::endl;
+			//std::cout << "number of elements in trail vector are " << trails.size() << std::endl;
 		}
 	}
 }
@@ -177,7 +177,7 @@ void player::update_collision(sf::RectangleShape* object) {
 			}
 		}
 		break;
-	case MOVE_TOP:
+	case MOVE_UP:
 		if ((pb.left >= ob.left) && (pb.left + pb.width <= ob.left + ob.width)) {
 			if (!(pb.top+pb.height< ob.top)) {
 				if (pb.top  <ob.top+ ob.height) {
@@ -194,10 +194,10 @@ void player::update_collision(sf::RectangleShape* object) {
 		getendtrail(movedirection);
 		moving = false;
 		movedirection = MOVE_NULL;
-		if ((fabs(start_trail.x - end_trail.x) > pb.width + 5.f) || (fabs(start_trail.y - end_trail.y) > pb.height + 5.f))
+		if ((fabs(start_trail.x - end_trail.x) > pb.width*1.2) || (fabs(start_trail.y - end_trail.y) > pb.height*1.2))
 		{
 			trails.push_back(curr_trail(&start_trail, &end_trail));
-			std::cout << "number of elements in trail vector are " << trails.size() << std::endl;
+			//std::cout << "number of elements in trail vector are " << trails.size() << std::endl;
 		}
 	}
 }

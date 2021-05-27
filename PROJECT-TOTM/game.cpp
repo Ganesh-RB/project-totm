@@ -3,28 +3,29 @@
 //private functions
 void game::initvariables()
 {
-	/*These lines are only to intialize some walls to test player movement,
-	will be removed later on*/
-	for (int i = 0; i < 7; i++) {
-		test[i].setFillColor(sf::Color::Blue);
-	}
-	test[0].setSize(sf::Vector2f(150.f, 30.f));
-	test[0].setPosition(0.f, 0.f);
-	test[1].setSize(sf::Vector2f(30.f, 150.f));
-	test[1].setPosition(0.f, 0.f);
-	test[2].setSize(sf::Vector2f(90.f, 30.f));
-	test[2].setPosition(0.f, 120.f);
-	test[3].setSize(sf::Vector2f(30.f, 180.f));
-	test[3].setPosition(120.f, 30.f);
-	test[4].setSize(sf::Vector2f(30.f, 30.f));
-	test[4].setPosition(60.f, 60.f);
-	test[5].setSize(sf::Vector2f(30.f, 90.f));
-	test[5].setPosition(60.f, 150.f);
-	test[6].setSize(sf::Vector2f(60.f, 30.f));
-	test[6].setPosition(90.f, 210.f);
-
-
-	
+	wall_generator.add_wall(0, 20, 5, wall_generator.UP);
+	wall_generator.add_wall(0, 19, 9, wall_generator.RIGHT);
+	wall_generator.add_wall(8, 19, 1, wall_generator.UP);
+	wall_generator.add_wall(8, 18, 2, wall_generator.RIGHT);
+	wall_generator.add_wall(9, 19, 2, wall_generator.UP);
+	wall_generator.add_wall(9, 17, 2, wall_generator.RIGHT);
+	wall_generator.add_wall(10, 18, 10, wall_generator.UP);
+	wall_generator.add_wall(9, 14, 3, wall_generator.UP);
+	wall_generator.add_wall(0, 15, 3, wall_generator.RIGHT);
+	wall_generator.add_wall(2, 16, 2, wall_generator.UP);
+	wall_generator.add_wall(2, 14, 5, wall_generator.RIGHT);
+	wall_generator.add_wall(3, 15, 3, wall_generator.UP);
+	wall_generator.add_wall(4, 12, 3, wall_generator.LEFT);
+	wall_generator.add_wall(0, 13, 4, wall_generator.UP);
+	wall_generator.add_wall(0, 9, 3, wall_generator.RIGHT);
+	wall_generator.add_wall(2, 10, 2, wall_generator.UP);
+	wall_generator.add_wall(2, 8, 9, wall_generator.RIGHT);
+	//FLOATERS
+	wall_generator.add_wall(2, 17, 2, wall_generator.RIGHT);
+	wall_generator.add_wall(5, 16, 1, wall_generator.RIGHT);
+	wall_generator.add_wall(4, 11, 1, wall_generator.RIGHT);
+	wall_generator.add_wall(5, 10, 1, wall_generator.RIGHT);
+	wall_generator.add_wall(6, 12, 1, wall_generator.RIGHT);
 	this->window = nullptr;
 }
 
@@ -83,8 +84,8 @@ void game::update(float* _dt,float* _time_mult)
 	time_mult = *_time_mult;
 	this->pollevents();
 	this->player1.update(this->window,&dt,&time_mult );
-	for (int i = 0; i < 7; i++) {
-		player1.update_collision(&test[i]);
+	for (auto i : wall_generator.walls) {
+		player1.update_collision(&i);
 	}
 
 }
@@ -94,9 +95,7 @@ void game::render()
 	this->window->clear();
 	//draw game objects
 	this->player1.render(this->window);
-	for (int i = 0; i < 7; i++) {
-		window->draw(test[i]);
-	}
+	this->wall_generator.render(this->window);
 	this->window->display();
 
 }

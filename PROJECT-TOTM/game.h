@@ -1,6 +1,6 @@
 #pragma once
 #include "player.h"
-
+#include "wall_gen.h"
 class game
 {
 private:
@@ -12,7 +12,7 @@ private:
 	//private functions
 	float dt;
 	float time_mult;
-	player player1{30.f,60.f};
+	player player1{30.f,540.f};
 	void initvariables();
 	void initwindow();
 public:
@@ -22,8 +22,7 @@ public:
 	sf::Sprite sprite1;
 	sf::Texture texture;
 	const bool running() const;
-	//test walls,remove later
-	sf::RectangleShape test[8];
+	wall_gen wall_generator{sf::Color::Blue,30.f};
 	//functions
 	void pollevents();
 	void update(float* _dt,float* _time_mult);

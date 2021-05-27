@@ -11,12 +11,12 @@ int main()
 	//game loop
 	while(game.running())
 	{  
+		dt = timer.restart().asSeconds();
 		//update
 		game.update(&dt, &time_mult);
 
 		//render
 		game.render();
-		dt=timer.restart().asSeconds();
 	}
 	
 	return 0;
