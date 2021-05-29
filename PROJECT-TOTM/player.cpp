@@ -8,11 +8,11 @@ void player::initvariables()
 	movedirection = MOVE_NULL;
 }
 
-const void player::initshape ()
+const void player::initshape()
 {
-	this->shape.setFillColor(sf::Color::Color(0,255,0,255));
+	this->shape.setFillColor(sf::Color::Color(0, 255, 0, 255));
 	this->shape.setSize(sf::Vector2f(30.f, 30.f));
-	
+
 }
 
 
@@ -30,7 +30,7 @@ player::~player()
 
 sf::Vector2f player::getcoord()
 {
-	sf::Vector2f result= shape.getPosition();
+	sf::Vector2f result = shape.getPosition();
 	return result;
 }
 
@@ -59,13 +59,13 @@ void player::getendtrail(int num)
 
 void player::updateinput()
 {
-	if(moving==false){
+	if (moving == false) {
 		sf::FloatRect pb = this->shape.getGlobalBounds(); //pb is for playerbounds
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
 			moving = true;
 			movedirection = MOVE_LEFT;
-			start_trail = sf::Vector2f(pb.left + pb.width , pb.top);
+			start_trail = sf::Vector2f(pb.left + pb.width, pb.top);
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
@@ -77,30 +77,30 @@ void player::updateinput()
 		{
 			moving = true;
 			movedirection = MOVE_DOWN;
-			start_trail = sf::Vector2f(pb.left , pb.top);
+			start_trail = sf::Vector2f(pb.left, pb.top);
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
 			moving = true;
 			movedirection = MOVE_UP;
-			start_trail = sf::Vector2f(pb.left , pb.top+pb.height);
+			start_trail = sf::Vector2f(pb.left, pb.top + pb.height);
 		}
 	}
 	if (moving == true)
 	{
-		switch(movedirection)
+		switch (movedirection)
 		{
 		case MOVE_LEFT:
-			this->shape.move(-this->movementspeed*dt*time_mult, 0.f);			
+			this->shape.move(-this->movementspeed*dt*time_mult, 0.f);
 			break;
 		case MOVE_RIGHT:
-			this->shape.move(this->movementspeed*dt*time_mult, 0.f);			
+			this->shape.move(this->movementspeed*dt*time_mult, 0.f);
 			break;
 		case MOVE_DOWN:
-			this->shape.move( 0.f, this->movementspeed*dt*time_mult);
+			this->shape.move(0.f, this->movementspeed*dt*time_mult);
 			break;
 		case MOVE_UP:
-			this->shape.move(0.f,-this->movementspeed*dt*time_mult);
+			this->shape.move(0.f, -this->movementspeed*dt*time_mult);
 			break;
 		default:
 			printf("error in player movement direction variable \n");
@@ -118,7 +118,7 @@ void player::updatewindowcollision(sf::RenderTarget * target)
 		this->shape.setPosition(0.f, playerbounds.top);
 		flag = 1;
 	}
-	else if (playerbounds.left + playerbounds.width > target->getSize().x){
+	else if (playerbounds.left + playerbounds.width > target->getSize().x) {
 		this->shape.setPosition(target->getSize().x - playerbounds.width, playerbounds.top);
 		flag = 1;
 	}
@@ -135,7 +135,7 @@ void player::updatewindowcollision(sf::RenderTarget * target)
 		getendtrail(movedirection);
 		moving = false;
 		movedirection = MOVE_NULL;
-		if ((fabs(start_trail.x -end_trail.x)>playerbounds.width+5.f) || (fabs(start_trail.y - end_trail.y) > playerbounds.height + 5.f))
+		if ((fabs(start_trail.x - end_trail.x) > playerbounds.width + 5.f) || (fabs(start_trail.y - end_trail.y) > playerbounds.height + 5.f))
 		{
 			trails.push_back(curr_trail(&start_trail, &end_trail));
 			//std::cout << "number of elements in trail vector are " << trails.size() << std::endl;
@@ -148,7 +148,7 @@ void player::update_collision(sf::RectangleShape* object) {
 	sf::FloatRect pb = this->shape.getGlobalBounds();
 	switch (movedirection) {
 	case MOVE_LEFT:
-		if ((pb.top >= ob.top) && (pb.top + pb.height <= ob.top + ob.height)) {
+		if ((pb.top >= ob.top - 5.f) && (pb.top + pb.height <= ob.top + ob.height + 5.f)) {
 			if (!(pb.left < ob.left)) {
 				if (pb.left < ob.left + ob.width) {
 					flag1 = 1;
@@ -158,9 +158,9 @@ void player::update_collision(sf::RectangleShape* object) {
 		}
 		break;
 	case MOVE_RIGHT:
-		if ((pb.top >= ob.top) && (pb.top + pb.height <= ob.top + ob.height)) {
-			if (!(pb.left +pb.width>ob.left+ob.width)){
-				if (pb.left +pb.width> ob.left ) {
+		if ((pb.top >= ob.top - 5.f) && (pb.top + pb.height <= ob.top + ob.height + 5.f)) {
+			if (!(pb.left + pb.width > ob.left + ob.width)) {
+				if (pb.left + pb.width > ob.left) {
 					flag1 = 1;
 					this->shape.setPosition(ob.left - pb.width, pb.top);
 				}
@@ -168,21 +168,21 @@ void player::update_collision(sf::RectangleShape* object) {
 		}
 		break;
 	case MOVE_DOWN:
-		if((pb.left>= ob.left) && (pb.left + pb.width <= ob.left + ob.width)) {
-			if (!(pb.top > ob.top+ob.height)) {
-				if (pb.top+pb.height>ob.top){
+		if ((pb.left >= ob.left - 5.f) && (pb.left + pb.width <= ob.left + ob.width + 5.f)) {
+			if (!(pb.top > ob.top + ob.height)) {
+				if (pb.top + pb.height > ob.top) {
 					flag1 = 1;
-					this->shape.setPosition(pb.left,ob.top-pb.height);
+					this->shape.setPosition(pb.left, ob.top - pb.height);
 				}
 			}
 		}
 		break;
 	case MOVE_UP:
-		if ((pb.left >= ob.left) && (pb.left + pb.width <= ob.left + ob.width)) {
-			if (!(pb.top+pb.height< ob.top)) {
-				if (pb.top  <ob.top+ ob.height) {
+		if ((pb.left >= ob.left - 5.f) && (pb.left + pb.width <= ob.left + ob.width + 5.f)) {
+			if (!(pb.top + pb.height < ob.top)) {
+				if (pb.top < ob.top + ob.height) {
 					flag1 = 1;
-					this->shape.setPosition(pb.left, ob.top+ob.height);
+					this->shape.setPosition(pb.left, ob.top + ob.height);
 				}
 			}
 		}
@@ -202,7 +202,7 @@ void player::update_collision(sf::RectangleShape* object) {
 	}
 }
 
-void player::update(sf::RenderTarget* target,float* _dt,float* _time_mult)
+void player::update(sf::RenderTarget* target, float* _dt, float* _time_mult)
 {
 	dt = *_dt;
 	time_mult = *_time_mult;
@@ -218,19 +218,17 @@ void player::render(sf::RenderTarget * target)
 		target->draw(i);
 	}
 	target->draw(this->shape);
-	
+
 }
 
 sf::RectangleShape player::curr_trail(sf::Vector2f* start, sf::Vector2f* end)
 {
 	sf::RectangleShape result;
 	result.setFillColor(sf::Color::Color(150, 0, 150, 255));
-	float init_pt = fabs(end->x - start->x)>20? end->x - start->x:30.f;
-    float end_pt =  fabs(end->y - start->y) > 20 ? end->y - start->y : 30.f;
-	result.setSize(sf::Vector2f(init_pt,end_pt));
+	float init_pt = fabs(end->x - start->x) > 20 ? end->x - start->x : 30.f;
+	float end_pt = fabs(end->y - start->y) > 20 ? end->y - start->y : 30.f;
+	result.setSize(sf::Vector2f(init_pt, end_pt));
 	result.setPosition(*start);
 	return result;
 
 }
-
-
