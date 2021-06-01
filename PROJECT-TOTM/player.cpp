@@ -88,19 +88,20 @@ void player::updateinput()
 	}
 	if (moving == true)
 	{
+		float mov = (movementspeed*dt*time_mult > 25.f) ? 25.f : movementspeed * dt*time_mult;
 		switch (movedirection)
 		{
 		case MOVE_LEFT:
-			this->shape.move(-this->movementspeed*dt*time_mult, 0.f);
+			this->shape.move(-mov, 0.f);
 			break;
 		case MOVE_RIGHT:
-			this->shape.move(this->movementspeed*dt*time_mult, 0.f);
+			this->shape.move(mov, 0.f);
 			break;
 		case MOVE_DOWN:
-			this->shape.move(0.f, this->movementspeed*dt*time_mult);
+			this->shape.move(0.f, mov);
 			break;
 		case MOVE_UP:
-			this->shape.move(0.f, -this->movementspeed*dt*time_mult);
+			this->shape.move(0.f, -mov);
 			break;
 		default:
 			printf("error in player movement direction variable \n");
@@ -149,7 +150,7 @@ void player::update_collision(sf::RectangleShape* object) {
 	switch (movedirection) {
 	case MOVE_LEFT:
 		if ((pb.top >= ob.top - 5.f) && (pb.top + pb.height <= ob.top + ob.height + 5.f)) {
-			if (!(pb.left < ob.left)) {
+			if (!(pb.left + pb.width < ob.left)) {
 				if (pb.left < ob.left + ob.width) {
 					flag1 = 1;
 					this->shape.setPosition(ob.left + ob.width, pb.top);
@@ -159,7 +160,7 @@ void player::update_collision(sf::RectangleShape* object) {
 		break;
 	case MOVE_RIGHT:
 		if ((pb.top >= ob.top - 5.f) && (pb.top + pb.height <= ob.top + ob.height + 5.f)) {
-			if (!(pb.left + pb.width > ob.left + ob.width)) {
+			if (!(pb.left > ob.left + ob.width)) {
 				if (pb.left + pb.width > ob.left) {
 					flag1 = 1;
 					this->shape.setPosition(ob.left - pb.width, pb.top);
