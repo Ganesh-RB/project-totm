@@ -3,43 +3,59 @@
 //private functions
 void game::initvariables()
 {
-	wall_generator.add_wall(0, 20, 5, wall_generator.UP);
-	wall_generator.add_wall(0, 19, 9, wall_generator.RIGHT);
-	wall_generator.add_wall(8, 19, 1, wall_generator.UP);
-	wall_generator.add_wall(8, 18, 2, wall_generator.RIGHT);
-	wall_generator.add_wall(9, 19, 2, wall_generator.UP);
-	wall_generator.add_wall(9, 17, 2, wall_generator.RIGHT);
-	wall_generator.add_wall(10, 18, 10, wall_generator.UP);
-	wall_generator.add_wall(9, 14, 3, wall_generator.UP);
-	wall_generator.add_wall(0, 15, 3, wall_generator.RIGHT);
-	wall_generator.add_wall(2, 16, 2, wall_generator.UP);
-	wall_generator.add_wall(2, 14, 5, wall_generator.RIGHT);
-	wall_generator.add_wall(3, 15, 3, wall_generator.UP);
-	wall_generator.add_wall(4, 12, 3, wall_generator.LEFT);
-	wall_generator.add_wall(0, 13, 4, wall_generator.UP);
-	wall_generator.add_wall(0, 9, 3, wall_generator.RIGHT);
-	wall_generator.add_wall(2, 10, 2, wall_generator.UP);
-	wall_generator.add_wall(2, 8, 9, wall_generator.RIGHT);
+	wall_generator.add_wall(2, 20, 5, wall_generator.UP);
+	wall_generator.add_wall(2, 19, 9, wall_generator.RIGHT);
+	wall_generator.add_wall(10, 19, 1, wall_generator.UP);
+	wall_generator.add_wall(10, 18, 2, wall_generator.RIGHT);
+	wall_generator.add_wall(11, 19, 2, wall_generator.UP);
+	wall_generator.add_wall(11, 17, 2, wall_generator.RIGHT);
+	wall_generator.add_wall(12, 18, 10, wall_generator.UP);
+	wall_generator.add_wall(11, 14, 3, wall_generator.UP);
+	wall_generator.add_wall(2, 15, 3, wall_generator.RIGHT);
+	wall_generator.add_wall(4, 16, 2, wall_generator.UP);
+	wall_generator.add_wall(4, 14, 5, wall_generator.RIGHT);
+	wall_generator.add_wall(5, 15, 3, wall_generator.UP);
+	wall_generator.add_wall(6, 12, 3, wall_generator.LEFT);
+	wall_generator.add_wall(2, 13, 4, wall_generator.UP);
+	wall_generator.add_wall(2, 9, 3, wall_generator.RIGHT);
+	wall_generator.add_wall(4, 10, 2, wall_generator.UP);
+	wall_generator.add_wall(4, 8, 9, wall_generator.RIGHT);
 	//FLOATERS
-	wall_generator.add_wall(2, 17, 2, wall_generator.RIGHT);
-	wall_generator.add_wall(5, 16, 1, wall_generator.RIGHT);
-	wall_generator.add_wall(4, 11, 1, wall_generator.RIGHT);
-	wall_generator.add_wall(5, 10, 1, wall_generator.RIGHT);
-	wall_generator.add_wall(6, 12, 1, wall_generator.RIGHT);
+	wall_generator.add_wall(4, 17, 2, wall_generator.RIGHT);
+	wall_generator.add_wall(7, 16, 1, wall_generator.RIGHT);
+	wall_generator.add_wall(6, 11, 1, wall_generator.RIGHT);
+	wall_generator.add_wall(7, 10, 1, wall_generator.RIGHT);
+	wall_generator.add_wall(8, 12, 1, wall_generator.RIGHT);
 	this->window = nullptr;
+	this->pause = false;
 }
 
 
 void game::initwindow()
 {
-	this->window =new sf::RenderWindow (sf::VideoMode(900, 600), "My first game", sf::Style::Titlebar | sf::Style::Close);
+	this->window = new sf::RenderWindow(sf::VideoMode(900, 600), "My first game", sf::Style::Titlebar | sf::Style::Close);
 	//this->window->setFramerateLimit(60);
+}
+void game::initfonts()
+{
+	if (!font1.loadFromFile("Fonts/Dosis-Light.ttf")) {
+		printf("Error::Game::initfonts failed to load font1 \n");
+	}
+}
+void game::inittext()
+{
+	this->pausetext.setFont(this->font1);
+	this->pausetext.setCharacterSize(24);
+	this->pausetext.setFillColor(sf::Color::White);
+	this->pausetext.setString("PAUSE");
 }
 //constructors and destructors
 game::game()
 {
 	this->initvariables();
 	this->initwindow();
+	this->initfonts();
+	this->inittext();
 }
 
 game::~game()
@@ -72,22 +88,26 @@ void game::pollevents()
 		case sf::Event::KeyPressed:
 			if (this->ev.key.code == sf::Keyboard::Escape)
 				this->window->close();
+			if (this->ev.key.code == sf::Keyboard::P && pause_timer.restart().asSeconds() > 0.1f)
+
+				this->pause = (pause == true) ? false : true;
 			break;
 		}
 	}
 }
 
 
-void game::update(float* _dt,float* _time_mult)
-{ 
-	dt=*_dt;
+void game::update(float* _dt, float* _time_mult)
+{
+	dt = *_dt;
 	time_mult = *_time_mult;
 	this->pollevents();
-	this->player1.update(this->window,&dt,&time_mult );
-	for (auto i : wall_generator.walls) {
-		player1.update_collision(&i);
+	if (pause == false) {
+		this->player1.update(this->window, &dt, &time_mult);
+		for (auto i : wall_generator.walls) {
+			player1.update_collision(&i);
+		}
 	}
-
 }
 
 void game::render()
@@ -96,6 +116,9 @@ void game::render()
 	//draw game objects
 	this->player1.render(this->window);
 	this->wall_generator.render(this->window);
+	if (pause == true) {
+		this->window->draw(this->pausetext);
+	}
 	this->window->display();
 
 }
