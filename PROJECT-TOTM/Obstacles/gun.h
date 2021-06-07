@@ -38,7 +38,7 @@ private:
 
 	gunType Type;
 	direction dir;
-	int counter;
+	float counter;
 
 	void initBullet();
 	void initGunShape();
@@ -149,3 +149,4 @@ public:
 ////////////////////////////////////////////////////////////
 
 #endif // !GUN_H
+
