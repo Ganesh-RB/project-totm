@@ -3,23 +3,46 @@
 enum move_dir_no { MOVE_NULL, MOVE_LEFT, MOVE_RIGHT, MOVE_DOWN, MOVE_UP };
 void player::initvariables()
 {
-	this->movementspeed = 15.0f;
+	movementspeed = 15.0f;
 	moving = false;
 	movedirection = MOVE_NULL;
+	marker_start = true;
+	all_markers_collected = false;
+	display_markers = true;
+	marker_temp.setFillColor(sf::Color::Yellow);
+	marker_temp.setSize(sf::Vector2f(2.f, 2.f));
+	marker_temp.setOrigin(sf::Vector2f(1.f, 1.f));
 }
 
 const void player::initshape()
 {
 	this->shape.setFillColor(sf::Color::Color(0, 255, 0, 255));
-	this->shape.setSize(sf::Vector2f(30.f, 30.f));
+	this->shape.setSize(sf::Vector2f(BASE_SIZE, BASE_SIZE));
 
+}
+
+bool player::no_markers_remain()
+{
+	return all_markers_collected;
+}
+
+void player::add_marker_chain()
+{
+	marker_start = true;
+}
+
+void player::add_marker_single(float x, float y)
+{
+
+	marker_temp.setPosition(sf::Vector2f(x*BASE_SIZE, y*BASE_SIZE));
+	markers.push_back(marker_temp);
 }
 
 
 
 player::player(float  _x, float  _y)
 {
-	this->shape.setPosition(_x, _y);
+	this->shape.setPosition(BASE_SIZE*_x, BASE_SIZE *_y);
 	this->initshape();
 	this->initvariables();
 }
@@ -88,7 +111,7 @@ void player::updateinput()
 	}
 	if (moving == true)
 	{
-		float mov = (movementspeed*dt*time_mult > 25.f) ? 25.f : movementspeed * dt*time_mult;
+		float mov = (movementspeed*dt*time_mult > BASE_SIZE*0.8f) ? BASE_SIZE * 0.8f : movementspeed * dt*time_mult;
 		switch (movedirection)
 		{
 		case MOVE_LEFT:
@@ -195,7 +218,7 @@ void player::update_collision(sf::RectangleShape* object) {
 		getendtrail(movedirection);
 		moving = false;
 		movedirection = MOVE_NULL;
-		if ((fabs(start_trail.x - end_trail.x) > pb.width*1.2) || (fabs(start_trail.y - end_trail.y) > pb.height*1.2))
+		if ((fabs(start_trail.x - end_trail.x) > pb.width*1.2f) || (fabs(start_trail.y - end_trail.y) > pb.height*1.2f))
 		{
 			trails.push_back(curr_trail(&start_trail, &end_trail));
 			//std::cout << "number of elements in trail vector are " << trails.size() << std::endl;
@@ -209,6 +232,10 @@ void player::update(sf::RenderTarget* target, float* _dt, float* _time_mult)
 	time_mult = *_time_mult;
 	this->updateinput();
 	this->updatewindowcollision(target);
+	markers.erase(std::partition(begin(markers), end(markers),
+		[this](const auto &x) {return !x.getGlobalBounds().intersects(shape.getGlobalBounds()); }),
+		end(markers));
+	if (markers.size() == 0) { all_markers_collected = true; }
 }
 
 void player::render(sf::RenderTarget * target)
@@ -219,15 +246,19 @@ void player::render(sf::RenderTarget * target)
 		target->draw(i);
 	}
 	target->draw(this->shape);
-
+	if (display_markers)
+		for (auto i : this->markers)
+		{
+			target->draw(i);
+		}
 }
 
 sf::RectangleShape player::curr_trail(sf::Vector2f* start, sf::Vector2f* end)
 {
 	sf::RectangleShape result;
 	result.setFillColor(sf::Color::Color(150, 0, 150, 255));
-	float init_pt = fabs(end->x - start->x) > 20 ? end->x - start->x : 30.f;
-	float end_pt = fabs(end->y - start->y) > 20 ? end->y - start->y : 30.f;
+	float init_pt = fabs(end->x - start->x) > BASE_SIZE*0.8f ? end->x - start->x : BASE_SIZE;
+	float end_pt = fabs(end->y - start->y) > BASE_SIZE*0.8f ? end->y - start->y : BASE_SIZE;
 	result.setSize(sf::Vector2f(init_pt, end_pt));
 	result.setPosition(*start);
 	return result;
