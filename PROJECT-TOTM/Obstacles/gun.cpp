@@ -68,7 +68,7 @@ gun::gun(sf::Vector2u GunPosition, sf::Vector2u TargetPosition, gunType Type = g
 	this->GunPosition.x = PlayerSize.x * GunPosition.x;		this->GunPosition.y = PlayerSize.x * GunPosition.y;
 	this->TargetPosition.x = PlayerSize.x * TargetPosition.x;		this->TargetPosition.y = PlayerSize.y * TargetPosition.y;
 	this->Type = Type;
-	this->counter = 0;
+	this->counter = 0.f;
 
 	initGunShape();
 	initDirection();
@@ -127,11 +127,11 @@ void gun::gunfire(const float dt)
 
 	if (Type == gunType::Simple)
 	{
-		if (counter < 4 * dist)
-			counter++;
-		if (counter >= 4 * dist)
+		if (counter < 120.f)
+			counter+= 1*dt*60;
+		if (counter >= 120.f)
 		{
-			counter = 0;
+			counter = 0.f;
 			Bullets.push_back(Bullet);
 		}
 	}
