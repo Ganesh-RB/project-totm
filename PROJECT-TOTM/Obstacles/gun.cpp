@@ -45,6 +45,7 @@ void gun::initBullet()
 
 void gun::initGunShape()
 {
+
 	Gunshape.setSize(sf::Vector2f(30.f, 30.f));
 	Gunshape.setPosition(GunPosition);
 	Gunshape.setFillColor(sf::Color::Magenta);
@@ -63,12 +64,11 @@ void gun::initDirection()
 		dir = direction::Up;
 }
 
-gun::gun(sf::Vector2u GunPosition, sf::Vector2u TargetPosition, gunType Type = gunType::Simple)
+gun::gun(sf::Vector2u GunPosition, sf::Vector2u TargetPosition)
 {
 	this->GunPosition.x = PlayerSize.x * GunPosition.x;		this->GunPosition.y = PlayerSize.x * GunPosition.y;
 	this->TargetPosition.x = PlayerSize.x * TargetPosition.x;		this->TargetPosition.y = PlayerSize.y * TargetPosition.y;
-	this->Type = Type;
-	this->counter = 0.f;
+	this->counter = 0;
 
 	initGunShape();
 	initDirection();
@@ -93,7 +93,7 @@ void gun::setTargetPosition(sf::Vector2f TargetPosition)
 	initBullet();
 }
 
-void gun::gunfire(const float dt)
+void gun::gunfire(const float dt,const float fire_rate=1)
 {
 	//check erase
 	for (size_t i = 0; i < Bullets.size(); i++)
@@ -123,35 +123,23 @@ void gun::gunfire(const float dt)
 
 	//update new bullets
 
-	int dist = int(fabs((TargetPosition.x - GunPosition.x + TargetPosition.y - GunPosition.y) / (dt*300.f)));
-
-	if (Type == gunType::Simple)
+	float dist = fabs((TargetPosition.x - GunPosition.x + TargetPosition.y - GunPosition.y + 300.f)/300.f);
+	
+	
+	if (counter < dist*fire_rate )
+		counter+=dt;
+	if (counter >= dist*fire_rate )
 	{
-		if (counter < 120.f)
-			counter+= 1*dt*60;
-		if (counter >= 120.f)
-		{
-			counter = 0.f;
-			Bullets.push_back(Bullet);
-		}
+		counter = 0;
+		Bullets.push_back(Bullet);
 	}
-	if (Type == gunType::Probablistic)
-	{
-		int c = (rand() % int(100000 / (dt*dist)));
-		if (c < 10)
-		{
-			std::cout << "hello    : " << c << "  :    " << Bullets.size() << std::endl;
-			Bullets.push_back(Bullet);
-		}
-
-	}
-
+	
 
 	// move
 
 	for (size_t i = 0; i < Bullets.size(); i++)
 	{
-		float speed = 300.f; // = 5.f at frame rate 60
+		float speed = 300.f; // 5.f at frame rate 60
 
 		switch (dir)
 		{

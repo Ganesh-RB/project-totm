@@ -9,23 +9,6 @@
 #define PlayerSize sf::Vector2f(30.f, 30.f)
 
 
-///////////////////////////////////////////////////
-///
-/// \brief guntype gives different types of gun - Simple , Probablistic
-///
-///////////////////////////////////////////////////
-enum class gunType { Simple, Probablistic };
-
-
-///////////////////////////////////////////////////
-///
-/// \brief direction gives different types of directoin - Left , Down , Up , Right
-///
-///////////////////////////////////////////////////
-enum class direction { Left, Down, Up, Right };
-
-
-
 class gun
 {
 private:
@@ -36,9 +19,14 @@ private:
 	sf::ConvexShape Bullet;
 	std::vector<sf::ConvexShape> Bullets;
 
-	gunType Type;
-	direction dir;
-	float counter;
+	///////////////////////////////////////////////////
+	///
+	/// \brief direction gives different types of directoin - Left , Down , Up , Right
+	///
+	///////////////////////////////////////////////////
+	enum class direction { Left, Down, Up, Right }dir;
+	
+	double counter;
 
 	void initBullet();
 	void initGunShape();
@@ -53,7 +41,7 @@ public:
 	/// \param TargetPosition sf::Vector2u position of target or last wall in player coordinate
 	/// \param Type type of gun 
 	///////////////////////////////////////////////////
-	gun(sf::Vector2u GunPosition, sf::Vector2u TargetPosition, gunType Type);
+	gun(sf::Vector2u GunPosition, sf::Vector2u TargetPosition);
 
 	/////////////////////////////////////////////////////
 	/////	\brief default destructor
@@ -85,7 +73,7 @@ public:
 	/// \param dt time for frame change(as s)-for frame rate independent	
 	///
 	///////////////////////////////////////////////////
-	void gunfire(const float dt);
+	void gunfire(const float dt, const float Fire_rate);
 
 	///////////////////////////////////////////////////
 	///	\brief Draw everything for given gun
@@ -140,13 +128,14 @@ public:
 ///
 /// \code
 ///
-/// gun Gun1(sf::Vector2f(10U,10U),sf::Vector2f(15U,10U),gunType::Simple);
+/// gun Gun1(sf::Vector2f(10U,10U),sf::Vector2f(15U,10U));
 ///	Gun1.setGunPosition(sf::Vector2f(10U,10U));
-///	Gun1.gunfire(0.016f);
+///	Gun1.gunfire(0.016f,1.f);
 ///	Gun1.Render_gun();
+/// if(Gun1.isCollide(player.shape.getglobalound()))
+///		//end game
 ///
 /// \endcode
 ////////////////////////////////////////////////////////////
 
 #endif // !GUN_H
-
