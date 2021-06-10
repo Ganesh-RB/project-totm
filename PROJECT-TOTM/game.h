@@ -18,7 +18,7 @@ private:
 	bool victory;
 	sf::Clock pause_timer;
 	player player1{ 3.f,18.f };
-	gun Gun1{ sf::Vector2u(11U,12U),sf::Vector2u(9U,12U),gunType::Simple };
+	gun Gun1{ sf::Vector2u(11U,12U),sf::Vector2u(8U,12U) };
 
 	// initializers
 	void initvariables();

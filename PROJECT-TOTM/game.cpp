@@ -152,7 +152,7 @@ void game::update(float* _dt, float* _time_mult)
 		for (auto i : wall_maker.walls) {
 			player1.update_collision(&i);
 		}
-		Gun1.gunfire(this->dt);
+		Gun1.gunfire(this->dt,0.5f);
 
 		if (Gun1.isCollide(player1.shape.getGlobalBounds())) {
 			//printf("DEAD\n");
@@ -167,9 +167,10 @@ void game::render()
 	this->window->clear();
 	//draw game objects
 	this->player1.render(this->window);
-	this->wall_generator.render(this->window);
 	this->wall_maker.render(this->window);
 	this->Gun1.Render_gun(window);
+	this->wall_generator.render(this->window);
+
 	if (pause && alive) {
 		GUItext.setString("PAUSED : Press P to unpause");
 		this->window->draw(this->GUItext);
