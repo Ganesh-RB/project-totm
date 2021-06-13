@@ -16,6 +16,20 @@
 class wall_gen
 {
 private:
+	sf::Image bitwise_image;
+	sf::Texture wall_tex;
+
+
+
+
+
+
+
+
+
+
+
+
 	////////////////////////////////////////////////////////////
 	/// \brief private variable used to store player size
 	///
@@ -126,13 +140,15 @@ public:
 	{
 		if (chain_start == false) {
 			sf::RectangleShape temp;
-			temp.setFillColor(wall_colour);
+			//temp.setFillColor(wall_colour);
 			temp.setPosition(chain_point.x*base_size, chain_point.y*base_size);
 			int temp_x = ((var1.x - chain_point.x) == 0) ? 1 : var1.x - chain_point.x;
 			if (var1.x > chain_point.x) { temp_x += 1; }
 			int temp_y = ((var1.y - chain_point.y) == 0) ? 1 : var1.y - chain_point.y;
 			if (var1.y > chain_point.y) { temp_y += 1; }
 			temp.setSize(sf::Vector2f(base_size*temp_x, base_size*temp_y));
+			temp.setTexture(&wall_tex);
+			temp.setTextureRect({ 0,0,(int)temp.getLocalBounds().width,(int)temp.getLocalBounds().height });
 			walls.push_back(temp);
 		}
 		else {

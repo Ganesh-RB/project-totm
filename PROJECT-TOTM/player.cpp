@@ -226,7 +226,7 @@ void player::update_collision(sf::RectangleShape* object) {
 	}
 }
 
-void player::update(sf::RenderTarget* target, float* _dt, float* _time_mult)
+void player::update(sf::RenderWindow* target, float* _dt, float* _time_mult)
 {
 	dt = *_dt;
 	time_mult = *_time_mult;
@@ -238,7 +238,7 @@ void player::update(sf::RenderTarget* target, float* _dt, float* _time_mult)
 	if (markers.size() == 0) { all_markers_collected = true; }
 }
 
-void player::render(sf::RenderTarget * target)
+void player::render(sf::RenderWindow * target)
 {
 	if (moving == true) { target->draw(curr_trail(&start_trail, &end_trail)); }
 	for (auto i : this->trails)
@@ -256,7 +256,7 @@ void player::render(sf::RenderTarget * target)
 sf::RectangleShape player::curr_trail(sf::Vector2f* start, sf::Vector2f* end)
 {
 	sf::RectangleShape result;
-	result.setFillColor(sf::Color::Color(150, 0, 150, 255));
+	result.setFillColor(sf::Color::Color(0, 100,255, 255));
 	float init_pt = fabs(end->x - start->x) > BASE_SIZE*0.8f ? end->x - start->x : BASE_SIZE;
 	float end_pt = fabs(end->y - start->y) > BASE_SIZE*0.8f ? end->y - start->y : BASE_SIZE;
 	result.setSize(sf::Vector2f(init_pt, end_pt));

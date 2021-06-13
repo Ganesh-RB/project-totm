@@ -313,7 +313,7 @@ public:
 	/// for which frame rate independence is implemented
 	///
 	////////////////////////////////////////////////////////////
-	void update(sf::RenderTarget* target, float* _dt, float* _time_mult);
+	void update(sf::RenderWindow* target, float* _dt, float* _time_mult);
 
 	////////////////////////////////////////////////////////////
 	/// \brief generic render function
@@ -324,7 +324,7 @@ public:
 	/// which object is to be rendered
 	///
 	////////////////////////////////////////////////////////////
-	void render(sf::RenderTarget* target);
+	void render(sf::RenderWindow* target);
 
 };
 
