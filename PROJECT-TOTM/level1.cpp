@@ -23,7 +23,7 @@ void level1::initvariables()
 	wall_generator.add_wall_single(4, 8, 9, wall_generator.RIGHT);*/
 
 	//CHAIN METHOD
-	wall_maker.add_wall_chain(sf::Vector2u(2U, 19U), sf::Vector2u(10U, 19U), sf::Vector2u(10U, 18U), sf::Vector2u(11U, 18U), sf::Vector2u(11U, 17U), sf::Vector2u(12U, 17U), sf::Vector2u(12U, 8U),
+	wall_generator.add_wall_chain(sf::Vector2u(2U, 19U), sf::Vector2u(10U, 19U), sf::Vector2u(10U, 18U), sf::Vector2u(11U, 18U), sf::Vector2u(11U, 17U), sf::Vector2u(12U, 17U), sf::Vector2u(12U, 8U),
 		sf::Vector2u(4U, 8U), sf::Vector2u(4U, 9U), sf::Vector2u(2U, 9U), sf::Vector2u(2U, 12U), sf::Vector2u(5U, 12U), sf::Vector2u(5U, 14U), sf::Vector2u(4U, 14U), sf::Vector2u(4U, 15U), sf::Vector2u(2U, 15U),
 		sf::Vector2u(2U, 19U));
 	//FLOATERS/SINGLE WALLS
@@ -47,6 +47,9 @@ void level1::initvariables()
 	this->is_running = true;
 	this->victory = false;
 	this->time_mult = 60.f;
+#if defined(_DEBUG)
+	this->player1.display_markers = true;
+#endif
 }
 
 
@@ -94,7 +97,7 @@ const bool level1::running() const
 
 
 
-//Functions
+//Overloaded state functions
 
 void level1::init()
 {
@@ -139,12 +142,9 @@ void level1::update(float& _dt)
 	dt = _dt;
 	this->pollevents();
 
-	if (((!is_pause) && alive) && (!player1.no_markers_remain())) {
+	if (((!is_pause) && alive) && (!player1.level_complete())) {
 		this->player1.update(m_context->m_window.get(), &dt, &time_mult);
 		for (auto i : wall_generator.walls) {
-			player1.update_collision(&i);
-		}
-		for (auto i : wall_maker.walls) {
 			player1.update_collision(&i);
 		}
 		Gun1.gunfire(this->dt,1.0f);
@@ -153,7 +153,7 @@ void level1::update(float& _dt)
 			//printf("DEAD\n");
 			alive = false;
 		}
-		victory = player1.no_markers_remain();
+		victory = player1.level_complete();
 	}
 }
 
@@ -162,8 +162,6 @@ void level1::render()
 	this->m_context->m_window->clear();
 	//draw game objects
 	this->player1.render(this->m_context->m_window.get());
-	this->wall_maker.render(this->m_context->m_window.get());
-	
 	this->wall_generator.render(this->m_context->m_window.get());
 	this->Gun1.Render_gun(this->m_context->m_window.get());
 
@@ -176,7 +174,7 @@ void level1::render()
 		GUItext.setString("Press R to Retry Level");
 		this->m_context->m_window->draw(this->GUItext);
 	}
-	if (player1.no_markers_remain()) {
+	if (player1.level_complete()) {
 		GUItext.setString("Level Complete!! Press R to play again");
 		this->m_context->m_window->draw(this->GUItext);
 	}

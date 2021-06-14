@@ -55,7 +55,7 @@ void stateman::ProcessStatechange()
 	}
 }
 
-std::unique_ptr<state> &stateman::Getcurrent()
+std::unique_ptr<state>& stateman::Getcurrent()
 {
 	return m_statestack.top();
 }

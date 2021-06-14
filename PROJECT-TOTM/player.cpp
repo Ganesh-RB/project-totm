@@ -3,12 +3,12 @@
 enum move_dir_no { MOVE_NULL, MOVE_LEFT, MOVE_RIGHT, MOVE_DOWN, MOVE_UP };
 void player::initvariables()
 {
-	movementspeed = 15.0f;
+	movementspeed = BASE_SIZE/2.f ;
 	moving = false;
 	movedirection = MOVE_NULL;
 	marker_start = true;
-	all_markers_collected = false;
-	display_markers = true;
+	all_grids_colored = false;
+	display_markers = false;
 	marker_temp.setFillColor(sf::Color::Yellow);
 	marker_temp.setSize(sf::Vector2f(2.f, 2.f));
 	marker_temp.setOrigin(sf::Vector2f(1.f, 1.f));
@@ -16,14 +16,14 @@ void player::initvariables()
 
 const void player::initshape()
 {
-	this->shape.setFillColor(sf::Color::Color(0, 255, 0, 255));
+	this->shape.setFillColor(sf::Color::Color(0, 255, 0, 120));
 	this->shape.setSize(sf::Vector2f(BASE_SIZE, BASE_SIZE));
 
 }
 
-bool player::no_markers_remain()
+bool player::level_complete()
 {
-	return all_markers_collected;
+	return  all_grids_colored;
 }
 
 void player::add_marker_chain()
@@ -159,7 +159,7 @@ void player::updatewindowcollision(sf::RenderTarget * target)
 		getendtrail(movedirection);
 		moving = false;
 		movedirection = MOVE_NULL;
-		if ((fabs(start_trail.x - end_trail.x) > playerbounds.width + 5.f) || (fabs(start_trail.y - end_trail.y) > playerbounds.height + 5.f))
+		if ((fabs(start_trail.x - end_trail.x) > playerbounds.width*1.2f) || (fabs(start_trail.y - end_trail.y) > playerbounds.height*1.2f))
 		{
 			trails.push_back(curr_trail(&start_trail, &end_trail));
 			//std::cout << "number of elements in trail vector are " << trails.size() << std::endl;
@@ -226,16 +226,44 @@ void player::update_collision(sf::RectangleShape* object) {
 	}
 }
 
+void player::updatemarkers()
+{
+	if (markers.size() != 0) {
+		markers.erase(std::partition(begin(markers), end(markers),
+			[this](const auto &x) {return !x.getGlobalBounds().intersects(shape.getGlobalBounds()); }),
+			end(markers));
+	}
+	else {
+		if (end_flag == false) {
+			end_flag = true;
+			ending_movement.first = getcoord();
+		}
+		else {
+			sf::FloatRect pb = this->shape.getGlobalBounds();
+			ending_movement.second = getcoord();
+			if((moving==false) ||((fabs(ending_movement.second.y - ending_movement.first.y) > (BASE_SIZE / 2) + marker_temp.getLocalBounds().width)
+				|| (fabs(ending_movement.second.x - ending_movement.first.x) > (BASE_SIZE / 2) + marker_temp.getLocalBounds().width))) {
+					if(moving==true){getendtrail(movedirection);
+					moving = false;
+					movedirection = MOVE_NULL;
+					if ((fabs(start_trail.x - end_trail.x) > pb.width*1.2f) || (fabs(start_trail.y - end_trail.y) > pb.height*1.2f))
+					{
+						trails.push_back(curr_trail(&start_trail, &end_trail));
+						//std::cout << "number of elements in trail vector are " << trails.size() << std::endl;
+					}}
+			    all_grids_colored = true;
+			}
+		}
+	}
+}
+
 void player::update(sf::RenderWindow* target, float* _dt, float* _time_mult)
 {
 	dt = *_dt;
 	time_mult = *_time_mult;
-	this->updateinput();
+	if(!level_complete()){this->updateinput();
 	this->updatewindowcollision(target);
-	markers.erase(std::partition(begin(markers), end(markers),
-		[this](const auto &x) {return !x.getGlobalBounds().intersects(shape.getGlobalBounds()); }),
-		end(markers));
-	if (markers.size() == 0) { all_markers_collected = true; }
+	this->updatemarkers(); }
 }
 
 void player::render(sf::RenderWindow * target)

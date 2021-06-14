@@ -16,19 +16,18 @@
 class wall_gen
 {
 private:
+	////////////////////////////////////////////////////////////
+	/// \brief variable where pixel pattern specified
+	/// to be applied to wall
+	///
+	////////////////////////////////////////////////////////////
 	sf::Image bitwise_image;
+
+	////////////////////////////////////////////////////////////
+	/// \brief variable used to apply texture to wall
+	///
+	////////////////////////////////////////////////////////////
 	sf::Texture wall_tex;
-
-
-
-
-
-
-
-
-
-
-
 
 	////////////////////////////////////////////////////////////
 	/// \brief private variable used to store player size
@@ -37,19 +36,15 @@ private:
 	float base_size = 30.f;
 
 	////////////////////////////////////////////////////////////
-	/// \brief stores color of walls
-	///
-	////////////////////////////////////////////////////////////
-	sf::Color wall_colour;
-
-	////////////////////////////////////////////////////////////
 	/// \brief sores if point is first point in chain or not
 	///
 	////////////////////////////////////////////////////////////
 	bool chain_start;
 
 	////////////////////////////////////////////////////////////
-	/// \brief used as storage for the other point alogn with
+	/// \brief used for wall creation by chain
+	///
+	/// Used as storage for the other point along with
 	/// active one using which wall made in chain method
 	///
 	////////////////////////////////////////////////////////////
@@ -61,11 +56,10 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Default constructor
 	///
-	/// \param _color     color of the walls
 	/// \param _base_size base size of player which is used to scale wall size
 	///
 	////////////////////////////////////////////////////////////
-	wall_gen(sf::Color _color = sf::Color::Blue, float _base_size = 30.f);
+	wall_gen(float _base_size = 30.f);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Virtual destructor
@@ -140,7 +134,6 @@ public:
 	{
 		if (chain_start == false) {
 			sf::RectangleShape temp;
-			//temp.setFillColor(wall_colour);
 			temp.setPosition(chain_point.x*base_size, chain_point.y*base_size);
 			int temp_x = ((var1.x - chain_point.x) == 0) ? 1 : var1.x - chain_point.x;
 			if (var1.x > chain_point.x) { temp_x += 1; }

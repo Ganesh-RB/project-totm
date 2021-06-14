@@ -7,7 +7,7 @@ game::game()
 	m_context = std::make_shared<context>();
 	m_context->m_window->create(sf::VideoMode(900,600), "TOTM Color game", sf::Style::Close);
 	m_context->m_states->Add(std::make_unique<level1>(m_context));
-	// should only call main menu state,to be done
+	// Should only call main menu state,to be done
 }
 
 game::~game()

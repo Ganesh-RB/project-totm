@@ -18,8 +18,6 @@ class player
 {
 private:
 
-
-	sf::Vector2f chain_point;
 	////////////////////////////////////////////////////////////
 	/// \brief used to initialize variables
 	///
@@ -43,12 +41,12 @@ private:
 	float movementspeed;
 
 	////////////////////////////////////////////////////////////
-	/// \brief used to indicate if all markers collected
+	/// \brief used to indicate if grid has been colored
 	///
-	/// false if no of markers positive,true when zero
+	/// true when grid colored entirely,false otherwise
 	///
 	////////////////////////////////////////////////////////////
-	bool all_markers_collected;
+	bool all_grids_colored;
 
 
 	////////////////////////////////////////////////////////////
@@ -59,6 +57,13 @@ private:
 	///
 	////////////////////////////////////////////////////////////
 	bool marker_start;
+
+	////////////////////////////////////////////////////////////
+	/// \brief used to make sure grid entirely covered
+	///
+	/// used in updatemarkers() to ensure last bit of movement 
+	////////////////////////////////////////////////////////////
+	bool end_flag;
 
 	//variables needed for time independent implementation
 
@@ -119,11 +124,35 @@ private:
 	////////////////////////////////////////////////////////////
 	std::vector<sf::RectangleShape> markers;
 
+	////////////////////////////////////////////////////////////
+	/// \brief temporary marker object
+	///
+	/// used to set size,color,origin of all markers
+	////////////////////////////////////////////////////////////
 	sf::RectangleShape marker_temp;
+
+	////////////////////////////////////////////////////////////
+	/// \brief used for marker addition by chain
+	///
+	/// Used as storage for the other point along with
+	/// active one between which markers added in
+	/// add_marker_chain() function
+	///
+	////////////////////////////////////////////////////////////
+	sf::Vector2f chain_point;
+
+	////////////////////////////////////////////////////////////
+	/// \brief used to ensure proper level completion
+	///
+    /// Used to make sure player moves certain distance after 
+	/// collecting all markers before stopping so that entire 
+	/// grid is colored 
+	///
+	////////////////////////////////////////////////////////////
+	std::pair<sf::Vector2f, sf::Vector2f> ending_movement;
 
 
 public:
-
 
 	////////////////////////////////////////////////////////////
 	/// \brief bool to display markers
@@ -135,13 +164,14 @@ public:
 	bool display_markers;
 
 	////////////////////////////////////////////////////////////
-	/// \brief used to check if markers remain
+	/// \brief used to check if level completed
 	///
-	/// if returns true means that all markers were collected 
-	/// ,return false means some markers still remain
+	/// if returns true means that all markers were collected
+	/// and level has finished(grid has been colored entirely),
+	/// false means still some squares uncolored
 	///
 	////////////////////////////////////////////////////////////
-	bool no_markers_remain();
+	bool level_complete();
 
 	////////////////////////////////////////////////////////////
 	/// \brief used to add markers in chain fashion
@@ -154,6 +184,8 @@ public:
 	/// \param var1 first point
 	/// \param ...var2 variadic argument for rest of entries
 	///
+	/// \note place markers in middle of grid squares
+	/// 
 	/// \warning no output/change if only one input given
 	///
 	/// \warning if 2 consecutive points are the same 
@@ -213,6 +245,9 @@ public:
 	///
 	/// \param x x coordinate in player units
 	/// \param y y coordinate in player units
+	///
+	/// \note place markers in middle of grid squares
+	/// 
 	////////////////////////////////////////////////////////////
 	void add_marker_single(float x, float y);
 
@@ -295,11 +330,21 @@ public:
 	///  checks if player is colliding with object and
 	/// adjusts it's position and stops movement accordingly
 	///
-	/// \param target pointer to object with which collision is to be checked
+	/// \param object pointer to object with which collision is to be checked
 	///
 	////////////////////////////////////////////////////////////
 	void update_collision(sf::RectangleShape* object);
 
+	////////////////////////////////////////////////////////////
+	/// \brief checks for collision with given object 
+	///
+	///  checks if player is colliding with object and
+	/// adjusts it's position and stops movement accordingly
+	///
+	/// \param object pointer to object with which collision is to be checked
+	///
+	////////////////////////////////////////////////////////////
+	void updatemarkers();
 
 	//generic update and vender
 	////////////////////////////////////////////////////////////

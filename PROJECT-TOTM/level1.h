@@ -39,8 +39,7 @@ public:
 	//sf::Sprite sprite1;
 	//sf::Texture texture;
 	const bool running() const;
-	wall_gen wall_generator{ sf::Color::Color(0,0,255,120),30.f };
-	wall_gen wall_maker{ sf::Color::Color(120,120,120,255),30.f };
+	wall_gen wall_generator{30.f};
 	//functions from state 
 	void init() override;
 	void pollevents() override;
@@ -49,4 +48,3 @@ public:
 	void pause() override;
 	void start() override;
 };
-
