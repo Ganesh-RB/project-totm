@@ -14,7 +14,7 @@ private:
 	std::shared_ptr<context> m_context;
 	float dt;
 	float time_mult;
-
+        float t;
 	bool is_pause;
 	bool alive;
 	bool is_running;
@@ -45,7 +45,7 @@ public:
 	//functions from state 
 	void init() override;
 	void pollevents() override;
-	void update(float& _dt) override ;
+	void update(float& _dt,float& _t) override ;
 	void render() override;
 	void pause() override;
 	void start() override;
