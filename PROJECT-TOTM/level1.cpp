@@ -148,8 +148,13 @@ void level1::update(float& _dt)
 			player1.update_collision(&i);
 		}
 		Gun1.gunfire(this->dt,1.0f);
+		Fish1.Updatefish(t,0.1f);
 
 		if (Gun1.isCollide(player1.shape.getGlobalBounds())) {
+			//printf("DEAD\n");
+			alive = false;
+		}
+		if (Fish1.isCollide(player1.shape.getGlobalBounds())) {
 			//printf("DEAD\n");
 			alive = false;
 		}
@@ -164,6 +169,7 @@ void level1::render()
 	this->player1.render(this->m_context->m_window.get());
 	this->wall_generator.render(this->m_context->m_window.get());
 	this->Gun1.Render_gun(this->m_context->m_window.get());
+	this->Fish1.Render_fish(this->m_context->m_window.get());
 
 	if (is_pause && alive) {
 		GUItext.setString("PAUSED : Press P to unpause");
