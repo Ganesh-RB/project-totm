@@ -1,0 +1,35 @@
+#pragma once
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/Network.hpp>
+
+#define PlayerSize sf::Vector2f(30.f, 30.f)
+
+class pufferfish
+{
+private:
+	sf::Vector2f FishPosition;
+
+	sf::Vector2f FishPosition1;
+
+	sf::Vector2f FishPosition2;
+
+	sf::Vector2f FishSize;
+
+	sf::RectangleShape Fish;
+
+	void Fish1();
+	
+public:
+	pufferfish(sf::Vector2u Fishposition);
+
+	virtual ~pufferfish();
+	
+	void Render_fish(sf::RenderWindow* window);
+
+	void Updatefish(float t,float u);
+
+	const bool isCollide(const sf::FloatRect &shape);
+};
