@@ -3,6 +3,7 @@
 #include "wall_gen.h"
 #include "Obstacles/gun.h"
 #include "game.h"
+#include "pufferfish.h"
 class level1 : public state
 {
 private:
@@ -21,6 +22,7 @@ private:
 	sf::Clock pause_timer;
 	player player1{ 3.f,18.f };
 	gun Gun1{ sf::Vector2u(11U,12U),sf::Vector2u(9U,12U) };
+	pufferfish Fish1{sf::Vector2u(7U,16U)};
 
 	// initializers
 	void initvariables();
