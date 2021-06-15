@@ -140,6 +140,7 @@ void level1::pollevents()
 void level1::update(float& _dt)
 {
 	dt = _dt;
+	t=t+dt;
 	this->pollevents();
 
 	if (((!is_pause) && alive) && (!player1.level_complete())) {
