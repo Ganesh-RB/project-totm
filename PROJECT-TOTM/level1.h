@@ -45,7 +45,7 @@ public:
 	//functions from state 
 	void init() override;
 	void pollevents() override;
-	void update(float& _dt,float& _t) override ;
+	void update(float& _dt) override ;
 	void render() override;
 	void pause() override;
 	void start() override;
