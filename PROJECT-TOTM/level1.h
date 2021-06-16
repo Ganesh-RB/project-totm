@@ -14,7 +14,6 @@ private:
 	std::shared_ptr<context> m_context;
 	float dt;
 	float time_mult;
-        float t;
 	bool is_pause;
 	bool alive;
 	bool is_running;
@@ -22,7 +21,7 @@ private:
 	sf::Clock pause_timer;
 	player player1{ 3.f,18.f };
 	gun Gun1{ sf::Vector2u(11U,12U),sf::Vector2u(9U,12U) };
-	pufferfish Fish1{sf::Vector2u(7U,16U)};
+	pufferfish Fish1{ sf::Vector2u(7U,16U) };
 
 	// initializers
 	void initvariables();
@@ -41,11 +40,11 @@ public:
 	//sf::Sprite sprite1;
 	//sf::Texture texture;
 	const bool running() const;
-	wall_gen wall_generator{30.f};
+	wall_gen wall_generator{ 30.f };
 	//functions from state 
 	void init() override;
 	void pollevents() override;
-	void update(float& _dt) override ;
+	void update(float& _dt) override;
 	void render() override;
 	void pause() override;
 	void start() override;

@@ -21,15 +21,17 @@ private:
 	sf::RectangleShape Fish;
 
 	void Fish1();
-	
+
+	float t;
+
 public:
 	pufferfish(sf::Vector2u Fishposition);
 
 	virtual ~pufferfish();
-	
+
 	void Render_fish(sf::RenderWindow* window);
 
-	void Updatefish(float t,float u);
+	void Updatefish(float dt, float u);
 
 	const bool isCollide(const sf::FloatRect &shape);
 };

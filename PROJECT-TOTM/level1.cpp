@@ -125,11 +125,11 @@ void level1::pollevents()
 				this->m_context->m_window->close();
 			}
 			if (this->ev.key.code == sf::Keyboard::P && pause_timer.restart().asSeconds() > 0.2f)
-			     (this->is_pause == true) ? start() : pause();
+				(this->is_pause == true) ? start() : pause();
 			if (this->ev.key.code == sf::Keyboard::R && (!alive || victory))
 			{
 				m_context->m_states->Add(std::make_unique<level1>(m_context), true);
-				
+
 			}
 			break;
 		}
@@ -140,7 +140,6 @@ void level1::pollevents()
 void level1::update(float& _dt)
 {
 	dt = _dt;
-	t=t+dt;
 	this->pollevents();
 
 	if (((!is_pause) && alive) && (!player1.level_complete())) {
@@ -148,8 +147,8 @@ void level1::update(float& _dt)
 		for (auto i : wall_generator.walls) {
 			player1.update_collision(&i);
 		}
-		Gun1.gunfire(this->dt,1.0f);
-		Fish1.Updatefish(t,0.1f);
+		Gun1.gunfire(this->dt, 1.0f);
+		Fish1.Updatefish(dt, 0.1f);
 
 		if (Gun1.isCollide(player1.shape.getGlobalBounds())) {
 			//printf("DEAD\n");

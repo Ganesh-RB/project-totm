@@ -11,14 +11,16 @@ void pufferfish::Fish1()
 
 
 pufferfish::pufferfish(sf::Vector2u Fishposition)
-{   this->FishPosition2.x=Fishposition.x*PlayerSize.x-PlayerSize.x;
-    this->FishPosition2.y = Fishposition.y*PlayerSize.y-PlayerSize.y;
+{
+	this->FishPosition2.x = Fishposition.x*PlayerSize.x - PlayerSize.x;
+	this->FishPosition2.y = Fishposition.y*PlayerSize.y - PlayerSize.y;
 	this->FishPosition1.x = Fishposition.x*PlayerSize.x;
 	this->FishPosition1.y = Fishposition.y*PlayerSize.y;
 	this->FishPosition.x = Fishposition.x*PlayerSize.x;
 	this->FishPosition.y = Fishposition.y*PlayerSize.y;
 	FishSize = PlayerSize;
 	Fish1();
+	t = 0.f;
 }
 
 
@@ -27,9 +29,10 @@ pufferfish::~pufferfish()
 }
 
 
-void pufferfish::Updatefish(float t, float u)
+void pufferfish::Updatefish(float dt, float u)
 {
-	int i = (int(t / u)) % 50;
+	t += dt;
+	int i = (int(t / u));
 	if (i < 13) {
 		this->FishPosition.x = this->FishPosition1.x - i * 2.5f; this->FishPosition.y = this->FishPosition1.y - i * 2.5f;
 		this->FishSize.x = PlayerSize.x + i * 5.f; this->FishSize.y = PlayerSize.y + i * 5.f;
@@ -47,6 +50,9 @@ void pufferfish::Updatefish(float t, float u)
 		this->FishPosition.y = FishPosition1.y;
 		FishSize = PlayerSize;
 		Fish1();
+	}
+	if (i >= 50) {
+		t = 0.f;
 	}
 }
 const bool pufferfish::isCollide(const sf::FloatRect & shape)
