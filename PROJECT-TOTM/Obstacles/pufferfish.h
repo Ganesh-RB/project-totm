@@ -5,11 +5,15 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 
-#define PlayerSize sf::Vector2f(30.f, 30.f)
+
 
 class pufferfish
 {
+
+
 private:
+	sf::Vector2f PlayerSize;
+
 	sf::Vector2f FishPosition;
 
 	sf::Vector2f FishPosition1;

@@ -1,6 +1,7 @@
 #include "pufferfish.h"
 #include<iostream>
 
+
 void pufferfish::Fish1()
 {
 
@@ -12,6 +13,7 @@ void pufferfish::Fish1()
 
 pufferfish::pufferfish(sf::Vector2u Fishposition)
 {
+	PlayerSize = sf::Vector2f(30.f, 30.f);
 	this->FishPosition2.x = Fishposition.x*PlayerSize.x - PlayerSize.x;
 	this->FishPosition2.y = Fishposition.y*PlayerSize.y - PlayerSize.y;
 	this->FishPosition1.x = Fishposition.x*PlayerSize.x;

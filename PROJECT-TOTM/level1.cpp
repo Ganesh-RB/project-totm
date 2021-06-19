@@ -42,7 +42,7 @@ void level1::initvariables()
 	player1.add_marker_chain(sf::Vector2f(8.5f, 13.5f), sf::Vector2f(6.5f, 13.5f), sf::Vector2f(6.5, 12.5f), sf::Vector2f(7.5f, 12.5f), sf::Vector2f(7.5f, 11.5f),
 		sf::Vector2f(8.5f, 11.5f), sf::Vector2f(8.5f, 9.5f), sf::Vector2f(5.5f, 9.5f), sf::Vector2f(5.5f, 11.5f), sf::Vector2f(3.5f, 11.5f), sf::Vector2f(3.5f, 10.5f),
 		sf::Vector2f(6.5f, 10.5f));
-
+	
 	this->alive = true;
 	this->is_running = true;
 	this->victory = false;
@@ -83,6 +83,7 @@ level1::level1(std::shared_ptr<context> &context)
 
 level1::~level1()
 {
+
 	m_context->m_window->setFramerateLimit(0);
 }
 
@@ -143,10 +144,13 @@ void level1::update(float& _dt)
 	this->pollevents();
 
 	if (((!is_pause) && alive) && (!player1.level_complete())) {
+		
 		this->player1.update(m_context->m_window.get(), &dt, &time_mult);
 		for (auto i : wall_generator.walls) {
 			player1.update_collision(&i);
 		}
+		/*test_tele.update();
+		test_drag.update(dt);*/
 		Gun1.gunfire(this->dt, 1.0f);
 		Fish1.Updatefish(dt, 0.1f);
 
@@ -170,7 +174,8 @@ void level1::render()
 	this->wall_generator.render(this->m_context->m_window.get());
 	this->Gun1.Render_gun(this->m_context->m_window.get());
 	this->Fish1.Render_fish(this->m_context->m_window.get());
-
+	/*this->test_tele.render(this->m_context->m_window.get());
+	this->test_drag.render(this->m_context->m_window.get());*/
 	if (is_pause && alive) {
 		GUItext.setString("PAUSED : Press P to unpause");
 		this->m_context->m_window->draw(this->GUItext);

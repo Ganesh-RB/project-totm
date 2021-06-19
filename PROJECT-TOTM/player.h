@@ -5,7 +5,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
-#define BASE_SIZE  30.f
+
 
 ////////////////////////////////////////////////////////////
 /// \brief class dealing with player movement,collision and markers
@@ -17,6 +17,14 @@
 class player
 {
 private:
+
+	enum move_dir_no { MOVE_NULL, MOVE_LEFT, MOVE_RIGHT, MOVE_DOWN, MOVE_UP };
+
+	////////////////////////////////////////////////////////////
+	/// \brief size of player
+	///
+	////////////////////////////////////////////////////////////
+	float BASE_SIZE = 30.f;
 
 	////////////////////////////////////////////////////////////
 	/// \brief used to initialize variables
@@ -65,7 +73,41 @@ private:
 	////////////////////////////////////////////////////////////
 	bool end_flag;
 
-	//variables needed for time independent implementation
+	//vector where all markers are stored
+	////////////////////////////////////////////////////////////
+	/// \brief storage for all markers
+	///
+	////////////////////////////////////////////////////////////
+	std::vector<sf::RectangleShape> markers;
+
+	////////////////////////////////////////////////////////////
+	/// \brief temporary marker object
+	///
+	/// used to set size,color,origin of all markers
+	////////////////////////////////////////////////////////////
+	sf::RectangleShape marker_temp;
+
+	////////////////////////////////////////////////////////////
+	/// \brief used for marker addition by chain
+	///
+	/// Used as storage for the other point along with
+	/// active one between which markers added in
+	/// add_marker_chain() function
+	///
+	////////////////////////////////////////////////////////////
+	sf::Vector2f chain_point;
+
+	////////////////////////////////////////////////////////////
+	/// \brief used to ensure proper level completion
+	///
+    /// Used to make sure player moves certain distance after 
+	/// collecting all markers before stopping so that entire 
+	/// grid is colored 
+	///
+	////////////////////////////////////////////////////////////
+	std::pair<sf::Vector2f, sf::Vector2f> ending_movement;
+
+    //variables needed for time independent implementation
 
 	////////////////////////////////////////////////////////////
 	/// \brief denotes delta time
@@ -107,52 +149,31 @@ private:
 	////////////////////////////////////////////////////////////
 	sf::RectangleShape curr_trail(sf::Vector2f* start, sf::Vector2f* end);
 
-	//sets trail end depending on movemenet direction
+	//sets trail start depending on movement direction
 	////////////////////////////////////////////////////////////
-	/// \brief setsend_trail to where end of trail given movement direction
+	/// \brief sets start_trail to where start of trail is, given movement direction
 	///
 	///  this function should only be called when movement happening 
-	///  will not chnage end_trail variable otherwise
+	///  will not change start_trail variable otherwise
 	/// 
 	////////////////////////////////////////////////////////////
-	void getendtrail(int);
+	void get_start_trail(int, sf::FloatRect);
 
-	//vector where all markers are stored
+	//sets trail end depending on movement direction
 	////////////////////////////////////////////////////////////
-	/// \brief storage for all markers
+	/// \brief setsend_trail to where end of trail is,given movement direction
 	///
+	///  this function should only be called when movement happening 
+	///  will not change end_trail variable otherwise
+	/// 
 	////////////////////////////////////////////////////////////
-	std::vector<sf::RectangleShape> markers;
-
-	////////////////////////////////////////////////////////////
-	/// \brief temporary marker object
-	///
-	/// used to set size,color,origin of all markers
-	////////////////////////////////////////////////////////////
-	sf::RectangleShape marker_temp;
-
-	////////////////////////////////////////////////////////////
-	/// \brief used for marker addition by chain
-	///
-	/// Used as storage for the other point along with
-	/// active one between which markers added in
-	/// add_marker_chain() function
-	///
-	////////////////////////////////////////////////////////////
-	sf::Vector2f chain_point;
-
-	////////////////////////////////////////////////////////////
-	/// \brief used to ensure proper level completion
-	///
-    /// Used to make sure player moves certain distance after 
-	/// collecting all markers before stopping so that entire 
-	/// grid is colored 
-	///
-	////////////////////////////////////////////////////////////
-	std::pair<sf::Vector2f, sf::Vector2f> ending_movement;
+	void get_end_trail(int,sf::FloatRect);
 
 
 public:
+
+	friend class teleporter;
+	friend class spring;
 
 	////////////////////////////////////////////////////////////
 	/// \brief bool to display markers

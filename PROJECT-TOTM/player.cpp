@@ -1,6 +1,6 @@
 #include "player.h"
 #include <iostream>
-enum move_dir_no { MOVE_NULL, MOVE_LEFT, MOVE_RIGHT, MOVE_DOWN, MOVE_UP };
+
 void player::initvariables()
 {
 	movementspeed = BASE_SIZE/2.f ;
@@ -16,9 +16,8 @@ void player::initvariables()
 
 const void player::initshape()
 {
-	this->shape.setFillColor(sf::Color::Color(0, 255, 0, 120));
+	this->shape.setFillColor(sf::Color::Color(0, 255, 0, 255));
 	this->shape.setSize(sf::Vector2f(BASE_SIZE, BASE_SIZE));
-
 }
 
 bool player::level_complete()
@@ -57,9 +56,8 @@ sf::Vector2f player::getcoord()
 	return result;
 }
 
-void player::getendtrail(int num)
+void player::get_end_trail(int num , sf::FloatRect pb)
 {
-	sf::FloatRect pb = this->shape.getGlobalBounds();
 	switch (num)
 	{
 	case MOVE_LEFT:
@@ -75,7 +73,29 @@ void player::getendtrail(int num)
 		end_trail = sf::Vector2f(pb.left, pb.top);
 		break;
 	default:
-		printf("error in player::getendtrail \n");
+		printf("error in player::get_end_trail \n");
+		break;
+	}
+}
+
+void player::get_start_trail(int num,sf::FloatRect pb)
+{
+	switch (num)
+	{
+	case MOVE_LEFT:
+		start_trail = sf::Vector2f(pb.left +pb.width, pb.top);
+		break;
+	case MOVE_RIGHT:
+		start_trail = sf::Vector2f(pb.left, pb.top);
+		break;
+	case MOVE_DOWN:
+		start_trail = sf::Vector2f(pb.left, pb.top );
+		break;
+	case MOVE_UP:
+		start_trail = sf::Vector2f(pb.left, pb.top+pb.width);
+		break;
+	default:
+		printf("error in player::get_start_trail \n");
 		break;
 	}
 }
@@ -88,25 +108,24 @@ void player::updateinput()
 		{
 			moving = true;
 			movedirection = MOVE_LEFT;
-			start_trail = sf::Vector2f(pb.left + pb.width, pb.top);
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
 			moving = true;
 			movedirection = MOVE_RIGHT;
-			start_trail = sf::Vector2f(pb.left, pb.top);
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
 			moving = true;
 			movedirection = MOVE_DOWN;
-			start_trail = sf::Vector2f(pb.left, pb.top);
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
 			moving = true;
 			movedirection = MOVE_UP;
-			start_trail = sf::Vector2f(pb.left, pb.top + pb.height);
+		}
+		if (moving) {
+			get_start_trail(movedirection, pb);
 		}
 	}
 	if (moving == true)
@@ -130,7 +149,7 @@ void player::updateinput()
 			printf("error in player movement direction variable \n");
 			break;
 		}
-		getendtrail(movedirection);
+		get_end_trail(movedirection,shape.getGlobalBounds());
 	}
 }
 
@@ -156,7 +175,7 @@ void player::updatewindowcollision(sf::RenderTarget * target)
 		flag = 1;
 	}
 	if (flag == 1) {
-		getendtrail(movedirection);
+		get_end_trail(movedirection,shape.getGlobalBounds());
 		moving = false;
 		movedirection = MOVE_NULL;
 		if ((fabs(start_trail.x - end_trail.x) > playerbounds.width*1.2f) || (fabs(start_trail.y - end_trail.y) > playerbounds.height*1.2f))
@@ -215,7 +234,7 @@ void player::update_collision(sf::RectangleShape* object) {
 		flag1 = 0;
 	}
 	if (flag1 == 1) {
-		getendtrail(movedirection);
+		get_end_trail(movedirection,shape.getGlobalBounds());
 		moving = false;
 		movedirection = MOVE_NULL;
 		if ((fabs(start_trail.x - end_trail.x) > pb.width*1.2f) || (fabs(start_trail.y - end_trail.y) > pb.height*1.2f))
@@ -243,14 +262,13 @@ void player::updatemarkers()
 			ending_movement.second = getcoord();
 			if((moving==false) ||((fabs(ending_movement.second.y - ending_movement.first.y) > (BASE_SIZE / 2) + marker_temp.getLocalBounds().width)
 				|| (fabs(ending_movement.second.x - ending_movement.first.x) > (BASE_SIZE / 2) + marker_temp.getLocalBounds().width))) {
-					if(moving==true){getendtrail(movedirection);
+					if(moving==true){
+					get_end_trail(movedirection,shape.getGlobalBounds());
 					moving = false;
 					movedirection = MOVE_NULL;
-					if ((fabs(start_trail.x - end_trail.x) > pb.width*1.2f) || (fabs(start_trail.y - end_trail.y) > pb.height*1.2f))
-					{
-						trails.push_back(curr_trail(&start_trail, &end_trail));
-						//std::cout << "number of elements in trail vector are " << trails.size() << std::endl;
-					}}
+					trails.push_back(curr_trail(&start_trail, &end_trail));
+					//std::cout << "number of elements in trail vector are " << trails.size() << std::endl;
+					}
 			    all_grids_colored = true;
 			}
 		}
@@ -269,13 +287,13 @@ void player::update(sf::RenderWindow* target, float* _dt, float* _time_mult)
 void player::render(sf::RenderWindow * target)
 {
 	if (moving == true) { target->draw(curr_trail(&start_trail, &end_trail)); }
-	for (auto i : this->trails)
+	for (const auto i : this->trails)
 	{
 		target->draw(i);
 	}
 	target->draw(this->shape);
 	if (display_markers)
-		for (auto i : this->markers)
+		for (const auto i : this->markers)
 		{
 			target->draw(i);
 		}

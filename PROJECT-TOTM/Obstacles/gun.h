@@ -6,12 +6,13 @@
 #include <SFML/System.hpp>
 #include <vector>
 
-#define PlayerSize sf::Vector2f(30.f, 30.f)
+ 
 
 
 class gun
 {
 private:
+	sf::Vector2f PlayerSize= sf::Vector2f(30.f, 30.f);
 	sf::Vector2f GunPosition;
 	sf::Vector2f TargetPosition;
 

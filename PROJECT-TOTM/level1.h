@@ -4,6 +4,8 @@
 #include "Obstacles/gun.h"
 #include "game.h"
 #include "pufferfish.h"
+#include "teleporter.h"
+#include "Dragon.h"
 class level1 : public state
 {
 private:
@@ -22,6 +24,8 @@ private:
 	player player1{ 3.f,18.f };
 	gun Gun1{ sf::Vector2u(11U,12U),sf::Vector2u(9U,12U) };
 	pufferfish Fish1{ sf::Vector2u(7U,16U) };
+	/*teleporter test_tele{ sf::Vector2f(9.f,18.f), sf::Vector2f(5.f, 9.f),&player1 };
+	Dragon test_drag{ sf::Vector2u(0U,0U),sf::Vector2u(3U,0U) };*/
 
 	// initializers
 	void initvariables();

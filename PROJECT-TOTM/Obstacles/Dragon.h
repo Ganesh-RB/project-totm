@@ -10,10 +10,10 @@ class Dragon
 private:
 
 	float PlayerSize = 30.f;
-	enum direction { Left=-2, Down=-1, Up=1, Right=2 }moving_dir ;
+	enum direction { Left = -2, Down = -1, Up = 1, Right = 2 }moving_dir;
 
 	sf::Clock clock;
-	
+
 	sf::Sprite dragonShape;
 	sf::Texture texture;
 	sf::IntRect CurrentFrame;
@@ -22,16 +22,16 @@ private:
 	sf::Vector2f FinalPosition;
 
 	std::pair<direction, sf::Vector2f> dir;
-	
+
 	void initDirection();
 	void initVariable();
 	void initSprite();
-	
+
 	void update_movement(float mpving_speed, float dt);
 	void fly();
 
 public:
-	
+
 	///////////////////////////////////////////////////
 	///	
 	///	\brief Constructor for constructing objects 
@@ -112,3 +112,4 @@ public:
 ///
 /// \endcode
 ////////////////////////////////////////////////////////////
+

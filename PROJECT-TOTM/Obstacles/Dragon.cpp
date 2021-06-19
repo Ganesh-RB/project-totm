@@ -4,8 +4,8 @@
 void Dragon::initVariable()
 {
 	this->clock.restart();
-
 	if (!this->texture.loadFromFile("Images/Dragon.png"))
+
 		std::cout << "Images/Dragon file not loaded\n";
 	this->CurrentFrame = sf::IntRect(0, 0, 44, 44);
 	//this->CurrentFrame = sf::IntRect(0, 0, texture.getSize().x/4, texture.getSize().y);
@@ -44,15 +44,15 @@ void Dragon::initSprite()
 	this->dragonShape.setTexture(this->texture);
 	this->dragonShape.setTextureRect(this->CurrentFrame);
 	this->dragonShape.setScale(PlayerSize / dragonShape.getLocalBounds().width, PlayerSize / dragonShape.getLocalBounds().height);
-	
+
 }
 
 void Dragon::update_movement(float moving_speed, float dt)
 {
-	if(moving_dir==this->dir.first)
+	if (moving_dir == this->dir.first)
 		dragonShape.move(this->dir.second*(moving_speed*dt*60.f));
 	else
-		dragonShape.move(this->dir.second*(-moving_speed*dt*60.f));
+		dragonShape.move(this->dir.second*(-moving_speed * dt*60.f));
 
 }
 
@@ -68,15 +68,17 @@ void Dragon::fly()
 		this->dragonShape.setTextureRect(this->CurrentFrame);
 		this->dragonShape.setScale(PlayerSize / dragonShape.getLocalBounds().width, PlayerSize / dragonShape.getLocalBounds().height);
 	}
-	
+
 }
 
 Dragon::Dragon(sf::Vector2u InitialPosition, sf::Vector2u FinalPosition)
 {
-	
-	this->InitialPosition.x = InitialPosition.x * PlayerSize ;		this->InitialPosition.y = PlayerSize * InitialPosition.y;
-	this->FinalPosition.x = FinalPosition.x * PlayerSize;		this->FinalPosition.y = PlayerSize * FinalPosition.y;
-	
+
+	this->InitialPosition.x = InitialPosition.x * PlayerSize;		
+	this->InitialPosition.y = PlayerSize * InitialPosition.y;
+	this->FinalPosition.x = FinalPosition.x * PlayerSize;		
+	this->FinalPosition.y = PlayerSize * FinalPosition.y;
+
 	this->initDirection();
 	this->initVariable();
 	this->initSprite();
@@ -89,7 +91,7 @@ Dragon::~Dragon()
 
 void Dragon::update(float dt)
 {
-	
+
 	fly();
 
 
@@ -107,7 +109,7 @@ void Dragon::update(float dt)
 			update_movement(3.f, dt);
 		}
 		break;
-	
+
 	case direction::Left:
 		if (dragonShape.getPosition().x >= FinalPosition.x	&&  dragonShape.getPosition().x <= InitialPosition.x)
 		{
@@ -143,8 +145,8 @@ void Dragon::update(float dt)
 		break;
 	default:
 		break;
-	}	
-	
+	}
+
 }
 
 void Dragon::render(sf::RenderTarget * target)
