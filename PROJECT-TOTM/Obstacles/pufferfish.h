@@ -1,11 +1,5 @@
-#pragma once
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
-
-
+#ifndef PUFFERFISH_H
+#define PUFFERFISH_H
 
 class pufferfish
 {
@@ -39,3 +33,5 @@ public:
 
 	const bool isCollide(const sf::FloatRect &shape);
 };
+
+#endif

@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "wall_gen.h"
 wall_gen::wall_gen(float _base_size)
 {

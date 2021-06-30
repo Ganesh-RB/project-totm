@@ -1,11 +1,10 @@
+#include "..\stdafx.h"
 #include "Dragon.h"
-#include <iostream>
 
 void Dragon::initVariable()
 {
 	this->clock.restart();
 	if (!this->texture.loadFromFile("Images/Dragon.png"))
-
 		std::cout << "Images/Dragon file not loaded\n";
 	this->CurrentFrame = sf::IntRect(0, 0, 44, 44);
 	//this->CurrentFrame = sf::IntRect(0, 0, texture.getSize().x/4, texture.getSize().y);

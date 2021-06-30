@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "player.h"
 #include <iostream>
 
@@ -5,7 +6,7 @@ void player::initvariables()
 {
 	movementspeed = BASE_SIZE/2.f ;
 	moving = false;
-	movedirection = MOVE_NULL;
+	movedirection =move_dir_no::MOVE_NULL ;
 	marker_start = true;
 	all_grids_colored = false;
 	display_markers = false;
@@ -56,20 +57,20 @@ sf::Vector2f player::getcoord()
 	return result;
 }
 
-void player::get_end_trail(int num , sf::FloatRect pb)
+void player::get_end_trail(move_dir_no dir, sf::FloatRect pb)
 {
-	switch (num)
+	switch (dir)
 	{
-	case MOVE_LEFT:
+	case move_dir_no::MOVE_LEFT:
 		end_trail = sf::Vector2f(pb.left, pb.top);
 		break;
-	case MOVE_RIGHT:
+	case move_dir_no::MOVE_RIGHT:
 		end_trail = sf::Vector2f(pb.left + pb.width, pb.top);
 		break;
-	case MOVE_DOWN:
+	case move_dir_no::MOVE_DOWN:
 		end_trail = sf::Vector2f(pb.left, pb.top + pb.height);
 		break;
-	case MOVE_UP:
+	case move_dir_no::MOVE_UP:
 		end_trail = sf::Vector2f(pb.left, pb.top);
 		break;
 	default:
@@ -78,20 +79,20 @@ void player::get_end_trail(int num , sf::FloatRect pb)
 	}
 }
 
-void player::get_start_trail(int num,sf::FloatRect pb)
+void player::get_start_trail(move_dir_no dir,sf::FloatRect pb)
 {
-	switch (num)
+	switch (dir)
 	{
-	case MOVE_LEFT:
+	case move_dir_no::MOVE_LEFT:
 		start_trail = sf::Vector2f(pb.left +pb.width, pb.top);
 		break;
-	case MOVE_RIGHT:
+	case move_dir_no::MOVE_RIGHT:
 		start_trail = sf::Vector2f(pb.left, pb.top);
 		break;
-	case MOVE_DOWN:
+	case move_dir_no::MOVE_DOWN:
 		start_trail = sf::Vector2f(pb.left, pb.top );
 		break;
-	case MOVE_UP:
+	case move_dir_no::MOVE_UP:
 		start_trail = sf::Vector2f(pb.left, pb.top+pb.width);
 		break;
 	default:
@@ -107,22 +108,22 @@ void player::updateinput()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
 			moving = true;
-			movedirection = MOVE_LEFT;
+			movedirection = move_dir_no::MOVE_LEFT;
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
 			moving = true;
-			movedirection = MOVE_RIGHT;
+			movedirection = move_dir_no::MOVE_RIGHT;
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
 			moving = true;
-			movedirection = MOVE_DOWN;
+			movedirection = move_dir_no::MOVE_DOWN;
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
 			moving = true;
-			movedirection = MOVE_UP;
+			movedirection = move_dir_no::MOVE_UP;
 		}
 		if (moving) {
 			get_start_trail(movedirection, pb);
@@ -133,16 +134,16 @@ void player::updateinput()
 		float mov = (movementspeed*dt*time_mult > BASE_SIZE*0.8f) ? BASE_SIZE * 0.8f : movementspeed * dt*time_mult;
 		switch (movedirection)
 		{
-		case MOVE_LEFT:
+		case move_dir_no::MOVE_LEFT:
 			this->shape.move(-mov, 0.f);
 			break;
-		case MOVE_RIGHT:
+		case move_dir_no::MOVE_RIGHT:
 			this->shape.move(mov, 0.f);
 			break;
-		case MOVE_DOWN:
+		case move_dir_no::MOVE_DOWN:
 			this->shape.move(0.f, mov);
 			break;
-		case MOVE_UP:
+		case move_dir_no::MOVE_UP:
 			this->shape.move(0.f, -mov);
 			break;
 		default:
@@ -177,7 +178,7 @@ void player::updatewindowcollision(sf::RenderTarget * target)
 	if (flag == 1) {
 		get_end_trail(movedirection,shape.getGlobalBounds());
 		moving = false;
-		movedirection = MOVE_NULL;
+		movedirection = move_dir_no::MOVE_NULL;
 		if ((fabs(start_trail.x - end_trail.x) > playerbounds.width*1.2f) || (fabs(start_trail.y - end_trail.y) > playerbounds.height*1.2f))
 		{
 			trails.push_back(curr_trail(&start_trail, &end_trail));
@@ -190,7 +191,7 @@ void player::update_collision(sf::RectangleShape* object) {
 	sf::FloatRect ob = object->getGlobalBounds();
 	sf::FloatRect pb = this->shape.getGlobalBounds();
 	switch (movedirection) {
-	case MOVE_LEFT:
+	case move_dir_no::MOVE_LEFT:
 		if ((pb.top >= ob.top - 5.f) && (pb.top + pb.height <= ob.top + ob.height + 5.f)) {
 			if (!(pb.left + pb.width < ob.left)) {
 				if (pb.left < ob.left + ob.width) {
@@ -200,7 +201,7 @@ void player::update_collision(sf::RectangleShape* object) {
 			}
 		}
 		break;
-	case MOVE_RIGHT:
+	case move_dir_no::MOVE_RIGHT:
 		if ((pb.top >= ob.top - 5.f) && (pb.top + pb.height <= ob.top + ob.height + 5.f)) {
 			if (!(pb.left > ob.left + ob.width)) {
 				if (pb.left + pb.width > ob.left) {
@@ -210,7 +211,7 @@ void player::update_collision(sf::RectangleShape* object) {
 			}
 		}
 		break;
-	case MOVE_DOWN:
+	case move_dir_no::MOVE_DOWN:
 		if ((pb.left >= ob.left - 5.f) && (pb.left + pb.width <= ob.left + ob.width + 5.f)) {
 			if (!(pb.top > ob.top + ob.height)) {
 				if (pb.top + pb.height > ob.top) {
@@ -220,7 +221,7 @@ void player::update_collision(sf::RectangleShape* object) {
 			}
 		}
 		break;
-	case MOVE_UP:
+	case move_dir_no::MOVE_UP:
 		if ((pb.left >= ob.left - 5.f) && (pb.left + pb.width <= ob.left + ob.width + 5.f)) {
 			if (!(pb.top + pb.height < ob.top)) {
 				if (pb.top < ob.top + ob.height) {
@@ -236,7 +237,7 @@ void player::update_collision(sf::RectangleShape* object) {
 	if (flag1 == 1) {
 		get_end_trail(movedirection,shape.getGlobalBounds());
 		moving = false;
-		movedirection = MOVE_NULL;
+		movedirection = move_dir_no::MOVE_NULL;
 		if ((fabs(start_trail.x - end_trail.x) > pb.width*1.2f) || (fabs(start_trail.y - end_trail.y) > pb.height*1.2f))
 		{
 			trails.push_back(curr_trail(&start_trail, &end_trail));
@@ -265,7 +266,7 @@ void player::updatemarkers()
 					if(moving==true){
 					get_end_trail(movedirection,shape.getGlobalBounds());
 					moving = false;
-					movedirection = MOVE_NULL;
+					movedirection = move_dir_no::MOVE_NULL;
 					trails.push_back(curr_trail(&start_trail, &end_trail));
 					//std::cout << "number of elements in trail vector are " << trails.size() << std::endl;
 					}

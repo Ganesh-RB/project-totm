@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef STATE_H
+#define STATE_H
 
 ////////////////////////////////////////////////////////////
 /// \brief state class for game 
@@ -72,3 +72,4 @@ public:
 	virtual void start() {};
 };
 
+#endif

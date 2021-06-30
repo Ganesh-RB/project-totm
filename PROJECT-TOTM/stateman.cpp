@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "stateman.h"
 
 stateman::stateman() : m_add(false), m_replace(false), m_remove(false)

@@ -1,7 +1,5 @@
+#include "..\stdafx.h"
 #include "gun.h"
-#include <iostream>
-#include <math.h>
-#include <cstdlib>
 
 void gun::initBullet()
 {

@@ -1,11 +1,5 @@
-
 #ifndef WALL_GEN_H
 #define WALL_GEN_H
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
 
 
 ////////////////////////////////////////////////////////////

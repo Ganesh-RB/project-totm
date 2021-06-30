@@ -1,10 +1,5 @@
-#pragma once
-
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
+#ifndef PLAYER_H
+#define PLAYER_H
 
 
 ////////////////////////////////////////////////////////////
@@ -18,7 +13,7 @@ class player
 {
 private:
 
-	enum move_dir_no { MOVE_NULL, MOVE_LEFT, MOVE_RIGHT, MOVE_DOWN, MOVE_UP };
+	enum class move_dir_no { MOVE_NULL, MOVE_LEFT, MOVE_RIGHT, MOVE_DOWN, MOVE_UP };
 
 	////////////////////////////////////////////////////////////
 	/// \brief size of player
@@ -157,7 +152,7 @@ private:
 	///  will not change start_trail variable otherwise
 	/// 
 	////////////////////////////////////////////////////////////
-	void get_start_trail(int, sf::FloatRect);
+	void get_start_trail(move_dir_no, sf::FloatRect);
 
 	//sets trail end depending on movement direction
 	////////////////////////////////////////////////////////////
@@ -167,7 +162,7 @@ private:
 	///  will not change end_trail variable otherwise
 	/// 
 	////////////////////////////////////////////////////////////
-	void get_end_trail(int,sf::FloatRect);
+	void get_end_trail(move_dir_no,sf::FloatRect);
 
 
 public:
@@ -301,11 +296,10 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief denotes movement direction
 	///
-	/// 0 denotes no movement,1 for left,2 for right
-	/// 3 for up and 4 for down
+	///
 	///
 	////////////////////////////////////////////////////////////
-	int movedirection;
+	move_dir_no movedirection;
 
 	////////////////////////////////////////////////////////////
 	/// \brief used for square shaped player
@@ -394,3 +388,4 @@ public:
 
 };
 
+#endif

@@ -1,14 +1,6 @@
 #ifndef GUN_H
 #define GUN_H
 
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <vector>
-
- 
-
-
 class gun
 {
 private:

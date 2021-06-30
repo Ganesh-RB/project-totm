@@ -1,7 +1,8 @@
-#pragma once
-#include <memory>
-#include <SFML\Graphics.hpp>
+#ifndef GAME_H
+#define GAME_H
+
 #include "stateman.h"
+#include "asset_holder.h"
 
 ////////////////////////////////////////////////////////////
 /// \struct 
@@ -15,11 +16,13 @@ struct context
 {
 	std::unique_ptr<stateman> m_states;
 	std::unique_ptr<sf::RenderWindow> m_window;
+	std::unique_ptr<asset_holder> m_assets;
 
 	context()
 	{
 		m_states = std::make_unique<stateman>();
 		m_window = std::make_unique<sf::RenderWindow>();
+		m_assets = std::make_unique<asset_holder>();
 	}
 };
 
@@ -40,7 +43,24 @@ private:
 	/// which has all variables needed by states to run properly
 	////////////////////////////////////////////////////////////
 	std::shared_ptr<context> m_context;
-	
+
+	////////////////////////////////////////////////////////////
+	/// \brief initializes fonts
+	///
+	/// initializes fonts inside m_assets for
+	/// use through out game
+	////////////////////////////////////////////////////////////
+	void InitFonts();
+
+	////////////////////////////////////////////////////////////
+	/// \brief initializes textures
+	///
+	/// initializes textures inside m_assets for
+	/// use through out game
+	////////////////////////////////////////////////////////////
+	void InitTextures();
+
+	void InitSounds();
 
 public:
 	////////////////////////////////////////////////////////////
@@ -65,3 +85,4 @@ public:
 	void run();
 };
 
+#endif

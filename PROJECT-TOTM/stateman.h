@@ -1,7 +1,6 @@
-#pragma once
+#ifndef STATEMAN_H
+#define STATEMAN_H
 
-#include <stack>
-#include <memory>
 #include "state.h"
 
 ////////////////////////////////////////////////////////////
@@ -98,4 +97,4 @@ public:
 	std::unique_ptr<state>& Getcurrent();
 };
 
-
+#endif

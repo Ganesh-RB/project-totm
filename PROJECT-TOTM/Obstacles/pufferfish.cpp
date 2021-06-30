@@ -1,5 +1,5 @@
+#include "..\stdafx.h"
 #include "pufferfish.h"
-#include<iostream>
 
 
 void pufferfish::Fish1()

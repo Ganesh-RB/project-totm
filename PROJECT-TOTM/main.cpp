@@ -1,4 +1,4 @@
-#include <iostream>
+#include "stdafx.h"
 #include "game.h"
 /*TO DO
 HARD:
