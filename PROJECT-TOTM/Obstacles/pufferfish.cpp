@@ -66,6 +66,7 @@ const bool pufferfish::isCollide(const sf::FloatRect & shape)
 		else
 			return false;
 	}
+	else {return false;}
 }
 
 void pufferfish::Render_fish(sf::RenderWindow * window)
