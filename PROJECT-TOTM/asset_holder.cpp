@@ -9,10 +9,11 @@ asset_holder::~asset_holder()
 {
 }
 
-void asset_holder::add_texture(group_member_name _name, int id, const std::string & filepath)
+void asset_holder::add_texture(group_member_name _name, int id, const std::string & filepath,bool setrepeated)
 {
 	auto temp_texture = std::make_unique<sf::Texture>();
 	if (temp_texture->loadFromFile(filepath)) {
+		temp_texture->setRepeated(setrepeated);
 		m_textures[std::make_pair(_name, id)] = std::move(temp_texture);
 	}
 	else {

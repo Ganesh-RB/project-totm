@@ -7,7 +7,6 @@ void player::initvariables()
 	movementspeed = BASE_SIZE/2.f ;
 	moving = false;
 	movedirection =move_dir_no::MOVE_NULL ;
-	marker_start = true;
 	all_grids_colored = false;
 	display_markers = false;
 	marker_temp.setFillColor(sf::Color::Yellow);
@@ -26,9 +25,38 @@ bool player::level_complete()
 	return  all_grids_colored;
 }
 
-void player::add_marker_chain()
+void player::add_marker_chain(const std::vector<sf::Vector2f>& points)
 {
-	marker_start = true;
+	sf::Vector2f chain_point=(points.size()>0)? points[0]:sf::Vector2f(0.f,0.f);
+	for (int i = 1; i < points.size(); i++) {
+		float max_y, max_x, min_y, min_x;
+		if (points[i].x > chain_point.x) {
+			max_x = points[i].x;
+			min_x = chain_point.x;
+		}
+		else {
+			max_x = chain_point.x;
+			min_x = points[i].x;
+		}
+		if (points[i].y > chain_point.y) {
+			max_y = points[i].y;
+			min_y = chain_point.y;
+		}
+		else {
+			max_y = chain_point.y;
+			min_y = points[i].y;
+		}
+
+		while ((max_x - min_x >= 0.9f) || (max_y - min_y >= 0.9f)) {
+			marker_temp.setPosition(sf::Vector2f(min_x*BASE_SIZE, min_y*BASE_SIZE));
+			markers.push_back(marker_temp);
+			min_x += (max_x - min_x >= 0.9f);
+			min_y += (max_y - min_y >= 0.9f);
+		}
+		marker_temp.setPosition(sf::Vector2f(max_x*BASE_SIZE, max_y*BASE_SIZE));
+		markers.push_back(marker_temp);
+		chain_point = points[i];
+	}
 }
 
 void player::add_marker_single(float x, float y)

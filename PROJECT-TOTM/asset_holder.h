@@ -28,9 +28,10 @@ public:
 	/// \param _name name of owner
 	/// \param _id unique id of owner's texture
 	/// \param filepath path to file where texture present 
+	/// \param setrepeated decides whether texture can be repeated
 	///
 	////////////////////////////////////////////////////////////
-	void add_texture(group_member_name _name,int id, const std::string& filepath);
+	void add_texture(group_member_name _name,int id, const std::string& filepath, bool setrepeated = false);
 
 	////////////////////////////////////////////////////////////
 	/// \brief adds font to assets

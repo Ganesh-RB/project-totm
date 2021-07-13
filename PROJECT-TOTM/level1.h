@@ -3,7 +3,7 @@
 
 #include "player.h"
 #include "wall_gen.h"
-#include "game.h"
+#include "context.h"
 #include "Obstacles/gun.h"
 #include "Obstacles/pufferfish.h"
 #include "Obstacles/teleporter.h"

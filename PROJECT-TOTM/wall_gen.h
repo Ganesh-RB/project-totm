@@ -29,22 +29,6 @@ private:
 	////////////////////////////////////////////////////////////
 	float base_size = 30.f;
 
-	////////////////////////////////////////////////////////////
-	/// \brief sores if point is first point in chain or not
-	///
-	////////////////////////////////////////////////////////////
-	bool chain_start;
-
-	////////////////////////////////////////////////////////////
-	/// \brief used for wall creation by chain
-	///
-	/// Used as storage for the other point along with
-	/// active one using which wall made in chain method
-	///
-	////////////////////////////////////////////////////////////
-	sf::Vector2u chain_point;
-
-
 public:
 	//constructors and deconstructors
 	////////////////////////////////////////////////////////////
@@ -93,22 +77,16 @@ public:
 	////////////////////////////////////////////////////////////
 	void add_wall_single(float x_coord, float y_coord, float len, wall_dir_no dir);
 
-	////////////////////////////////////////////////////////////
-	/*! \overload void add_wall_chain()
-	*    overloaded null argument function to terminate variadic function
-	*/
-	////////////////////////////////////////////////////////////
-	void add_wall_chain();
 
 	////////////////////////////////////////////////////////////
 	/// \brief used to add wall in chain fashion
 	///
-	/// enter any number of sf::Vector2u points in player units
+	/// enter a vector of sf::Vector2u points in player units
 	/// and this function will create vertical/horizontal walls
-	/// with width equal player length between consecutive entered points
+	/// with width equal player length between consecutive  
+	/// points in vector
 	///
-	/// \param var1 first point
-	/// \param ...var2 variadic argument for rest of entries
+	/// \param points vector of sf::vector2u points
 	///
 	/// \note when constructing walls going downward/rightward
 	/// direction ,their length extended by one to avoid cases of incomplete corner walls
@@ -118,32 +96,12 @@ public:
 	/// horizontal line ,or undefined behaviour
 	///
 	/// \warning if 2 consecutive points are the same then a player
-	///sized block will be generated at that position
+	/// sized block will be generated at that position
 	/// 
-	/// \warning no output/change if only one input given
+	/// \warning no output/change if only zero or one point in vector
 	///
 	////////////////////////////////////////////////////////////
-	template <typename... ARGS>
-	void add_wall_chain(sf::Vector2u var1, ARGS... var2)
-	{
-		if (chain_start == false) {
-			sf::RectangleShape temp;
-			temp.setPosition(chain_point.x*base_size, chain_point.y*base_size);
-			int temp_x = ((var1.x - chain_point.x) == 0) ? 1 : var1.x - chain_point.x;
-			if (var1.x > chain_point.x) { temp_x += 1; }
-			int temp_y = ((var1.y - chain_point.y) == 0) ? 1 : var1.y - chain_point.y;
-			if (var1.y > chain_point.y) { temp_y += 1; }
-			temp.setSize(sf::Vector2f(base_size*temp_x, base_size*temp_y));
-			temp.setTexture(&wall_tex);
-			temp.setTextureRect({ 0,0,(int)temp.getLocalBounds().width,(int)temp.getLocalBounds().height });
-			walls.push_back(temp);
-		}
-		else {
-			chain_start = false;
-		}
-		chain_point = var1;
-		wall_gen::add_wall_chain(var2...);
-	}
+	void add_wall_chain(const std::vector<sf::Vector2u>& points);
 
 	////////////////////////////////////////////////////////////
 	/// \brief draws all members of walls on given target

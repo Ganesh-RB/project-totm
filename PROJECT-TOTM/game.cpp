@@ -4,7 +4,7 @@
 
 void game::InitFonts()
 {
-	m_context->m_assets->add_font(0, "Fonts/Dosis-Light.ttf");
+	m_context->m_assets->add_font(0, "Fonts/Dosis-Light.otf");
 }
 
 void game::InitTextures()

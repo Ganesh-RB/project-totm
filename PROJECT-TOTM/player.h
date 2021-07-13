@@ -51,16 +51,6 @@ private:
 	////////////////////////////////////////////////////////////
 	bool all_grids_colored;
 
-
-	////////////////////////////////////////////////////////////
-	/// \brief used to indicate if point is at start of chain
-	///
-	/// true for first point given to add_marker_chain(),
-	/// false otherwise
-	///
-	////////////////////////////////////////////////////////////
-	bool marker_start;
-
 	////////////////////////////////////////////////////////////
 	/// \brief used to make sure grid entirely covered
 	///
@@ -81,16 +71,6 @@ private:
 	/// used to set size,color,origin of all markers
 	////////////////////////////////////////////////////////////
 	sf::RectangleShape marker_temp;
-
-	////////////////////////////////////////////////////////////
-	/// \brief used for marker addition by chain
-	///
-	/// Used as storage for the other point along with
-	/// active one between which markers added in
-	/// add_marker_chain() function
-	///
-	////////////////////////////////////////////////////////////
-	sf::Vector2f chain_point;
 
 	////////////////////////////////////////////////////////////
 	/// \brief used to ensure proper level completion
@@ -192,66 +172,22 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief used to add markers in chain fashion
 	///
-	/// enter any number of sf::Vector2f points in player units
+	/// enter a vector of sf::Vector2f points in player units
 	/// and this function will create markers with spacing in the 
 	/// x and/or y direction  equal to player length between 
-	/// consecutive entered points
+	/// consecutive points in vector
 	///
-	/// \param var1 first point
-	/// \param ...var2 variadic argument for rest of entries
+	/// \param points vector of sf::vector2f points
 	///
 	/// \note place markers in middle of grid squares
 	/// 
-	/// \warning no output/change if only one input given
+	/// \warning no output/change if only zero or one point in vector
 	///
 	/// \warning if 2 consecutive points are the same 
-	/// then a single marker  will be generated at that position
+	/// then a single marker will be generated at that position
 	///
 	////////////////////////////////////////////////////////////
-	template <typename... ARGS>
-	void add_marker_chain(sf::Vector2f var1, ARGS ...var2)
-	{
-		if (marker_start == false) {
-			float max_y, max_x, min_y, min_x;
-			if (var1.x > chain_point.x) {
-				max_x = var1.x;
-				min_x = chain_point.x;
-			}
-			else {
-				max_x = chain_point.x;
-				min_x = var1.x;
-			}
-			if (var1.y > chain_point.y) {
-				max_y = var1.y;
-				min_y = chain_point.y;
-			}
-			else {
-				max_y = chain_point.y;
-				min_y = var1.y;
-			}
-
-			while ((max_x - min_x >= 0.9f) || (max_y - min_y >= 0.9f)) {
-				marker_temp.setPosition(sf::Vector2f(min_x*BASE_SIZE, min_y*BASE_SIZE));
-				markers.push_back(marker_temp);
-				min_x += (max_x - min_x >= 0.9f);
-				min_y += (max_y - min_y >= 0.9f);
-			}
-			marker_temp.setPosition(sf::Vector2f(max_x*BASE_SIZE, max_y*BASE_SIZE));
-			markers.push_back(marker_temp);
-		}
-		else {
-			marker_start = false;
-		}
-		chain_point = var1;
-		player::add_marker_chain(var2...);
-	}
-
-	////////////////////////////////////////////////////////////
-	/*! \overload void add_marker_chain()
-	*    overloaded null argument function to terminate variadic function
-	*/
-	////////////////////////////////////////////////////////////
-	void add_marker_chain();
+	void add_marker_chain(const std::vector<sf::Vector2f>& points);
 
 	////////////////////////////////////////////////////////////
 	/// \brief used to add a single marker

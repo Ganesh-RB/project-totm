@@ -3,8 +3,6 @@
 wall_gen::wall_gen(float _base_size)
 {
 	base_size = _base_size;
-	chain_point = sf::Vector2u(0U, 0U);
-	chain_start = true;
 	unsigned base_size_half = (unsigned) base_size/3;
 	bitwise_image.create(base_size_half,base_size_half);
 	for (unsigned i = 0; i < base_size_half; i++) {
@@ -44,9 +42,22 @@ void wall_gen::add_wall_single(float x_coord, float y_coord, float len, wall_dir
 	walls.push_back(temp);
 }
 
-void wall_gen::add_wall_chain()
+void wall_gen::add_wall_chain(const std::vector<sf::Vector2u>& points)
 {
-	chain_start = true;
+	sf::Vector2u chain_point = (points.size() > 0) ? points[0] : sf::Vector2u(0u,0u);
+	for (int i = 1; i < points.size(); i++) {
+		sf::RectangleShape temp;
+		temp.setPosition(chain_point.x*base_size, chain_point.y*base_size);
+		int temp_x = ((points[i].x - chain_point.x) == 0) ? 1 : points[i].x - chain_point.x;
+		if (points[i].x > chain_point.x) { temp_x += 1; }
+		int temp_y = ((points[i].y - chain_point.y) == 0) ? 1 : points[i].y - chain_point.y;
+		if (points[i].y > chain_point.y) { temp_y += 1; }
+		temp.setSize(sf::Vector2f(base_size*temp_x, base_size*temp_y));
+		temp.setTexture(&wall_tex);
+		temp.setTextureRect({ 0,0,(int)temp.getLocalBounds().width,(int)temp.getLocalBounds().height });
+		walls.push_back(temp);
+		chain_point = points[i];
+	}
 }
 
 
