@@ -54,6 +54,11 @@ void level1::inittext()
 	this->deathscreen.setString("YOU ARE DEAD !");
 	this->deathscreen.setPosition(sf::Vector2f(60.f, 100.f));
 }
+void level1::defeat()
+{
+	this->alive = false;
+	m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::DEATH);
+}
 //constructors and destructors
 level1::level1(std::shared_ptr<context> &context) :m_context(context)
 {
@@ -99,7 +104,7 @@ void level1::pollevents()
 				this->is_running = false;
 				this->m_context->m_window->close();
 			}
-			if (this->ev.key.code == sf::Keyboard::P && pause_timer.restart().asSeconds() > 0.2f) {
+			if (this->ev.key.code == sf::Keyboard::P && pause_timer.getElapsedTime().asSeconds() > 0.2f) {
 				this->is_pause = true;
 
 			}
@@ -118,8 +123,6 @@ void level1::pollevents()
 void level1::update(float& _dt)
 {
 	dt = _dt;
-	this->pollevents();
-
 	if (((!is_pause) && alive) && (!player1.level_complete())) {
 
 		this->player1.update(m_context->m_window.get(), &dt, &time_mult);
@@ -134,14 +137,13 @@ void level1::update(float& _dt)
 		test_spring1.update(dt);
 		test_spring2.update(dt);
 		if (Gun1.isCollide(player1.shape.getGlobalBounds())) {
-			//printf("DEAD\n");
-			alive = false;
+			this->defeat();
 		}
 		if (Fish1.isCollide(player1.shape.getGlobalBounds())) {
-			//printf("DEAD\n");
-			alive = false;
+			this->defeat();
 		}
 		victory = player1.level_complete();
+		if (victory) { m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::VICTORY); }
 	}
 	if (is_pause && alive) {
 		this->m_context->m_states->Add(std::make_unique<pause_menu>(m_context));
@@ -152,7 +154,9 @@ void level1::render()
 {
 	this->m_context->m_window->clear();
 	//draw game objects
-	this->player1.render(this->m_context->m_window.get());
+	if (alive) {
+		this->player1.render(this->m_context->m_window.get());
+	}
 	this->wall_generator.render(this->m_context->m_window.get());
 	this->Gun1.Render_gun(this->m_context->m_window.get());
 	this->Fish1.Render_fish(this->m_context->m_window.get());
@@ -183,5 +187,6 @@ void level1::pause()
 
 void level1::start()
 {
+	pause_timer.restart();
 	is_pause = false;
 }

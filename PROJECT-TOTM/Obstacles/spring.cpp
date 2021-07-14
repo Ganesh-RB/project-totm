@@ -99,16 +99,22 @@ void spring::update(float _dt)
 			player_var.trails.push_back(player_var.curr_trail(&player_var.start_trail, &player_var.end_trail));
 			is_active= false;
 			player_var.movedirection = directions.first[1];
+			player_var.last_moving_direction = player_var.movedirection;
 			player_var.shape.setPosition(spring_sprite.getPosition() - sf::Vector2f(BASE_SIZE / 2.f, BASE_SIZE / 2.f));
 			player_var.get_start_trail(player_var.movedirection, spring_sprite.getGlobalBounds());
+			player_var.previous_moving = false;
+			player_var.spring_flag = true;
 		}
 		if (player_var.movedirection == directions.second[0]) {
 			player_var.get_end_trail(player_var.movedirection, spring_sprite.getGlobalBounds());
 			player_var.trails.push_back(player_var.curr_trail(&player_var.start_trail, &player_var.end_trail));
 			is_active = false;
 			player_var.movedirection = directions.second[1];
+			player_var.last_moving_direction = player_var.movedirection;
 			player_var.shape.setPosition(spring_sprite.getPosition()-sf::Vector2f(BASE_SIZE/2.f,BASE_SIZE/2.f));
 			player_var.get_start_trail(player_var.movedirection, spring_sprite.getGlobalBounds());
+			player_var.previous_moving = false;
+			player_var.spring_flag = true;
 		}
 	}
 }

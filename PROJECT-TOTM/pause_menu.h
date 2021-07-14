@@ -11,6 +11,7 @@ private:
 	sf::Color color_text[2];
 	sf::Text options[3];
 	int option_no[2];
+	sf::Clock min_timer;
 	
 public:
 	pause_menu(std::shared_ptr<context>& context);

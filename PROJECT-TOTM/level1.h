@@ -25,7 +25,7 @@ private:
 	bool is_running;
 	bool victory;
 	sf::Clock pause_timer;
-	player player1{ 3.f,18.f };
+	player player1{ 3.f,18.f,m_context->m_assets.get()};
 	gun Gun1{ sf::Vector2u(11U,12U),sf::Vector2u(9U,12U)};
 	pufferfish Fish1{ sf::Vector2u(7U,16U) };
 	spring test_spring{ sf::Vector2f(3.f,10.f),spring::spring_dir::DOWN_RIGHT,player1,m_context->m_assets.get()};
@@ -38,6 +38,7 @@ private:
 	void initvariables();
 	void initfonts();
 	void inittext();
+	void defeat();
 
 	//fonts
 	sf::Font font1;

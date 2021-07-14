@@ -4,19 +4,37 @@
 
 void player::initvariables()
 {
-	movementspeed = BASE_SIZE/2.f ;
+	movementspeed = BASE_SIZE / 2.f;
 	moving = false;
-	movedirection =move_dir_no::MOVE_NULL ;
+	previous_moving = false;
+	movedirection = move_dir_no::MOVE_NULL;
 	all_grids_colored = false;
 	display_markers = false;
 	marker_temp.setFillColor(sf::Color::Yellow);
 	marker_temp.setSize(sf::Vector2f(2.f, 2.f));
 	marker_temp.setOrigin(sf::Vector2f(1.f, 1.f));
+	for (int i = 0; i < 6; i++) {
+		if (i < 4){
+			display_frame[i] = sf::IntRect(30 * i, 0, 30, 30);
+		}
+		else {
+			display_frame[i] = sf::IntRect(90, 0, 30 * (i - 2), 30);
+		}
+	}
+	last_moving_direction = move_dir_no::MOVE_DOWN;
+	player_sprite.setTexture(m_assets.get_texture(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_textures::PLAYER));
+	player_sprite.setOrigin(BASE_SIZE / 2.f, BASE_SIZE / 2.f);
+	player_sprite.setTextureRect(display_frame[0]);
+	player_sprite.setScale(30.f / BASE_SIZE, 30.f / BASE_SIZE);
+	player_sprite.setPosition(shape.getPosition() + sf::Vector2f(BASE_SIZE / 2.f, BASE_SIZE / 2.f));
+	anim_dir = 1;
+	anim_timer = 0.f;
+	trail_timer = 0.f;
+	spring_flag = false;
 }
 
 const void player::initshape()
 {
-	this->shape.setFillColor(sf::Color::Color(0, 255, 0, 255));
 	this->shape.setSize(sf::Vector2f(BASE_SIZE, BASE_SIZE));
 }
 
@@ -68,11 +86,12 @@ void player::add_marker_single(float x, float y)
 
 
 
-player::player(float  _x, float  _y)
+player::player(float  _x, float  _y,asset_holder* assets) :m_assets(*assets)
 {
 	this->shape.setPosition(BASE_SIZE*_x, BASE_SIZE *_y);
 	this->initshape();
 	this->initvariables();
+	
 }
 
 player::~player()
@@ -107,6 +126,53 @@ void player::get_end_trail(move_dir_no dir, sf::FloatRect pb)
 	}
 }
 
+void player::update_animation(float _dt)
+{
+	player_sprite.setPosition(shape.getPosition() + sf::Vector2f(BASE_SIZE / 2.f, BASE_SIZE / 2.f));
+	anim_timer += 180 * anim_dir* _dt;
+	if (anim_timer > 60.f) { anim_dir = -1; }
+	if (anim_timer < 0.f) { anim_dir = 1; }
+	
+	if(moving && previous_moving) {
+		trail_timer += movementspeed*24.f*_dt;
+		if (trail_timer > 60.f) { player_sprite.setTextureRect(display_frame[5]); }
+		else if(trail_timer>30.f){ player_sprite.setTextureRect(display_frame[4]); }
+		else { player_sprite.setTextureRect(display_frame[3]); }
+	
+	}
+	else {
+		trail_timer = 0.f;
+		if (anim_timer < 20.f) {
+			player_sprite.setTextureRect(display_frame[0]);
+		}
+		else if (anim_timer < 40.f) {
+			player_sprite.setTextureRect(display_frame[1]);
+
+		}
+		else { player_sprite.setTextureRect(display_frame[2]); }
+	}
+	float temp;
+	switch (last_moving_direction)
+	{
+	case move_dir_no::MOVE_LEFT:
+		temp = 90.f;
+		break;
+	case move_dir_no::MOVE_RIGHT:
+		temp = -90.f;
+		break;
+	case move_dir_no::MOVE_UP:
+		temp = 180.f;
+		break;
+	case move_dir_no::MOVE_DOWN:
+		temp = 0.f;
+		break;
+	default:
+		printf("ERROR::PLAYER::UPDATE_ANIMATION::invalid value of last_moving_direction\n");
+		break;
+	}
+	player_sprite.setRotation(temp + ((moving&&previous_moving)*-90.f));
+}
+
 void player::get_start_trail(move_dir_no dir,sf::FloatRect pb)
 {
 	switch (dir)
@@ -131,6 +197,8 @@ void player::get_start_trail(move_dir_no dir,sf::FloatRect pb)
 
 void player::updateinput()
 {
+	if (!spring_flag) { previous_moving = moving; }
+	spring_flag = false;
 	if (moving == false) {
 		sf::FloatRect pb = this->shape.getGlobalBounds(); //pb is for playerbounds
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
@@ -154,6 +222,7 @@ void player::updateinput()
 			movedirection = move_dir_no::MOVE_UP;
 		}
 		if (moving) {
+			last_moving_direction =movedirection;
 			get_start_trail(movedirection, pb);
 		}
 	}
@@ -268,6 +337,7 @@ void player::update_collision(sf::RectangleShape* object) {
 		movedirection = move_dir_no::MOVE_NULL;
 		if ((fabs(start_trail.x - end_trail.x) > pb.width*1.2f) || (fabs(start_trail.y - end_trail.y) > pb.height*1.2f))
 		{
+			m_assets.play_sound(asset_holder::group_member_name::OJJAS,asset_holder::ojjas_sounds::COLLIDE);
 			trails.push_back(curr_trail(&start_trail, &end_trail));
 			//std::cout << "number of elements in trail vector are " << trails.size() << std::endl;
 		}
@@ -308,6 +378,7 @@ void player::update(sf::RenderWindow* target, float* _dt, float* _time_mult)
 {
 	dt = *_dt;
 	time_mult = *_time_mult;
+	this->update_animation(dt);
 	if(!level_complete()){this->updateinput();
 	this->updatewindowcollision(target);
 	this->updatemarkers(); }
@@ -320,7 +391,7 @@ void player::render(sf::RenderWindow * target)
 	{
 		target->draw(i);
 	}
-	target->draw(this->shape);
+	target->draw(this->player_sprite);
 	if (display_markers)
 		for (const auto i : this->markers)
 		{

@@ -11,8 +11,8 @@ public:
 	////////////////////////////////////////////////////////////
 	enum class group_member_name { ADIL, GANESH, MANNAM, OJJAS };
 
-	enum ojjas_sounds { BUTTON_FORWARD, BUTTON_BACKWARD, BEEP, BOUNCE, TELEPORT };
-	enum ojjas_textures { SPRING, TELEPORTER };
+	enum ojjas_sounds { BUTTON_FORWARD, BUTTON_BACKWARD, BEEP, BOUNCE, TELEPORT,COLLIDE,DEATH,VICTORY };
+	enum ojjas_textures { SPRING, TELEPORTER,PLAYER };
 
 	enum fonts {DOSIS_EXTRALIGHT,DOSIS_LIGHT,DOSIS_REGULAR,DOSIS_MEDIUM,DOSIS_SEMIBOLD,DOSIS_BOLD,DOSIS_EXTRABOLD};
 

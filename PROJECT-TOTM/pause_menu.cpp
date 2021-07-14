@@ -60,6 +60,12 @@ void pause_menu::pollevents()
 					m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS,asset_holder::ojjas_sounds::BEEP);
 				}
 				break;
+			case::sf::Keyboard::P:
+				if (min_timer.getElapsedTime().asSeconds() > 0.2f) {
+					m_context->m_states->Popcurrent();
+					m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::BUTTON_FORWARD);
+				}
+				break;
 			case sf::Keyboard::Enter:
 				switch (option_no[0]) {
 				case 0:

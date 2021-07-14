@@ -8,3 +8,14 @@ https://freesound.org/people/qubodup/sounds/172660/
 
 teleport sound
 https://opengameart.org/content/8-bit-teleport
+
+collide sound
+https://freesound.org/people/jeckkech/sounds/391658/
+
+death sound
+https://freesound.org/people/MentosLat/sounds/417486/
+
+victory sound
+https://opengameart.org/content/win-sound-effect
+
+Sprites of teleporter,springs and player were made by using pixil.com website
