@@ -1,0 +1,10 @@
+buttons
+https://opengameart.org/content/beep-tone-sound-sfx
+https://opengameart.org/content/forward-button-press-ui-sound
+https://opengameart.org/content/backwards-button-press-ui-sound
+
+bounce sound
+https://freesound.org/people/qubodup/sounds/172660/
+
+teleport sound
+https://opengameart.org/content/8-bit-teleport

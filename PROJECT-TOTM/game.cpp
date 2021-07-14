@@ -4,17 +4,26 @@
 
 void game::InitFonts()
 {
-	m_context->m_assets->add_font(0, "Fonts/Dosis-Light.otf");
+	m_context->m_assets->add_font(asset_holder::fonts::DOSIS_EXTRALIGHT,"Fonts/Dosis-ExtraLight.otf" );
+	m_context->m_assets->add_font(asset_holder::fonts::DOSIS_LIGHT, "Fonts/Dosis-Light.otf");
+	m_context->m_assets->add_font(asset_holder::fonts::DOSIS_REGULAR, "Fonts/Dosis-Regular.otf");
+	m_context->m_assets->add_font(asset_holder::fonts::DOSIS_MEDIUM,"Fonts/Dosis-Medium.otf" );
+	m_context->m_assets->add_font(asset_holder::fonts::DOSIS_SEMIBOLD,"Fonts/Dosis-SemiBold.otf" );
+	m_context->m_assets->add_font(asset_holder::fonts::DOSIS_BOLD,"Fonts/Dosis-Bold.otf" );
+	m_context->m_assets->add_font(asset_holder::fonts::DOSIS_EXTRABOLD,"Fonts/Dosis-ExtraBold.otf" );
 }
 
 void game::InitTextures()
 {
-	m_context->m_assets->add_texture(asset_holder::group_member_name::OJJAS, 0, "Images/spring.png");
-	m_context->m_assets->add_texture(asset_holder::group_member_name::OJJAS, 1, "Images/teleporter.png");
+	m_context->m_assets->add_texture(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_textures::SPRING, "Images/spring.png");
+	m_context->m_assets->add_texture(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_textures::TELEPORTER, "Images/teleporter.png");
 }
 void game::InitSounds() {
-	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::OJJAS, 0, "Sounds/bounce.flac");
-	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::OJJAS, 1, "Sounds/teleport.flac");
+	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::OJJAS,asset_holder::ojjas_sounds::BUTTON_FORWARD, "Sounds/button_forward.flac");
+	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::OJJAS,asset_holder::ojjas_sounds::BUTTON_BACKWARD, "Sounds/button_backward.flac");
+	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::OJJAS,asset_holder::ojjas_sounds::BEEP, "Sounds/beep.flac");
+	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::BOUNCE, "Sounds/bounce.flac");
+	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::TELEPORT, "Sounds/teleport.flac");
 }
 game::game()
 
@@ -36,13 +45,15 @@ void game::run()
 {
 	sf::Clock timer;
 	float dt;
-	while (m_context->m_window->isOpen())
+	m_context->m_states->ProcessStatechange();
+	while ((m_context->m_window->isOpen()) && !(m_context->m_states->is_empty()))
 	{
-		    dt = timer.restart().asSeconds();
-			m_context->m_assets->clear_sounds();
-			m_context->m_states->ProcessStatechange();
-			m_context->m_states->Getcurrent()->pollevents();
-			m_context->m_states->Getcurrent()->update(dt);
-			m_context->m_states->Getcurrent()->render();
+		dt = timer.restart().asSeconds();
+		m_context->m_assets->clear_sounds();
+		m_context->m_states->Getcurrent()->pollevents();
+		m_context->m_states->Getcurrent()->update(dt);
+		m_context->m_states->Getcurrent()->render();
+		m_context->m_states->ProcessStatechange();
+
 	}
 }

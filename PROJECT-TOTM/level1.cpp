@@ -38,7 +38,7 @@ void level1::initvariables()
 
 void level1::initfonts()
 {
-	font1 = m_context->m_assets->get_font(0);
+	font1 = m_context->m_assets->get_font(asset_holder::fonts::DOSIS_LIGHT);
 }
 void level1::inittext()
 {
@@ -99,10 +99,13 @@ void level1::pollevents()
 				this->is_running = false;
 				this->m_context->m_window->close();
 			}
-			if (this->ev.key.code == sf::Keyboard::P && pause_timer.restart().asSeconds() > 0.2f)
-				(this->is_pause == true) ? start() : pause();
+			if (this->ev.key.code == sf::Keyboard::P && pause_timer.restart().asSeconds() > 0.2f) {
+				this->is_pause = true;
+
+			}
 			if (this->ev.key.code == sf::Keyboard::R && (!alive || victory))
 			{
+				m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::BUTTON_FORWARD);
 				m_context->m_states->Add(std::make_unique<level1>(m_context), true);
 
 			}
@@ -140,6 +143,9 @@ void level1::update(float& _dt)
 		}
 		victory = player1.level_complete();
 	}
+	if (is_pause && alive) {
+		this->m_context->m_states->Add(std::make_unique<pause_menu>(m_context));
+	}
 }
 
 void level1::render()
@@ -155,10 +161,6 @@ void level1::render()
 	this->test_spring2.render(this->m_context->m_window.get());
 	this->test_tele.render(this->m_context->m_window.get());
 	/*this->test_drag.render(this->m_context->m_window.get());*/
-	if (is_pause && alive) {
-		GUItext.setString("PAUSED : Press P to unpause");
-		this->m_context->m_window->draw(this->GUItext);
-	}
 	if (!alive) {
 		this->m_context->m_window->draw(this->deathscreen);
 		GUItext.setString("Press R to Retry Level");

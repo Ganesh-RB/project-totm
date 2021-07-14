@@ -9,7 +9,7 @@ void spring::initvariables()
 
 	anim_flash = 1.f;
 	currentframe = sf::IntRect(0, 0, 30, 30);
-	spring_sprite.setTexture(m_assets.get_texture(asset_holder::group_member_name::OJJAS,0));
+	spring_sprite.setTexture(m_assets.get_texture(asset_holder::group_member_name::OJJAS,asset_holder::ojjas_textures::SPRING));
 	spring_sprite.setTextureRect(currentframe);
 	spring_sprite.setScale(BASE_SIZE/ spring_sprite.getLocalBounds().width, BASE_SIZE / spring_sprite.getLocalBounds().height);
 	is_active = true;
@@ -90,7 +90,7 @@ void spring::update(float _dt)
 			bounce_animation = true;
 			currentframe.left = 30;
 			spring_sprite.setTextureRect(currentframe);
-			m_assets.play_sound(asset_holder::group_member_name::OJJAS, 0);
+			m_assets.play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::BOUNCE);
 		}
 	}
 	else if (is_active && player_var.shape.getGlobalBounds().contains(trigger_point)){

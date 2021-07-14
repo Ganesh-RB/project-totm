@@ -60,3 +60,8 @@ std::unique_ptr<state>& stateman::Getcurrent()
 {
 	return m_statestack.top();
 }
+
+bool stateman::is_empty()
+{
+	return m_statestack.empty();
+}

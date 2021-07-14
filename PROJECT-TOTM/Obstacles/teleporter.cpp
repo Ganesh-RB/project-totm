@@ -7,7 +7,7 @@ void teleporter::init_variables()
 	BASE_SIZE = player_var.BASE_SIZE;
 	currentframe = sf::IntRect(0, 0, 30, 30);
 	for (auto &i : this->portals) {
-		i.first.setTexture(m_assets.get_texture(asset_holder::group_member_name::OJJAS, 1));
+		i.first.setTexture(m_assets.get_texture(asset_holder::group_member_name::OJJAS,asset_holder::ojjas_textures::TELEPORTER));
 		i.first.setTextureRect(currentframe);
 		i.first.setScale(BASE_SIZE /i.first.getLocalBounds().width, BASE_SIZE / i.first.getLocalBounds().height);
 		i.second = true;
@@ -54,7 +54,7 @@ void teleporter::update(float _dt)
 			portals[1-i].second=false;
 			player_var.shape.setPosition(portals[1-i].first.getPosition());
 			player_var.get_start_trail(player_var.movedirection, portals[1-i].first.getGlobalBounds());
-			m_assets.play_sound(asset_holder::group_member_name::OJJAS,1);
+			m_assets.play_sound(asset_holder::group_member_name::OJJAS,asset_holder::TELEPORT);
 		}
 	}
 }

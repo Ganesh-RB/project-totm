@@ -4,6 +4,18 @@
 class asset_holder
 {
 public:
+
+	////////////////////////////////////////////////////////////
+	/// \brief enum class to indicate ownership of assets
+	///
+	////////////////////////////////////////////////////////////
+	enum class group_member_name { ADIL, GANESH, MANNAM, OJJAS };
+
+	enum ojjas_sounds { BUTTON_FORWARD, BUTTON_BACKWARD, BEEP, BOUNCE, TELEPORT };
+	enum ojjas_textures { SPRING, TELEPORTER };
+
+	enum fonts {DOSIS_EXTRALIGHT,DOSIS_LIGHT,DOSIS_REGULAR,DOSIS_MEDIUM,DOSIS_SEMIBOLD,DOSIS_BOLD,DOSIS_EXTRABOLD};
+
 	////////////////////////////////////////////////////////////
 	/// \brief constructor
 	///
@@ -15,12 +27,6 @@ public:
 	///
 	////////////////////////////////////////////////////////////
 	~asset_holder();
-
-	////////////////////////////////////////////////////////////
-	/// \brief enum class to indicate ownership of assets
-	///
-	////////////////////////////////////////////////////////////
-	enum class group_member_name { ADIL, GANESH, MANNAM, OJJAS };
 
 	////////////////////////////////////////////////////////////
 	/// \brief adds texture to assets

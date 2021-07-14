@@ -9,6 +9,7 @@
 #include "Obstacles/teleporter.h"
 #include "Obstacles/Dragon.h"
 #include "Obstacles/spring.h"
+#include "pause_menu.h"
 
 class level1 : public state
 {
