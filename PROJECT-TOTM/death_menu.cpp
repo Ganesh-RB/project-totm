@@ -1,15 +1,15 @@
 #include "stdafx.h"
-#include "pause_menu.h"
+#include "death_menu.h"
 
-pause_menu::pause_menu(std::shared_ptr<context>& context):gen_menu(context)
+death_menu::death_menu(std::shared_ptr<context>& context) :gen_menu(context)
 {
 }
 
-pause_menu::~pause_menu()
+death_menu::~death_menu()
 {
 }
 
-void pause_menu::variable_init()
+void death_menu::variable_init()
 {
 	number_of_options = 3;
 	for (int i = 0; i < number_of_options; i++) {
@@ -18,13 +18,13 @@ void pause_menu::variable_init()
 	menu_title.setFillColor(sf::Color::Green);
 	color_text[0] = sf::Color::White;
 	color_text[1] = sf::Color::Red;
-	menu_title.setString("PAUSED");
-	options[0].setString("Resume");
+	menu_title.setString("YOU DIED");
+	options[0].setString("Restart");
 	options[1].setString("Main Menu");
 	options[2].setString("Exit");
 }
 
-void pause_menu::pollevents()
+void death_menu::pollevents()
 {
 	sf::Event event;
 	while (m_context->m_window->pollEvent(event)) {
@@ -40,21 +40,15 @@ void pause_menu::pollevents()
 				}
 				break;
 			case sf::Keyboard::S:
-				if (option_no[0] < number_of_options-1) {
+				if (option_no[0] < number_of_options - 1) {
 					option_no[0] += 1;
-					m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS,asset_holder::ojjas_sounds::BEEP);
-				}
-				break;
-			case::sf::Keyboard::P:
-				if (min_timer.getElapsedTime().asSeconds() > 0.2f) {
-					m_context->m_states->Popcurrent();
-					m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::BUTTON_FORWARD);
+					m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::BEEP);
 				}
 				break;
 			case sf::Keyboard::Enter:
 				switch (option_no[0]) {
 				case 0:
-					m_context->m_states->Popcurrent();
+					m_context->m_states->Add(std::make_unique<level1>(m_context), true);
 					m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::BUTTON_FORWARD);
 					break;
 				case 1:
