@@ -75,7 +75,7 @@ public:
 	///  \param dir direction as given in wall_dir_no
 	///  
 	////////////////////////////////////////////////////////////
-	void add_wall_single(float x_coord, float y_coord, float len, wall_dir_no dir);
+	void add_wall_single(const sf::Vector2u coord, unsigned len, wall_dir_no dir);
 
 
 	////////////////////////////////////////////////////////////
