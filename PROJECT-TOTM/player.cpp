@@ -77,10 +77,10 @@ void player::add_marker_chain(const std::vector<sf::Vector2f>& points)
 	}
 }
 
-void player::add_marker_single(float x, float y)
+void player::add_marker_single(sf::Vector2u &pos)
 {
 
-	marker_temp.setPosition(sf::Vector2f(x*BASE_SIZE, y*BASE_SIZE));
+	marker_temp.setPosition(sf::Vector2f(pos.x*BASE_SIZE, pos.y*BASE_SIZE));
 	markers.push_back(marker_temp);
 }
 
@@ -402,7 +402,7 @@ void player::render(sf::RenderWindow * target)
 sf::RectangleShape player::curr_trail(sf::Vector2f* start, sf::Vector2f* end)
 {
 	sf::RectangleShape result;
-	result.setFillColor(sf::Color::Color(0, 100,255, 255));
+	result.setFillColor(sf::Color(0, 100,255, 255));
 	float init_pt = fabs(end->x - start->x) > BASE_SIZE*0.8f ? end->x - start->x : BASE_SIZE;
 	float end_pt = fabs(end->y - start->y) > BASE_SIZE*0.8f ? end->y - start->y : BASE_SIZE;
 	result.setSize(sf::Vector2f(init_pt, end_pt));
