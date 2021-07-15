@@ -86,9 +86,9 @@ void player::add_marker_single(sf::Vector2u &pos)
 
 
 
-player::player(float  _x, float  _y,asset_holder* assets) :m_assets(*assets)
+player::player(asset_holder* assets) :m_assets(*assets)
 {
-	this->shape.setPosition(BASE_SIZE*_x, BASE_SIZE *_y);
+	this->shape.setPosition(BASE_SIZE*0, BASE_SIZE *0);
 	this->initshape();
 	this->initvariables();
 	
@@ -96,6 +96,11 @@ player::player(float  _x, float  _y,asset_holder* assets) :m_assets(*assets)
 
 player::~player()
 {
+}
+
+void player::setPosition(const sf::Vector2u position)
+{
+	this->shape.setPosition(BASE_SIZE * position.x, BASE_SIZE * position.y);
 }
 
 sf::Vector2f player::getcoord()

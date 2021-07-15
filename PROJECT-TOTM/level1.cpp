@@ -4,6 +4,7 @@
 //private functions
 void level1::initvariables()
 {
+	player1.setPosition(sf::Vector2u(3U, 18U));
 	//CHAIN METHOD
 	wall_generator.add_wall_chain(std::vector<sf::Vector2u>{ sf::Vector2u(2U, 19U), sf::Vector2u(10U, 19U), sf::Vector2u(10U, 18U), sf::Vector2u(11U, 18U), sf::Vector2u(11U, 17U), sf::Vector2u(12U, 17U), sf::Vector2u(12U, 8U),
 		sf::Vector2u(4U, 8U), sf::Vector2u(4U, 9U), sf::Vector2u(2U, 9U), sf::Vector2u(2U, 12U), sf::Vector2u(5U, 12U), sf::Vector2u(5U, 14U), sf::Vector2u(4U, 14U), sf::Vector2u(4U, 15U), sf::Vector2u(2U, 15U),

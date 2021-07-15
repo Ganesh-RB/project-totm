@@ -322,12 +322,10 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief constructor
 	///
-	/// \param _x initial  x coordinate of player in player unit
-	/// \param _y initial  y coordinate of player in player units
-	/// \param 
+	/// \note Assign Player position as (0,0)
 	/// 
 	////////////////////////////////////////////////////////////
-	player(float _x , float _y,asset_holder* assets);
+	player(asset_holder* assets);
 
 	////////////////////////////////////////////////////////////
 	/// \brief destructor
@@ -335,6 +333,16 @@ public:
 	////////////////////////////////////////////////////////////
 	virtual ~player();
 
+	////////////////////////////////////////////////////////////
+	///	\brief SEt the position of the Player to the argument provided
+	///	
+	///	\param position sf::Vector2u position of Player in BASE SIZE coordinates
+	///	
+	///	\note use only at the initalising level or level changing
+	///	
+	////////////////////////////////////////////////////////////
+	void setPosition(const sf::Vector2u position);
+	
 	////////////////////////////////////////////////////////////
 	/// \brief used for square shaped player
 	///
