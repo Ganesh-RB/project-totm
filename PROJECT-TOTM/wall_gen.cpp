@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "wall_gen.h"
+
 wall_gen::wall_gen(float _base_size)
 {
 	base_size = _base_size;
@@ -18,10 +19,10 @@ wall_gen::~wall_gen()
 {
 }
 
-void wall_gen::add_wall_single(float x_coord, float y_coord, float len, wall_dir_no dir)
+void wall_gen::add_wall_single(const sf::Vector2u coord, int len, wall_dir_no dir)
 {
 	sf::RectangleShape temp;
-	temp.setPosition(x_coord*base_size, y_coord*base_size);
+	temp.setPosition(coord.x*base_size, coord.y*base_size);
 	switch (dir)
 	{
 	case LEFT:
