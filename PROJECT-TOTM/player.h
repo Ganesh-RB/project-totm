@@ -316,16 +316,18 @@ public:
 	/// \note place markers in middle of grid squares
 	/// 
 	////////////////////////////////////////////////////////////
-	void add_marker_single(sf::Vector2u &pos);
+	void add_marker_single(float x, float y);
 
 	//cons and decons
 	////////////////////////////////////////////////////////////
 	/// \brief constructor
 	///
-	/// \note Assign Player position as (0,0)
+	/// \param _x initial  x coordinate of player in player unit
+	/// \param _y initial  y coordinate of player in player units
+	/// \param 
 	/// 
 	////////////////////////////////////////////////////////////
-	player(asset_holder* assets);
+	player(float _x , float _y,asset_holder* assets);
 
 	////////////////////////////////////////////////////////////
 	/// \brief destructor
@@ -333,16 +335,6 @@ public:
 	////////////////////////////////////////////////////////////
 	virtual ~player();
 
-	////////////////////////////////////////////////////////////
-	///	\brief SEt the position of the Player to the argument provided
-	///	
-	///	\param position sf::Vector2u position of Player in BASE SIZE coordinates
-	///	
-	///	\note use only at the initalising level or level changing
-	///	
-	////////////////////////////////////////////////////////////
-	void setPosition(const sf::Vector2u position);
-	
 	////////////////////////////////////////////////////////////
 	/// \brief used for square shaped player
 	///
