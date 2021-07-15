@@ -46,19 +46,18 @@ void level1::inittext()
 	this->GUItext.setCharacterSize(24);
 	this->GUItext.setFillColor(sf::Color::White);
 	this->GUItext.setString("NONE");
-	this->deathtext.setFont(this->font1);
-	this->deathtext.setCharacterSize(60);
-	this->deathtext.setOutlineColor(sf::Color::Red);
-	this->deathtext.setFillColor(sf::Color::Color(255, 255, 0, 255));
-	this->deathtext.setOutlineThickness(5.f);
-	this->deathtext.setString("YOU ARE DEAD !");
-	this->deathtext.setPosition(sf::Vector2f(60.f, 100.f));
+	this->deathscreen.setFont(this->font1);
+	this->deathscreen.setCharacterSize(60);
+	this->deathscreen.setOutlineColor(sf::Color::Red);
+	this->deathscreen.setFillColor(sf::Color::Color(255, 255, 0, 255));
+	this->deathscreen.setOutlineThickness(5.f);
+	this->deathscreen.setString("YOU ARE DEAD !");
+	this->deathscreen.setPosition(sf::Vector2f(60.f, 100.f));
 }
 void level1::defeat()
 {
 	this->alive = false;
 	m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::DEATH);
-	death_timer.restart();
 }
 //constructors and destructors
 level1::level1(std::shared_ptr<context> &context) :m_context(context)
@@ -107,10 +106,9 @@ void level1::pollevents()
 			}
 			if (this->ev.key.code == sf::Keyboard::P && pause_timer.getElapsedTime().asSeconds() > 0.2f) {
 				this->is_pause = true;
-				m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::BUTTON_BACKWARD);
-				this->m_context->m_states->Add(std::make_unique<pause_menu>(m_context));
+
 			}
-			if (this->ev.key.code == sf::Keyboard::R && victory)
+			if (this->ev.key.code == sf::Keyboard::R && (!alive || victory))
 			{
 				m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::BUTTON_FORWARD);
 				m_context->m_states->Add(std::make_unique<level1>(m_context), true);
@@ -147,8 +145,8 @@ void level1::update(float& _dt)
 		victory = player1.level_complete();
 		if (victory) { m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::VICTORY); }
 	}
-	if (!alive && death_timer.getElapsedTime().asSeconds() > 2.f) {
-		m_context->m_states->Add(std::make_unique<death_menu>(m_context), true);
+	if (is_pause && alive) {
+		this->m_context->m_states->Add(std::make_unique<pause_menu>(m_context));
 	}
 }
 
@@ -167,13 +165,14 @@ void level1::render()
 	this->test_spring2.render(this->m_context->m_window.get());
 	this->test_tele.render(this->m_context->m_window.get());
 	/*this->test_drag.render(this->m_context->m_window.get());*/
+	if (!alive) {
+		this->m_context->m_window->draw(this->deathscreen);
+		GUItext.setString("Press R to Retry Level");
+		this->m_context->m_window->draw(this->GUItext);
+	}
 	if (player1.level_complete()) {
 		GUItext.setString("Level Complete!! Press R to play again");
 		this->m_context->m_window->draw(this->GUItext);
-	}
-	if (!alive) {
-		this->m_context->m_window->draw(this->deathtext);
-	
 	}
 
 
