@@ -4,6 +4,7 @@
 //private functions
 void level1::initvariables()
 {
+	player1.setPosition(sf::Vector2u(3U, 18U));
 	//CHAIN METHOD
 	wall_generator.add_wall_chain(std::vector<sf::Vector2u>{ sf::Vector2u(2U, 19U), sf::Vector2u(10U, 19U), sf::Vector2u(10U, 18U), sf::Vector2u(11U, 18U), sf::Vector2u(11U, 17U), sf::Vector2u(12U, 17U), sf::Vector2u(12U, 8U),
 		sf::Vector2u(4U, 8U), sf::Vector2u(4U, 9U), sf::Vector2u(2U, 9U), sf::Vector2u(2U, 12U), sf::Vector2u(5U, 12U), sf::Vector2u(5U, 14U), sf::Vector2u(4U, 14U), sf::Vector2u(4U, 15U), sf::Vector2u(2U, 15U),
@@ -11,13 +12,13 @@ void level1::initvariables()
 	//FLOATERS/SINGLE WALLS
 
 
-	wall_generator.add_wall_single(11, 14, 3, wall_generator.UP);
-	wall_generator.add_wall_single(4, 17, 2, wall_generator.RIGHT);
-	wall_generator.add_wall_single(7, 16, 1, wall_generator.RIGHT);
-	wall_generator.add_wall_single(6, 11, 1, wall_generator.RIGHT);
-	wall_generator.add_wall_single(7, 10, 1, wall_generator.RIGHT);
-	wall_generator.add_wall_single(8, 12, 1, wall_generator.RIGHT);
-	wall_generator.add_wall_single(6, 14, 3, wall_generator.RIGHT);
+	wall_generator.add_wall_single(sf::Vector2u(11U, 14U), 3, wall_generator.UP);
+	wall_generator.add_wall_single(sf::Vector2u(4U, 17U), 2, wall_generator.RIGHT);
+	wall_generator.add_wall_single(sf::Vector2u(7U, 16U), 1, wall_generator.RIGHT);
+	wall_generator.add_wall_single(sf::Vector2u(6U, 11U), 1, wall_generator.RIGHT);
+	wall_generator.add_wall_single(sf::Vector2u(7U, 10U), 1, wall_generator.RIGHT);
+	wall_generator.add_wall_single(sf::Vector2u(8U, 12U), 1, wall_generator.RIGHT);
+	wall_generator.add_wall_single(sf::Vector2u(6U, 14U), 3, wall_generator.RIGHT);
 	player1.add_marker_chain(std::vector<sf::Vector2f>{sf::Vector2f(3.5f, 18.5f), sf::Vector2f(9.5f, 18.5f), sf::Vector2f(9.5f, 17.5f), sf::Vector2f(10.5f, 17.5f), sf::Vector2f(10.5f, 16.5f),
 		sf::Vector2f(11.5f, 16.5f), sf::Vector2f(11.5f, 14.5f), sf::Vector2f(10.5f, 14.5f), sf::Vector2f(10.5f, 15.5f), sf::Vector2f(9.5f, 15.5f),
 		sf::Vector2f(9.5f, 16.5f), sf::Vector2f(8.5f, 16.5f), sf::Vector2f(8.5f, 17.5f), sf::Vector2f(6.5f, 17.5f), sf::Vector2f(6.5f, 16.5f)});
@@ -49,7 +50,7 @@ void level1::inittext()
 	this->deathscreen.setFont(this->font1);
 	this->deathscreen.setCharacterSize(60);
 	this->deathscreen.setOutlineColor(sf::Color::Red);
-	this->deathscreen.setFillColor(sf::Color::Color(255, 255, 0, 255));
+	this->deathscreen.setFillColor(sf::Color(255, 255, 0, 255));
 	this->deathscreen.setOutlineThickness(5.f);
 	this->deathscreen.setString("YOU ARE DEAD !");
 	this->deathscreen.setPosition(sf::Vector2f(60.f, 100.f));
