@@ -17,6 +17,8 @@ void gen_menu::variable_init()
 	menu_title.setFillColor(sf::Color::Green);
 	color_text[0] = sf::Color::White;
 	color_text[1] = sf::Color::Red;
+	title_font = &m_context->m_assets->get_font(asset_holder::fonts::DOSIS_EXTRABOLD);
+	option_font = &m_context->m_assets->get_font(asset_holder::fonts::DOSIS_BOLD);
 	menu_title.setString("GIVE ME A TITLE");
 	options[0].setString("I am an option");
 	options[1].setString("I am also an option");
@@ -25,14 +27,14 @@ void gen_menu::variable_init()
 void gen_menu::init()
 {
 	variable_init();
-	menu_title.setFont(m_context->m_assets->get_font(asset_holder::fonts::DOSIS_EXTRABOLD));
+	menu_title.setFont(*title_font);
 	menu_title.setCharacterSize(60);
 	option_no[0] = 0;
 	option_no[1] = 0;
 	menu_title.setOrigin(menu_title.getLocalBounds().width / 2.f, 0);
 	menu_title.setPosition(m_context->m_window->getSize().x / 2.f, 0.f);
 	for (int i = 0; i < number_of_options;i++) {
-		options[i].setFont(m_context->m_assets->get_font(asset_holder::fonts::DOSIS_BOLD));
+		options[i].setFont(*option_font);
 		options[i].setCharacterSize(30);
 		options[i].setPosition(m_context->m_window->getSize().x / 3.f, m_context->m_window->getSize().y / 2.f +(i-2)*50.f);
 		options[i].setFillColor(color_text[0]);

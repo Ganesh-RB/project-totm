@@ -22,6 +22,8 @@ void pause_menu::variable_init()
 	options[0].setString("Resume");
 	options[1].setString("Main Menu");
 	options[2].setString("Exit");
+	title_font = &m_context->m_assets->get_font(asset_holder::fonts::DOSIS_EXTRABOLD);
+	option_font = &m_context->m_assets->get_font(asset_holder::fonts::DOSIS_BOLD);
 }
 
 void pause_menu::pollevents()

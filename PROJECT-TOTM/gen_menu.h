@@ -12,6 +12,9 @@ protected:
 	std::vector<sf::Text> options;
 	int option_no[2];
 	unsigned number_of_options=0;
+	sf::Font* title_font;
+	sf::Font* option_font;
+
 public:
 	gen_menu(std::shared_ptr<context>& context);
 	virtual ~gen_menu();

@@ -22,6 +22,8 @@ void death_menu::variable_init()
 	options[0].setString("Restart");
 	options[1].setString("Main Menu");
 	options[2].setString("Exit");
+	title_font = &m_context->m_assets->get_font(asset_holder::fonts::DOSIS_EXTRABOLD);
+	option_font = &m_context->m_assets->get_font(asset_holder::fonts::DOSIS_BOLD);
 }
 
 void death_menu::pollevents()
