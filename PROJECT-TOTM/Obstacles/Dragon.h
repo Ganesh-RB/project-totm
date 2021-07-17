@@ -1,11 +1,13 @@
 #ifndef DRAGON_H
 #define DRAGON_H
 
-class Dragon
+#include "Obstacle.h"
+
+class Dragon : public Obstacle
 {
 private:
 
-	float PlayerSize = 30.f;
+	float BASE_SIZE = 30.f;
 	enum direction { Left = -2, Down = -1, Up = 1, Right = 2 }moving_dir;
 
 	sf::Clock clock;
@@ -84,7 +86,19 @@ public:
 	/// \return false if not collide
 	///		
 	///////////////////////////////////////////////////
-	bool isCollide(sf::FloatRect rect);
+	const bool isCollide(const sf::FloatRect &rect);
+
+	///////////////////////////////////////////////////
+	///	
+	///	\brief read the details of dragon from the file
+	///	
+	///	\param fin std::ifstream& file stream
+	///	\param data Data& file stream \file Data.h
+	///	\param size size_t& file no of inputs to be taken
+	///	
+	///	
+	///////////////////////////////////////////////////
+	static void read(std::ifstream &fin, Data &data, size_t &size);
 };
 
 

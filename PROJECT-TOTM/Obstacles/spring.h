@@ -3,7 +3,9 @@
 
 #include "..\player.h"
 #include "..\asset_holder.h"
-class spring
+#include "Obstacle.h"
+
+class spring : public Obstacle
 {
 public:
 	////////////////////////////////////////////////////////////
@@ -21,7 +23,7 @@ public:
 	/// \param asset_source pointer to asset class to be used
 	///
 	////////////////////////////////////////////////////////////
-	spring(sf::Vector2f _position,spring_dir _dir,player& _player_var, asset_holder* asset_source);
+	spring(sf::Vector2u _position,int _dir,player& _player_var, asset_holder* asset_source);
 
 	////////////////////////////////////////////////////////////
 	/// \brief destructor
@@ -49,6 +51,20 @@ public:
 	///
 	////////////////////////////////////////////////////////////
 	void render(sf::RenderTarget* target);
+
+	const bool isCollide(const sf::FloatRect &shape);
+
+	///////////////////////////////////////////////////
+	///	
+	///	\brief read the details of spring from the file
+	///	
+	///	\param fin std::ifstream& file stream
+	///	\param data Data& file stream \file Data.h
+	///	\param size size_t& file no of inputs to be taken
+	///	
+	///	
+	///////////////////////////////////////////////////
+	static void read(std::ifstream &fin, Data &data, size_t &size);
 
 private:
 	////////////////////////////////////////////////////////////
@@ -144,5 +160,6 @@ private:
 	/// 
 	////////////////////////////////////////////////////////////
 	std::pair <player::move_dir_no[2],player::move_dir_no[2]> directions;
+
 };
 #endif 

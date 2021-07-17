@@ -42,7 +42,7 @@ void Dragon::initSprite()
 	this->dragonShape.setPosition(this->InitialPosition);
 	this->dragonShape.setTexture(this->texture);
 	this->dragonShape.setTextureRect(this->CurrentFrame);
-	this->dragonShape.setScale(PlayerSize / dragonShape.getLocalBounds().width, PlayerSize / dragonShape.getLocalBounds().height);
+	this->dragonShape.setScale(BASE_SIZE / dragonShape.getLocalBounds().width, BASE_SIZE / dragonShape.getLocalBounds().height);
 
 }
 
@@ -61,22 +61,23 @@ void Dragon::fly()
 	{
 		this->CurrentFrame.left += 44;
 		if (this->CurrentFrame.left >= 132)
-			this->CurrentFrame.left = 0.f;
+			this->CurrentFrame.left = 0;
 
 		this->clock.restart();
 		this->dragonShape.setTextureRect(this->CurrentFrame);
-		this->dragonShape.setScale(PlayerSize / dragonShape.getLocalBounds().width, PlayerSize / dragonShape.getLocalBounds().height);
+		this->dragonShape.setScale(BASE_SIZE / dragonShape.getLocalBounds().width, BASE_SIZE / dragonShape.getLocalBounds().height);
 	}
 
 }
 
 Dragon::Dragon(sf::Vector2u InitialPosition, sf::Vector2u FinalPosition)
 {
+	this->Type = Obstacle::obstacle_type::Dragon;
 
-	this->InitialPosition.x = InitialPosition.x * PlayerSize;		
-	this->InitialPosition.y = PlayerSize * InitialPosition.y;
-	this->FinalPosition.x = FinalPosition.x * PlayerSize;		
-	this->FinalPosition.y = PlayerSize * FinalPosition.y;
+	this->InitialPosition.x = InitialPosition.x * BASE_SIZE;		
+	this->InitialPosition.y = BASE_SIZE * InitialPosition.y;
+	this->FinalPosition.x = FinalPosition.x * BASE_SIZE;		
+	this->FinalPosition.y = BASE_SIZE * FinalPosition.y;
 
 	this->initDirection();
 	this->initVariable();
@@ -155,7 +156,24 @@ void Dragon::render(sf::RenderTarget * target)
 }
 
 
-bool Dragon::isCollide(sf::FloatRect shape)
+const bool Dragon::isCollide(const sf::FloatRect& shape)
 {
 	return dragonShape.getGlobalBounds().intersects(shape);
+}
+
+void Dragon::read(std::ifstream & fin, Data &data, size_t & size)
+{
+	unsigned temp_var1, temp_var2, temp_var3, temp_var4;
+	char c_var1;
+
+	for (size_t i = 0; i < size; i++)
+	{
+		fin >> temp_var1 >> temp_var2;
+		fin >> temp_var3 >> temp_var4;
+
+		data.dragon_arg.push_back(std::pair< sf::Vector2u, sf::Vector2u >(sf::Vector2u(temp_var1, temp_var2), sf::Vector2u(temp_var3, temp_var4)));
+	}
+
+	fin >> c_var1;
+
 }

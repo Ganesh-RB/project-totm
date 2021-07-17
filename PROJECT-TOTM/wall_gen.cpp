@@ -19,11 +19,11 @@ wall_gen::~wall_gen()
 {
 }
 
-void wall_gen::add_wall_single(const sf::Vector2u coord, int len, wall_dir_no dir)
+void wall_gen::add_wall_single(const sf::Vector2u coord, int len, int dir)
 {
 	sf::RectangleShape temp;
 	temp.setPosition(coord.x*base_size, coord.y*base_size);
-	switch (dir)
+	switch (wall_gen::wall_dir_no(dir))
 	{
 	case LEFT:
 		temp.setSize(sf::Vector2f(-len * base_size, base_size));

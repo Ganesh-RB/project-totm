@@ -134,8 +134,8 @@ void level1::update(float& _dt)
 		}
 		test_tele.update(dt);
 		/*test_drag.update(dt);*/
-		Gun1.gunfire(this->dt, 1.f);
-		Fish1.Updatefish(dt, 0.1f);
+		Gun1.update(this->dt);
+		Fish1.update(dt);
 		test_spring.update(dt);
 		test_spring1.update(dt);
 		test_spring2.update(dt);
@@ -161,8 +161,8 @@ void level1::render()
 		this->player1.render(this->m_context->m_window.get());
 	}
 	this->wall_generator.render(this->m_context->m_window.get());
-	this->Gun1.Render_gun(this->m_context->m_window.get());
-	this->Fish1.Render_fish(this->m_context->m_window.get());
+	this->Gun1.render(this->m_context->m_window.get());
+	this->Fish1.render(this->m_context->m_window.get());
 	this->test_spring.render(this->m_context->m_window.get());
 	this->test_spring1.render(this->m_context->m_window.get());
 	this->test_spring2.render(this->m_context->m_window.get());

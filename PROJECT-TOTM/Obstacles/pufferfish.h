@@ -1,12 +1,14 @@
 #ifndef PUFFERFISH_H
 #define PUFFERFISH_H
 
-class pufferfish
+#include "Obstacle.h"
+
+class pufferfish : public Obstacle
 {
 
 
 private:
-	sf::Vector2f PlayerSize;
+	float BASE_SIZE;
 
 	sf::Vector2f FishPosition;
 
@@ -27,11 +29,25 @@ public:
 
 	virtual ~pufferfish();
 
-	void Render_fish(sf::RenderWindow* window);
+	void render(sf::RenderTarget* window);
 
-	void Updatefish(float dt, float u);
+	void update(float dt, float u);
+
+	void update(float dt);
 
 	const bool isCollide(const sf::FloatRect &shape);
+
+	///////////////////////////////////////////////////
+	///	
+	///	\brief read the details of pufferfish from the file
+	///	
+	///	\param fin std::ifstream& file stream
+	///	\param data Data& file stream \file Data.h
+	///	\param size size_t& file no of inputs to be taken
+	///	
+	///	
+	///////////////////////////////////////////////////
+	static void read(std::ifstream &fin, Data &data, size_t &size);
 };
 
 #endif

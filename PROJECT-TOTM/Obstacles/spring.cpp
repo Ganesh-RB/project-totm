@@ -56,7 +56,7 @@ void spring::animation(float _dt)
     timer += 60* anim_flash* _dt;
 	if (timer > 60.f) { anim_flash = -1.f; }
 	if (timer < 0.f) { anim_flash = 1.f; }
-	spring_sprite.setColor(sf::Color::Color(120 + (int)(timer * 2), 120 + (int)(timer * 2), 120 + (int)(timer * 2), 255));
+	spring_sprite.setColor(sf::Color(120 + (int)(timer * 2), 120 + (int)(timer * 2), 120 + (int)(timer * 2), 255));
 	if (bounce_animation) {
 		timer_bounce += 60 * _dt;
 		if (timer_bounce > 15.f) {
@@ -68,12 +68,12 @@ void spring::animation(float _dt)
 	}
 }
 
-spring::spring(sf::Vector2f _position,spring_dir _dir, player &_player_var, asset_holder* asset_source): player_var(_player_var),m_assets(*asset_source)
+spring::spring(sf::Vector2u _position,int _dir, player &_player_var, asset_holder* asset_source): player_var(_player_var),m_assets(*asset_source)
 {
 	BASE_SIZE = player_var.BASE_SIZE;
-	spring_sprite.setPosition(_position*BASE_SIZE);
+	spring_sprite.setPosition(_position.x*BASE_SIZE,_position.y*BASE_SIZE);
 	trigger_point = spring_sprite.getPosition() + sf::Vector2f(BASE_SIZE / 2.f, BASE_SIZE / 2.f);
-	dir = _dir;
+	dir = spring::spring_dir(_dir);
 	initvariables();
 }
 
@@ -122,4 +122,28 @@ void spring::update(float _dt)
 void spring::render(sf::RenderTarget* target)
 {
 	target->draw(spring_sprite);
+}
+
+
+const bool spring::isCollide(const sf::FloatRect& shape)
+{
+	return false;
+}
+
+void spring::read(std::ifstream & fin, Data &data, size_t & size)
+{
+	int temp_var1, temp_var2;
+	int  temp_var3 ;
+	char c_var1;
+
+	for (size_t i = 0; i < size; i++)
+	{
+		fin >> temp_var1 >> temp_var2;
+		fin >> temp_var3 ;
+
+		data.spring_arg.push_back(sf::Vector3i(temp_var1,temp_var2,temp_var3));
+	}
+
+	fin >> c_var1;
+
 }

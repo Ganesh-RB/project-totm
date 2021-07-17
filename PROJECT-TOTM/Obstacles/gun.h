@@ -1,10 +1,12 @@
 #ifndef GUN_H
 #define GUN_H
 
-class gun
+#include "Obstacle.h"
+
+class gun : public Obstacle
 {
 private:
-	sf::Vector2f PlayerSize= sf::Vector2f(30.f, 30.f);
+	float BASE_SIZE = 30.f;
 	sf::Vector2f GunPosition;
 	sf::Vector2f TargetPosition;
 
@@ -66,13 +68,13 @@ public:
 	/// \param dt time for frame change(as s)-for frame rate independent	
 	///
 	///////////////////////////////////////////////////
-	void gunfire(const float dt, const float Fire_rate);
+	void update(const float dt);
 
 	///////////////////////////////////////////////////
 	///	\brief Draw everything for given gun
 	///
 	///////////////////////////////////////////////////
-	void Render_gun(sf::RenderWindow* window);
+	void render(sf::RenderTarget* window);
 
 	///////////////////////////////////////////////////
 	///	
@@ -105,7 +107,20 @@ public:
 	///	\return true if collide else false
 	///	
 	///////////////////////////////////////////////////
-	const bool isCollide(const sf::FloatRect &shape);
+	const bool isCollide(const sf::FloatRect &shape) ;
+
+	///////////////////////////////////////////////////
+	///	
+	///	\brief read the details of gun from the file
+	///	
+	///	\param fin std::ifstream& file stream
+	///	\param data Data& file stream \file Data.h
+	///	\param size size_t& file no of inputs to be taken
+	///	
+	///	
+	///////////////////////////////////////////////////
+	static void read(std::ifstream &fin, Data &data, size_t &size);
+
 };
 
 
@@ -123,8 +138,8 @@ public:
 ///
 /// gun Gun1(sf::Vector2f(10U,10U),sf::Vector2f(15U,10U));
 ///	Gun1.setGunPosition(sf::Vector2f(10U,10U));
-///	Gun1.gunfire(0.016f,1.f);
-///	Gun1.Render_gun();
+///	Gun1.update(0.016f);
+///	Gun1.render(this->window);
 /// if(Gun1.isCollide(player.shape.getglobalound()))
 ///		//end game
 ///

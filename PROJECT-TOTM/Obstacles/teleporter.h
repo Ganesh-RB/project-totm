@@ -3,7 +3,9 @@
 
 #include "../player.h"
 #include "../asset_holder.h"
-class teleporter
+#include "Obstacle.h"
+
+class teleporter : public Obstacle
 {
 private:
 	////////////////////////////////////////////////////////////
@@ -70,7 +72,7 @@ public:
 	/// \param asset_source pointer to asset class to be used
 	///
 	////////////////////////////////////////////////////////////
-	teleporter(sf::Vector2f portal1, sf::Vector2f portal2, player& _player_var,asset_holder* _assets);
+	teleporter(sf::Vector2u portal1, sf::Vector2u portal2, player& _player_var,asset_holder* _assets);
 
 	////////////////////////////////////////////////////////////
 	/// \brief destructor
@@ -97,7 +99,21 @@ public:
 	/// which object is to be rendered
 	///
 	////////////////////////////////////////////////////////////
-	void render(sf::RenderWindow* target);
+	void render(sf::RenderTarget* target);
+
+	const bool isCollide(const sf::FloatRect &shape);
+
+	///////////////////////////////////////////////////
+	///	
+	///	\brief read the details of pufferfish from the file
+	///	
+	///	\param fin std::ifstream& file stream
+	///	\param data Data& file stream \file Data.h
+	///	\param size size_t& file no of inputs to be taken
+	///	
+	///	
+	///////////////////////////////////////////////////
+	static void read(std::ifstream &fin, Data &data, size_t &size);
 
 };
 

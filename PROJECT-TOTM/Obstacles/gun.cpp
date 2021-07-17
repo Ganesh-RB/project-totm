@@ -1,4 +1,4 @@
-#include "..\stdafx.h"
+#include "../stdafx.h"
 #include "gun.h"
 
 void gun::initBullet()
@@ -64,8 +64,10 @@ void gun::initDirection()
 
 gun::gun(sf::Vector2u GunPosition, sf::Vector2u TargetPosition)
 {
-	this->GunPosition.x = PlayerSize.x * GunPosition.x;		this->GunPosition.y = PlayerSize.x * GunPosition.y;
-	this->TargetPosition.x = PlayerSize.x * TargetPosition.x;		this->TargetPosition.y = PlayerSize.y * TargetPosition.y;
+	BASE_SIZE = 30.f;
+	this->Type = Obstacle::obstacle_type::Gun;
+	this->GunPosition.x = BASE_SIZE * GunPosition.x;		this->GunPosition.y = BASE_SIZE * GunPosition.y;
+	this->TargetPosition.x = BASE_SIZE * TargetPosition.x;		this->TargetPosition.y = BASE_SIZE * TargetPosition.y;
 	this->counter = 0;
 
 	initGunShape();
@@ -81,17 +83,17 @@ gun::~gun()
 
 void gun::setGunPosition(sf::Vector2f GunPosition)
 {
-	this->GunPosition.x = PlayerSize.x * GunPosition.x;		this->GunPosition.y = PlayerSize.x * GunPosition.y;
+	this->GunPosition.x = BASE_SIZE * GunPosition.x;		this->GunPosition.y = BASE_SIZE * GunPosition.y;
 	Gunshape.setPosition(GunPosition);
 }
 
 void gun::setTargetPosition(sf::Vector2f TargetPosition)
 {
-	this->TargetPosition.x = PlayerSize.x * TargetPosition.x;		this->TargetPosition.y = PlayerSize.y * TargetPosition.y;
+	this->TargetPosition.x = BASE_SIZE * TargetPosition.x;		this->TargetPosition.y = BASE_SIZE * TargetPosition.y;
 	initBullet();
 }
 
-void gun::gunfire(const float dt,const float fire_rate=1)
+void gun::update(const float dt)
 {
 	//check erase
 	for (size_t i = 0; i < Bullets.size(); i++)
@@ -124,9 +126,9 @@ void gun::gunfire(const float dt,const float fire_rate=1)
 	float dist = fabs((TargetPosition.x - GunPosition.x + TargetPosition.y - GunPosition.y + 300.f)/300.f);
 	
 	
-	if (counter < dist*fire_rate )
+	if (counter < dist )
 		counter+=dt;
-	if (counter >= dist*fire_rate )
+	if (counter >= dist )
 	{
 		counter = 0;
 		Bullets.push_back(Bullet);
@@ -160,7 +162,7 @@ void gun::gunfire(const float dt,const float fire_rate=1)
 
 }
 
-void gun::Render_gun(sf::RenderWindow* window)
+void gun::render(sf::RenderTarget* window)
 {
 
 	for (size_t j = 0; j < Bullets.size(); j++)
@@ -190,4 +192,21 @@ const bool gun::isCollide(const sf::FloatRect &shape)
 			return true;
 	}
 	return false;
+}
+
+void gun::read(std::ifstream & fin, Data &data, size_t & size)
+{
+	unsigned temp_var1, temp_var2, temp_var3, temp_var4;
+	char c_var1;
+
+	for (size_t i = 0; i < size; i++)
+	{
+		fin >> temp_var1 >> temp_var2;
+		fin >> temp_var3 >> temp_var4;
+
+		data.gun_arg.push_back(std::pair< sf::Vector2u, sf::Vector2u >(sf::Vector2u(temp_var1, temp_var2), sf::Vector2u(temp_var3, temp_var4)));
+	}
+
+	fin >> c_var1;
+
 }

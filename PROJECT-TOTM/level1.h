@@ -30,10 +30,10 @@ private:
 	player player1{m_context->m_assets.get()};
 	gun Gun1{ sf::Vector2u(11U,12U),sf::Vector2u(9U,12U)};
 	pufferfish Fish1{ sf::Vector2u(7U,16U) };
-	spring test_spring{ sf::Vector2f(3.f,10.f),spring::spring_dir::DOWN_RIGHT,player1,m_context->m_assets.get()};
-	spring test_spring1{ sf::Vector2f(5.f,11.f),spring::spring_dir::UP_LEFT,player1,m_context->m_assets.get() };
-	spring test_spring2{ sf::Vector2f(3.f,11.f),spring::spring_dir::UP_RIGHT,player1,m_context->m_assets.get()};
-	teleporter test_tele{ sf::Vector2f(9.f,18.f), sf::Vector2f(5.f, 9.f),player1,m_context->m_assets.get() };
+	spring test_spring{ sf::Vector2u(3U,10U),int(spring::spring_dir::DOWN_RIGHT),player1,m_context->m_assets.get()};
+	spring test_spring1{ sf::Vector2u(5U,11U),int(spring::spring_dir::UP_LEFT),player1,m_context->m_assets.get() };
+	spring test_spring2{ sf::Vector2u(3U,11U),int(spring::spring_dir::UP_RIGHT),player1,m_context->m_assets.get()};
+	teleporter test_tele{ sf::Vector2u(9U,18U), sf::Vector2u(5U, 9U),player1,m_context->m_assets.get() };
 	/*Dragon test_drag{ sf::Vector2u(0U,0U),sf::Vector2u(3U,0U) }; */
 
 	// initializers
