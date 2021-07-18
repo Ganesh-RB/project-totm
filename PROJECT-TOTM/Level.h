@@ -1,5 +1,5 @@
-#ifndef LEVEL1_H
-#define LEVEL1_H
+#ifndef LEVEL_H
+#define LEVEL_H
 
 #include "player.h"
 #include "wall_gen.h"
@@ -11,7 +11,8 @@
 #include "Obstacles/spring.h"
 #include "pause_menu.h"
 #include "death_menu.h"
-class level1 : public state
+
+class Level : public state
 {
 private:
 	//window
@@ -27,14 +28,18 @@ private:
 	sf::Clock pause_timer;
 	sf::Clock death_timer;
 
-	player player1{m_context->m_assets.get()};
-	gun Gun1{ sf::Vector2u(11U,12U),sf::Vector2u(9U,12U)};
+	player player{m_context->m_assets.get()};
+	/*gun Gun1{ sf::Vector2u(11U,12U),sf::Vector2u(9U,12U)};
 	pufferfish Fish1{ sf::Vector2u(7U,16U) };
 	spring test_spring{ sf::Vector2u(3U,10U),int(spring::spring_dir::DOWN_RIGHT),player1,m_context->m_assets.get()};
 	spring test_spring1{ sf::Vector2u(5U,11U),int(spring::spring_dir::UP_LEFT),player1,m_context->m_assets.get() };
 	spring test_spring2{ sf::Vector2u(3U,11U),int(spring::spring_dir::UP_RIGHT),player1,m_context->m_assets.get()};
-	teleporter test_tele{ sf::Vector2u(9U,18U), sf::Vector2u(5U, 9U),player1,m_context->m_assets.get() };
+	teleporter test_tele{ sf::Vector2u(9U,18U), sf::Vector2u(5U, 9U),player1,m_context->m_assets.get() };*/
 	/*Dragon test_drag{ sf::Vector2u(0U,0U),sf::Vector2u(3U,0U) }; */
+
+    std::vector<Obstacle*> obstacles;
+
+    std::vector<Data> data;
 
 	// initializers
 	void initvariables();
@@ -49,11 +54,12 @@ private:
 	sf::Text deathscreen;
 public:
 	//constructor and destructor
-	level1(std::shared_ptr<context> &context);
-	virtual ~level1();
+	Level(std::shared_ptr<context> &context);
+	virtual ~Level();
 	const bool running() const;
 	wall_gen wall_generator{ 30.f };
 	//functions from state 
+    const bool assign(int lev_no);
 	void init() override;
 	void pollevents() override;
 	void update(float& _dt) override;

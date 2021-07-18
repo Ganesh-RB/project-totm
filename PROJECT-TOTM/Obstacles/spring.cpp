@@ -132,18 +132,16 @@ const bool spring::isCollide(const sf::FloatRect& shape)
 
 void spring::read(std::ifstream & fin, Data &data, size_t & size)
 {
-	int temp_var1, temp_var2;
+	unsigned temp_var1, temp_var2;
 	int  temp_var3 ;
-	char c_var1;
 
 	for (size_t i = 0; i < size; i++)
 	{
 		fin >> temp_var1 >> temp_var2;
 		fin >> temp_var3 ;
 
-		data.spring_arg.push_back(sf::Vector3i(temp_var1,temp_var2,temp_var3));
+		data.spring_arg.push_back(std::pair(sf::Vector2u(temp_var1,temp_var2),temp_var3));
 	}
 
-	fin >> c_var1;
 
 }

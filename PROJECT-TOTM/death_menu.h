@@ -2,7 +2,7 @@
 #define DEATH_MENU_H
 
 #include "gen_menu.h"
-#include "level1.h"
+#include "Level.h"
 class death_menu : public gen_menu
 {
 public:

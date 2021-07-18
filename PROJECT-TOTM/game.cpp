@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "game.h"
-#include "level1.h"
+#include "Level.h"
 
 void game::InitFonts()
 {
@@ -37,7 +37,7 @@ game::game()
 	InitTextures();
 	InitFonts();
 	InitSounds();
-	m_context->m_states->Add(std::make_unique<level1>(m_context));
+	m_context->m_states->Add(std::make_unique<Level>(m_context));
 	// Should only call main menu state,to be done
 }
 
