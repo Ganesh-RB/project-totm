@@ -107,7 +107,6 @@ void pufferfish::render(sf::RenderTarget * window)
 void pufferfish::read(std::ifstream & fin, Data &data, size_t & size)
 {
 	unsigned temp_var1, temp_var2;
-	char c_var1;
 
 	for (size_t i = 0; i < size; i++)
 	{
@@ -116,6 +115,5 @@ void pufferfish::read(std::ifstream & fin, Data &data, size_t & size)
 		data.Pfish_arg.push_back(sf::Vector2u(temp_var1, temp_var2));
 	}
 
-	fin >> c_var1;
 
 }

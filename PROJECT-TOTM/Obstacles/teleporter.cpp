@@ -77,7 +77,6 @@ const bool teleporter::isCollide(const sf::FloatRect& shape)
 void teleporter::read(std::ifstream & fin, Data &data, size_t & size)
 {
 	unsigned temp_var1, temp_var2, temp_var3, temp_var4;
-	char c_var1;
 
 	for (size_t i = 0; i < size; i++)
 	{
@@ -86,7 +85,5 @@ void teleporter::read(std::ifstream & fin, Data &data, size_t & size)
 
 		data.teleportal_arg.push_back(std::pair< sf::Vector2u, sf::Vector2u >(sf::Vector2u(temp_var1, temp_var2), sf::Vector2u(temp_var3, temp_var4)));
 	}
-
-	fin >> c_var1;
 
 }

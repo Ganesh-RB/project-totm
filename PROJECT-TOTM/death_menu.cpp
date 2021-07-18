@@ -50,7 +50,7 @@ void death_menu::pollevents()
 			case sf::Keyboard::Enter:
 				switch (option_no[0]) {
 				case 0:
-					m_context->m_states->Add(std::make_unique<level1>(m_context), true);
+					m_context->m_states->Add(std::make_unique<Level>(m_context), true);
 					m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::BUTTON_FORWARD);
 					break;
 				case 1:
