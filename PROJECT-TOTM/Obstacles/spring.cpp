@@ -140,7 +140,7 @@ void spring::read(std::ifstream & fin, Data &data, size_t & size)
 		fin >> temp_var1 >> temp_var2;
 		fin >> temp_var3 ;
 
-		data.spring_arg.push_back(std::pair(sf::Vector2u(temp_var1,temp_var2),temp_var3));
+		data.spring_arg.push_back(std::pair<sf::Vector2u,int>(sf::Vector2u(temp_var1,temp_var2),temp_var3));
 	}
 
 

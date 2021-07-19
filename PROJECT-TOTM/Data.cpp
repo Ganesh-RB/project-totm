@@ -49,7 +49,7 @@ bool Data::read(std::vector<Data>& data)
 		{
 			fin >> temp_var1 >> temp_var2;
 			fin >> temp_var3 >> temp_var4;
-			data_p->wall_cordinates_sing.push_back(std::pair(sf::Vector2u(temp_var1, temp_var2), std::pair(temp_var3, temp_var4)));
+			data_p->wall_cordinates_sing.push_back(std::pair<sf::Vector2u,std::pair<int,int>>(sf::Vector2u(temp_var1, temp_var2), std::pair<int,int>(temp_var3, temp_var4)));
 		}
 
 
