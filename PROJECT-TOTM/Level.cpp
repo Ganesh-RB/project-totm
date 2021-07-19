@@ -4,7 +4,7 @@
 //private functions
 void Level::initvariables()
 {
-	player.setPosition(sf::Vector2u(3U, 18U));
+	
 	//CHAIN METHOD
 	/*wall_generator.add_wall_chain(std::vector<sf::Vector2u>{ sf::Vector2u(2U, 19U), sf::Vector2u(10U, 19U), sf::Vector2u(10U, 18U), sf::Vector2u(11U, 18U), sf::Vector2u(11U, 17U), sf::Vector2u(12U, 17U), sf::Vector2u(12U, 8U),
 		sf::Vector2u(4U, 8U), sf::Vector2u(4U, 9U), sf::Vector2u(2U, 9U), sf::Vector2u(2U, 12U), sf::Vector2u(5U, 12U), sf::Vector2u(5U, 14U), sf::Vector2u(4U, 14U), sf::Vector2u(4U, 15U), sf::Vector2u(2U, 15U),
@@ -28,7 +28,7 @@ void Level::initvariables()
 		sf::Vector2f(8.5f, 11.5f), sf::Vector2f(8.5f, 9.5f), sf::Vector2f(5.5f, 9.5f), sf::Vector2f(5.5f, 11.5f), sf::Vector2f(3.5f, 11.5f), sf::Vector2f(3.5f, 10.5f),
 		sf::Vector2f(6.5f, 10.5f) });*/
 
-	this->assign(1);
+	this->assign(*m_context->m_level_no.get());
 
 	this->alive = true;
 	this->is_running = true;
@@ -42,30 +42,42 @@ void Level::initvariables()
 
 void Level::initfonts()
 {
-	font1 = m_context->m_assets->get_font(asset_holder::fonts::DOSIS_LIGHT);
+	gui_font = m_context->m_assets->get_font(asset_holder::fonts::DOSIS_LIGHT);
+	endgame_font = m_context->m_assets->get_font(asset_holder::fonts::DOSIS_BOLD);
 }
 void Level::inittext()
 {
-	this->GUItext.setFont(this->font1);
+	this->GUItext.setFont(this->gui_font);
 	this->GUItext.setCharacterSize(24);
 	this->GUItext.setFillColor(sf::Color::White);
-	this->GUItext.setString("NONE");
-	this->deathscreen.setFont(this->font1);
-	this->deathscreen.setCharacterSize(60);
-	this->deathscreen.setOutlineColor(sf::Color::Red);
-	this->deathscreen.setFillColor(sf::Color(255, 255, 0, 255));
-	this->deathscreen.setOutlineThickness(5.f);
-	this->deathscreen.setString("YOU ARE DEAD !");
-	this->deathscreen.setPosition(sf::Vector2f(60.f, 100.f));
+	this->GUItext.setString(std::string("LEVEL ")+ std::to_string(*m_context->m_level_no.get()));
+	this->end_game_text.setFont(this->endgame_font);
+	this->end_game_text.setCharacterSize(60);
+	this->end_game_text.setOutlineColor(sf::Color::Red);
+	this->end_game_text.setFillColor(sf::Color(255, 255, 0, 255));
+	this->end_game_text.setOutlineThickness(5.f);
+	this->end_game_text.setString("GAME OVER!");
+	this->end_game_text.setPosition(sf::Vector2f(60.f, 80.f));
+
 }
 void Level::defeat()
 {
 	this->alive = false;
 	m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::DEATH);
-	death_timer.restart();
+	endlevel_timer.restart();
+	end_game_text.setString("GAME OVER!");
+}
+void Level::win()
+{
+	m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::VICTORY);
+	endlevel_timer.restart();
+	end_game_text.setString("YOU WON !!");
+	end_game_text.setFillColor(sf::Color::Blue);
+	end_game_text.setOutlineColor(sf::Color::Green);
 }
 //constructors and destructors
-Level::Level(std::shared_ptr<context> &context) :m_context(context)
+
+Level::Level(std::shared_ptr<context>& context):m_context(context)
 {
 	is_pause = false;
 	if (!Data::read(this->data))
@@ -178,12 +190,6 @@ void Level::pollevents()
 				m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::BUTTON_BACKWARD);
 				this->m_context->m_states->Add(std::make_unique<pause_menu>(m_context));
 			}
-			if (this->ev.key.code == sf::Keyboard::R && victory)
-			{
-				m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::BUTTON_FORWARD);
-				m_context->m_states->Add(std::make_unique<Level>(m_context), true);
-
-			}
 			break;
 		}
 	}
@@ -207,15 +213,22 @@ void Level::update(float& _dt)
 		
 		for (auto obs : obstacles)
 		{
-			if(obs->isCollide(player.shape.getGlobalBounds()))
+			if (obs->isCollide(player.shape.getGlobalBounds())) {
 				this->defeat();
+				break;
+			}
 		}
 		
 		victory = player.level_complete();
-		if (victory) { m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::VICTORY); }
+		if (victory && alive) { 
+			this->win();
+		}
 	}
-	if (!alive && death_timer.getElapsedTime().asSeconds() > 3.f) {
+	if (!alive && endlevel_timer.getElapsedTime().asSeconds() > 2.f) {
 		m_context->m_states->Add(std::make_unique<death_menu>(m_context), true);
+	}
+	else if ((alive && victory) && endlevel_timer.getElapsedTime().asSeconds() > 2.f) {
+		m_context->m_states->Add(std::make_unique<victory_menu>(m_context), true);
 	}
 }
 
@@ -234,17 +247,11 @@ void Level::render()
 		obs->render(this->m_context->m_window.get());
 	}
 	/*this->test_drag.render(this->m_context->m_window.get());*/
-	if (!alive) {
-		this->m_context->m_window->draw(this->deathscreen);
+	if (victory || !alive) {
+		this->m_context->m_window->draw(this->end_game_text);
 	}
-	if (player.level_complete()) {
-		GUItext.setString("Level Complete!! Press R to play again");
-		this->m_context->m_window->draw(this->GUItext);
-	}
-
-
+	this->m_context->m_window->draw(this->GUItext);
 	this->m_context->m_window->display();
-
 }
 
 void Level::pause()

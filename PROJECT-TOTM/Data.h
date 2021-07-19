@@ -11,7 +11,7 @@ struct Data
 	std::vector<std::pair<sf::Vector2u, std::pair<int, int>>> wall_cordinates_sing; //like 1 2,3 2,3 4,4 3,2 3,1 2,8 7
 	std::vector<std::vector<sf::Vector2u>> wall_cordinates_mult;
 
-	std::vector<sf::Vector2u> marker_pos_sing;
+	std::vector<sf::Vector2f> marker_pos_sing;
 	std::vector<std::vector<sf::Vector2f>> marker_pos_mult;
 
 

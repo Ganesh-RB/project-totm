@@ -16,12 +16,13 @@ struct context
 	std::unique_ptr<stateman> m_states;
 	std::unique_ptr<sf::RenderWindow> m_window;
 	std::unique_ptr<asset_holder> m_assets;
-
+	std::unique_ptr<unsigned> m_level_no;
 	context()
 	{
 		m_states = std::make_unique<stateman>();
 		m_window = std::make_unique<sf::RenderWindow>();
 		m_assets = std::make_unique<asset_holder>();
+		m_level_no = std::make_unique<unsigned>(1u);
 	}
 };
 

@@ -72,7 +72,7 @@ bool Data::read(std::vector<Data>& data)
 
 		{
 			fin >> temp_var1 >> temp_var2;
-			data_p->marker_pos_sing.push_back(sf::Vector2u(temp_var1, temp_var2));
+			data_p->marker_pos_sing.push_back(sf::Vector2f(temp_var1, temp_var2));
 		}
 
 
@@ -125,7 +125,9 @@ bool Data::read(std::vector<Data>& data)
 
 		if (fin.eof())
 		{
+#if defined(_DEBUG)
 			std::cout << "eof reached\n";
+#endif
 			fin.close();
 			return true;
 		}

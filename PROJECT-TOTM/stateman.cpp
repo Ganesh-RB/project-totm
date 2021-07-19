@@ -24,6 +24,9 @@ void stateman::Popcurrent()
 
 void stateman::ProcessStatechange()
 {
+#if defined(_DEBUG)
+	auto temp = m_statestack.size();
+#endif
 	if (m_remove && (!m_statestack.empty()))
 	{
 		m_statestack.pop();
@@ -54,6 +57,11 @@ void stateman::ProcessStatechange()
 		m_statestack.top()->start();
 		m_add = false;
 	}
+#if defined(_DEBUG)
+	if (temp != m_statestack.size()) {
+		std::cout << "Earlier there were " << temp << " state. Now there are " << m_statestack.size() << " states\n";
+	}
+#endif
 }
 
 std::unique_ptr<state>& stateman::Getcurrent()

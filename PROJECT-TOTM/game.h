@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "context.h"
+#include "main_menu.h"
 
 ////////////////////////////////////////////////////////////
 /// \brief game class where game states and running happens

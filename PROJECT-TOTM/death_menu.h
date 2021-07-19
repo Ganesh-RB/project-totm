@@ -3,6 +3,7 @@
 
 #include "gen_menu.h"
 #include "Level.h"
+#include "main_menu.h"
 class death_menu : public gen_menu
 {
 public:

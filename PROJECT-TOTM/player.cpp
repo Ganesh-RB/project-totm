@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "player.h"
-#include <iostream>
 
 void player::initvariables()
 {
@@ -77,7 +76,7 @@ void player::add_marker_chain(const std::vector<sf::Vector2f>& points)
 	}
 }
 
-void player::add_marker_single(sf::Vector2u &pos)
+void player::add_marker_single(sf::Vector2f &pos)
 {
 
 	marker_temp.setPosition(sf::Vector2f(pos.x*BASE_SIZE, pos.y*BASE_SIZE));

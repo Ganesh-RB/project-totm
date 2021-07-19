@@ -11,6 +11,7 @@
 #include "Obstacles/spring.h"
 #include "pause_menu.h"
 #include "death_menu.h"
+#include "victory_menu.h"
 
 class Level : public state
 {
@@ -25,8 +26,9 @@ private:
 	bool alive;
 	bool is_running;
 	bool victory;
+
 	sf::Clock pause_timer;
-	sf::Clock death_timer;
+	sf::Clock endlevel_timer;
 
 	player player{m_context->m_assets.get()};
 	/*gun Gun1{ sf::Vector2u(11U,12U),sf::Vector2u(9U,12U)};
@@ -45,13 +47,16 @@ private:
 	void initvariables();
 	void initfonts();
 	void inittext();
+	//functions dealing with end game situations
 	void defeat();
+	void win();
 
 	//fonts
-	sf::Font font1;
+	sf::Font gui_font;
+	sf::Font endgame_font;
 	//text
 	sf::Text GUItext;
-	sf::Text deathscreen;
+	sf::Text end_game_text;
 public:
 	//constructor and destructor
 	Level(std::shared_ptr<context> &context);

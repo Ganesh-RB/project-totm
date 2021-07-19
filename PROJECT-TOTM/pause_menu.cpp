@@ -11,7 +11,7 @@ pause_menu::~pause_menu()
 
 void pause_menu::variable_init()
 {
-	number_of_options = 3;
+	number_of_options = 2;
 	for (int i = 0; i < number_of_options; i++) {
 		options.emplace_back(sf::Text());
 	}
@@ -20,8 +20,7 @@ void pause_menu::variable_init()
 	color_text[1] = sf::Color::Red;
 	menu_title.setString("PAUSED");
 	options[0].setString("Resume");
-	options[1].setString("Main Menu");
-	options[2].setString("Exit");
+	options[1].setString("Exit");
 	title_font = &m_context->m_assets->get_font(asset_holder::fonts::DOSIS_EXTRABOLD);
 	option_font = &m_context->m_assets->get_font(asset_holder::fonts::DOSIS_BOLD);
 }
@@ -60,11 +59,6 @@ void pause_menu::pollevents()
 					m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::BUTTON_FORWARD);
 					break;
 				case 1:
-					// add main menu here
-					//m_context->m_states->Add(std::make_unique<main_menu>(m_context),true);
-					m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::BUTTON_BACKWARD);
-					break;
-				case 2:
 					m_context->m_window->close();
 					break;
 				default:

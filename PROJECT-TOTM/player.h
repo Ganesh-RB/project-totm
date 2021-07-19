@@ -316,7 +316,7 @@ public:
 	/// \note place markers in middle of grid squares
 	/// 
 	////////////////////////////////////////////////////////////
-	void add_marker_single(sf::Vector2u &pos);
+	void add_marker_single(sf::Vector2f &pos);
 
 	//cons and decons
 	////////////////////////////////////////////////////////////

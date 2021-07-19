@@ -44,6 +44,7 @@ void gen_menu::init()
 
 void gen_menu::update(float & deltatime)
 {
+	update_anim(deltatime);
 	if (option_no[0] != option_no[1]) {
 		for (auto& i : options) { i.setFillColor(color_text[0]); }
 		options[option_no[0]].setFillColor(color_text[1]);
