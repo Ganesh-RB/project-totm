@@ -18,4 +18,7 @@ https://freesound.org/people/MentosLat/sounds/417486/
 victory sound
 https://opengameart.org/content/win-sound-effect
 
+stretch sound
+https://freesound.org/people/hans/sounds/107784/
+
 Sprites of teleporter,springs and player were made by using pixil.com website

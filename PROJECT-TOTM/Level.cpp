@@ -138,7 +138,7 @@ const bool Level::assign(int lev_no)
 
             for (auto obs = _data->Pfish_arg.begin(); obs != _data->Pfish_arg.end(); obs++)
 			{
-				this->obstacles.push_back(new pufferfish(*obs));//
+				this->obstacles.push_back(new pufferfish(*obs, m_context->m_assets.get()));
 			}
 
             for (auto obs = _data->teleportal_arg.begin(); obs != _data->teleportal_arg.end(); obs++)

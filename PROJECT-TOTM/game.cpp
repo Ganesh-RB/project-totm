@@ -17,6 +17,7 @@ void game::InitTextures()
 	m_context->m_assets->add_texture(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_textures::SPRING, "Images/spring.png");
 	m_context->m_assets->add_texture(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_textures::TELEPORTER, "Images/teleporter.png");
 	m_context->m_assets->add_texture(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_textures::PLAYER, "Images/player.png");
+	m_context->m_assets->add_texture(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_textures::PUFFERFISH, "Images/pufferfish.png");
 }
 void game::InitSounds() {
 	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::OJJAS,asset_holder::ojjas_sounds::BUTTON_FORWARD, "Sounds/button_forward.flac");
@@ -27,6 +28,7 @@ void game::InitSounds() {
 	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::COLLIDE, "Sounds/collide.wav");
 	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::DEATH, "Sounds/death.flac");
 	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::VICTORY, "Sounds/victory.flac");
+	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::STRETCH, "Sounds/stretch.flac");
 }
 game::game()
 
