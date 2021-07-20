@@ -30,6 +30,7 @@ void player::initvariables()
 	anim_timer = 0.f;
 	trail_timer = 0.f;
 	spring_flag = false;
+	dead = false;
 }
 
 const void player::initshape()
@@ -102,6 +103,11 @@ void player::setPosition(const sf::Vector2u position)
 	this->shape.setPosition(BASE_SIZE * position.x, BASE_SIZE * position.y);
 }
 
+void player::set_player_dead()
+{
+	dead = true;
+}
+
 sf::Vector2f player::getcoord()
 {
 	sf::Vector2f result = shape.getPosition();
@@ -132,49 +138,72 @@ void player::get_end_trail(move_dir_no dir, sf::FloatRect pb)
 
 void player::update_animation(float _dt)
 {
-	player_sprite.setPosition(shape.getPosition() + sf::Vector2f(BASE_SIZE / 2.f, BASE_SIZE / 2.f));
-	anim_timer += 180 * anim_dir* _dt;
-	if (anim_timer > 60.f) { anim_dir = -1; }
-	if (anim_timer < 0.f) { anim_dir = 1; }
-	
-	if(moving && previous_moving) {
-		trail_timer += movementspeed*24.f*_dt;
-		if (trail_timer > 60.f) { player_sprite.setTextureRect(display_frame[5]); }
-		else if(trail_timer>30.f){ player_sprite.setTextureRect(display_frame[4]); }
-		else { player_sprite.setTextureRect(display_frame[3]); }
-	
-	}
-	else {
-		trail_timer = 0.f;
-		if (anim_timer < 20.f) {
-			player_sprite.setTextureRect(display_frame[0]);
-		}
-		else if (anim_timer < 40.f) {
-			player_sprite.setTextureRect(display_frame[1]);
+	if(!dead){
+		anim_timer += 180 * anim_dir* _dt;
+		if (anim_timer > 60.f) { anim_dir = -1; }
+		if (anim_timer < 0.f) { anim_dir = 1; }
+		player_sprite.setPosition(shape.getPosition() + sf::Vector2f(BASE_SIZE / 2.f, BASE_SIZE / 2.f));
+		if (moving && previous_moving) {
+			trail_timer += movementspeed * 24.f*_dt;
+			if (trail_timer > 60.f) { player_sprite.setTextureRect(display_frame[5]); }
+			else if (trail_timer > 30.f) { player_sprite.setTextureRect(display_frame[4]); }
+			else { player_sprite.setTextureRect(display_frame[3]); }
 
 		}
-		else { player_sprite.setTextureRect(display_frame[2]); }
+		else {
+			trail_timer = 0.f;
+			if (anim_timer < 20.f) {
+				player_sprite.setTextureRect(display_frame[0]);
+			}
+			else if (anim_timer < 40.f) {
+				player_sprite.setTextureRect(display_frame[1]);
+
+			}
+			else { player_sprite.setTextureRect(display_frame[2]); }
+		}
+		float temp;
+		switch (last_moving_direction)
+		{
+		case move_dir_no::MOVE_LEFT:
+			temp = 90.f;
+			break;
+		case move_dir_no::MOVE_RIGHT:
+			temp = -90.f;
+			break;
+		case move_dir_no::MOVE_UP:
+			temp = 180.f;
+			break;
+		case move_dir_no::MOVE_DOWN:
+			temp = 0.f;
+			break;
+		default:
+			printf("ERROR::PLAYER::UPDATE_ANIMATION::invalid value of last_moving_direction\n");
+			break;
+		}
+		player_sprite.setRotation(temp + ((moving&&previous_moving)*-90.f));
 	}
-	float temp;
-	switch (last_moving_direction)
-	{
-	case move_dir_no::MOVE_LEFT:
-		temp = 90.f;
-		break;
-	case move_dir_no::MOVE_RIGHT:
-		temp = -90.f;
-		break;
-	case move_dir_no::MOVE_UP:
-		temp = 180.f;
-		break;
-	case move_dir_no::MOVE_DOWN:
-		temp = 0.f;
-		break;
-	default:
-		printf("ERROR::PLAYER::UPDATE_ANIMATION::invalid value of last_moving_direction\n");
-		break;
+	else {
+		anim_timer += 6 * anim_dir* _dt;
+		if (anim_timer > 60.f) { anim_dir = -1; }
+		if (anim_timer < 0.f) { anim_dir = 1; }
+		player_sprite.setTextureRect(display_frame[0]);
+		switch ((int)anim_timer % 4) {
+		case 0:
+			player_sprite.setRotation(0.f);
+			break;
+		case 1:
+			player_sprite.setRotation(90.f);
+			break;
+		case 2:
+			player_sprite.setRotation(180.f);
+			break;
+		case 3:
+			player_sprite.setRotation(270.f);
+			break;
+		}
+		
+
 	}
-	player_sprite.setRotation(temp + ((moving&&previous_moving)*-90.f));
 }
 
 void player::get_start_trail(move_dir_no dir,sf::FloatRect pb)
@@ -199,7 +228,7 @@ void player::get_start_trail(move_dir_no dir,sf::FloatRect pb)
 	}
 }
 
-void player::updateinput()
+void player::update_input_and_movement()
 {
 	if (!spring_flag) { previous_moving = moving; }
 	spring_flag = false;
@@ -383,9 +412,11 @@ void player::update(sf::RenderWindow* target, float* _dt, float* _time_mult)
 	dt = *_dt;
 	time_mult = *_time_mult;
 	this->update_animation(dt);
-	if(!level_complete()){this->updateinput();
-	this->updatewindowcollision(target);
-	this->updatemarkers(); }
+	if(!level_complete()&& !dead){
+		this->update_input_and_movement();
+		this->updatewindowcollision(target);
+		this->updatemarkers();
+	}
 }
 
 void player::render(sf::RenderWindow * target)

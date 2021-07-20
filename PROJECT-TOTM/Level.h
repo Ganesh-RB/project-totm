@@ -61,7 +61,6 @@ public:
 	//constructor and destructor
 	Level(std::shared_ptr<context> &context);
 	virtual ~Level();
-	const bool running() const;
 	wall_gen wall_generator{ 30.f };
 	//functions from state 
     const bool assign(int lev_no);

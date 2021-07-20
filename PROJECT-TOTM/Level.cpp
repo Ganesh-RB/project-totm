@@ -66,6 +66,7 @@ void Level::defeat()
 	m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::DEATH);
 	endlevel_timer.restart();
 	end_game_text.setString("GAME OVER!");
+	this->player.set_player_dead();
 }
 void Level::win()
 {
@@ -90,11 +91,6 @@ Level::~Level()
 	m_context->m_window->setFramerateLimit(0);
 }
 
-//accessors
-const bool Level::running() const
-{
-	return (this->is_running && this->m_context->m_window->isOpen());
-}
 
 const bool Level::assign(int lev_no)
 {
@@ -224,6 +220,7 @@ void Level::update(float& _dt)
 			this->win();
 		}
 	}
+	if (!alive) { player.update(m_context->m_window.get(), &dt, &time_mult); }
 	if (!alive && endlevel_timer.getElapsedTime().asSeconds() > 2.f) {
 		m_context->m_states->Add(std::make_unique<death_menu>(m_context), true);
 	}
@@ -236,9 +233,8 @@ void Level::render()
 {
 	this->m_context->m_window->clear();
 	//draw game objects
-	if (alive) {
-		this->player.render(this->m_context->m_window.get());
-	}
+
+	this->player.render(this->m_context->m_window.get());
 	this->wall_generator.render(this->m_context->m_window.get());
 
 	
