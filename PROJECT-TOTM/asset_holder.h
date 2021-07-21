@@ -70,13 +70,15 @@ public:
 	///
 	/// \param _name name of owner
 	/// \param id unique id of owner's texture
+	/// \param volume sets the volume of sound value should be
+	/// in between 0 and 100
 	///
 	/// takes key to a sound buffer already present and
 	/// creates a sf::sound object which uses it and plays the 
 	/// sound object 
 	///
 	////////////////////////////////////////////////////////////
-	void play_sound(group_member_name _name, int id);
+	void play_sound(group_member_name _name, int id, float volume = 100.f);
 
 	////////////////////////////////////////////////////////////
 	/// \brief gets specified texture

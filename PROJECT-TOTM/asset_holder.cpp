@@ -48,10 +48,11 @@ void asset_holder::clear_sounds()
 	m_sounds.remove_if(is_finished());
 }
 
-void asset_holder::play_sound(group_member_name _name, int id)
+void asset_holder::play_sound(group_member_name _name, int id,float volume)
 {
 	assert(m_soundbuffers.find(std::make_pair(_name, id)) != m_soundbuffers.end());
 	m_sounds.emplace_back(sf::Sound::Sound(*(m_soundbuffers[std::make_pair(_name, id)].get())));
+	m_sounds.back().setVolume(volume);
 	m_sounds.back().play();
 }
 

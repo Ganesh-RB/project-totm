@@ -36,16 +36,16 @@ void stateman::ProcessStatechange()
 			m_statestack.top()->start();
 		}
 
-		m_remove = false;
 	}
+	m_remove = false;
 
 	if (m_add)
 	{
 		if (m_replace && (!m_statestack.empty()))
 		{
 			m_statestack.pop();
-			m_replace = false;
 		}
+		m_replace = false;
 
 		if (!m_statestack.empty())
 		{
@@ -73,3 +73,9 @@ bool stateman::is_empty()
 {
 	return m_statestack.empty();
 }
+
+int stateman::no_of_states()
+{
+	return m_statestack.size();
+}
+

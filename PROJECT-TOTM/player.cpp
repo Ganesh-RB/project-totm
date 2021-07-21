@@ -46,7 +46,7 @@ bool player::level_complete()
 
 void player::add_marker_chain(const std::vector<sf::Vector2f>& points)
 {
-	sf::Vector2f chain_point = (points.size() > 0) ? points[0] : sf::Vector2f(0.f, 0.f);
+	sf::Vector2f chain_point=(points.size()>0)? points[0]:sf::Vector2f(0.f,0.f);
 	for (int i = 1; i < points.size(); i++) {
 		float max_y, max_x, min_y, min_x;
 		if (points[i].x > chain_point.x) {
@@ -89,10 +89,10 @@ void player::add_marker_single(sf::Vector2f &pos)
 
 player::player(asset_holder* assets) :m_assets(*assets)
 {
-	this->shape.setPosition(BASE_SIZE * 0, BASE_SIZE * 0);
+	this->shape.setPosition(BASE_SIZE*0, BASE_SIZE *0);
 	this->initshape();
 	this->initvariables();
-
+	
 }
 
 player::~player()
@@ -139,7 +139,7 @@ void player::get_end_trail(move_dir_no dir, sf::FloatRect pb)
 
 void player::update_animation(float _dt)
 {
-	if (!dead) {
+	if(!dead){
 		anim_timer += 180 * anim_dir* _dt;
 		if (anim_timer > 60.f) { anim_dir = -1; }
 		if (anim_timer < 0.f) { anim_dir = 1; }
@@ -202,26 +202,26 @@ void player::update_animation(float _dt)
 			player_sprite.setRotation(270.f);
 			break;
 		}
-
+		
 
 	}
 }
 
-void player::get_start_trail(move_dir_no dir, sf::FloatRect pb)
+void player::get_start_trail(move_dir_no dir,sf::FloatRect pb)
 {
 	switch (dir)
 	{
 	case move_dir_no::MOVE_LEFT:
-		start_trail = sf::Vector2f(pb.left + pb.width, pb.top);
+		start_trail = sf::Vector2f(pb.left +pb.width, pb.top);
 		break;
 	case move_dir_no::MOVE_RIGHT:
 		start_trail = sf::Vector2f(pb.left, pb.top);
 		break;
 	case move_dir_no::MOVE_DOWN:
-		start_trail = sf::Vector2f(pb.left, pb.top);
+		start_trail = sf::Vector2f(pb.left, pb.top );
 		break;
 	case move_dir_no::MOVE_UP:
-		start_trail = sf::Vector2f(pb.left, pb.top + pb.width);
+		start_trail = sf::Vector2f(pb.left, pb.top+pb.width);
 		break;
 	default:
 		printf("error in player::get_start_trail \n");
@@ -256,7 +256,7 @@ void player::update_input_and_movement()
 			movedirection = move_dir_no::MOVE_UP;
 		}
 		if (moving) {
-			last_moving_direction = movedirection;
+			last_moving_direction =movedirection;
 			get_start_trail(movedirection, pb);
 		}
 	}
@@ -281,7 +281,7 @@ void player::update_input_and_movement()
 			printf("error in player movement direction variable \n");
 			break;
 		}
-		get_end_trail(movedirection, shape.getGlobalBounds());
+		get_end_trail(movedirection,shape.getGlobalBounds());
 	}
 }
 
@@ -307,7 +307,7 @@ void player::updatewindowcollision(sf::RenderTarget * target)
 		flag = 1;
 	}
 	if (flag == 1) {
-		get_end_trail(movedirection, shape.getGlobalBounds());
+		get_end_trail(movedirection,shape.getGlobalBounds());
 		moving = false;
 		movedirection = move_dir_no::MOVE_NULL;
 		if ((fabs(start_trail.x - end_trail.x) > playerbounds.width*1.2f) || (fabs(start_trail.y - end_trail.y) > playerbounds.height*1.2f))
@@ -366,12 +366,12 @@ void player::update_collision(sf::RectangleShape* object) {
 		flag1 = 0;
 	}
 	if (flag1 == 1) {
-		get_end_trail(movedirection, shape.getGlobalBounds());
+		get_end_trail(movedirection,shape.getGlobalBounds());
 		moving = false;
 		movedirection = move_dir_no::MOVE_NULL;
 		if ((fabs(start_trail.x - end_trail.x) > pb.width*1.2f) || (fabs(start_trail.y - end_trail.y) > pb.height*1.2f))
 		{
-			m_assets.play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::COLLIDE);
+			m_assets.play_sound(asset_holder::group_member_name::OJJAS,asset_holder::ojjas_sounds::COLLIDE);
 			trails.push_back(curr_trail(&start_trail, &end_trail));
 			//std::cout << "number of elements in trail vector are " << trails.size() << std::endl;
 		}
@@ -393,16 +393,16 @@ void player::updatemarkers()
 		else {
 			sf::FloatRect pb = this->shape.getGlobalBounds();
 			ending_movement.second = getcoord();
-			if ((moving == false) || ((fabs(ending_movement.second.y - ending_movement.first.y) > (BASE_SIZE / 2) + marker_temp.getLocalBounds().width)
+			if((moving==false) ||((fabs(ending_movement.second.y - ending_movement.first.y) > (BASE_SIZE / 2) + marker_temp.getLocalBounds().width)
 				|| (fabs(ending_movement.second.x - ending_movement.first.x) > (BASE_SIZE / 2) + marker_temp.getLocalBounds().width))) {
-				if (moving == true) {
-					get_end_trail(movedirection, shape.getGlobalBounds());
+					if(moving==true){
+					get_end_trail(movedirection,shape.getGlobalBounds());
 					moving = false;
 					movedirection = move_dir_no::MOVE_NULL;
 					trails.push_back(curr_trail(&start_trail, &end_trail));
 					//std::cout << "number of elements in trail vector are " << trails.size() << std::endl;
-				}
-				all_grids_colored = true;
+					}
+			    all_grids_colored = true;
 			}
 		}
 	}
@@ -413,7 +413,7 @@ void player::update(sf::RenderWindow* target, float* _dt, float* _time_mult)
 	dt = *_dt;
 	time_mult = *_time_mult;
 	this->update_animation(dt);
-	if (!level_complete() && !dead) {
+	if(!level_complete()&& !dead){
 		this->update_input_and_movement();
 		this->updatewindowcollision(target);
 		this->updatemarkers();
@@ -438,7 +438,7 @@ void player::render(sf::RenderWindow * target)
 sf::RectangleShape player::curr_trail(sf::Vector2f* start, sf::Vector2f* end)
 {
 	sf::RectangleShape result;
-	result.setFillColor(sf::Color(0, 100, 255, 255));
+	result.setFillColor(sf::Color(0, 100,255, 255));
 	float init_pt = fabs(end->x - start->x) > BASE_SIZE*0.8f ? end->x - start->x : BASE_SIZE;
 	float end_pt = fabs(end->y - start->y) > BASE_SIZE*0.8f ? end->y - start->y : BASE_SIZE;
 	result.setSize(sf::Vector2f(init_pt, end_pt));
