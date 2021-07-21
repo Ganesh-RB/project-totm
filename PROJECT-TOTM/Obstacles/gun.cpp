@@ -3,50 +3,60 @@
 
 void gun::initBullet()
 {
-	Bullet.setPosition(GunPosition);
-	Bullet.setPointCount(5);
-	switch (dir)
-	{
-	case direction::Right:
-		Bullet.setPoint(0, sf::Vector2f(10.f, 10.f));
-		Bullet.setPoint(1, sf::Vector2f(20.f, 10.f));
-		Bullet.setPoint(2, sf::Vector2f(25.f, 15.f));
-		Bullet.setPoint(3, sf::Vector2f(20.f, 20.f));
-		Bullet.setPoint(4, sf::Vector2f(10.f, 20.f));
-		break;
-	case direction::Left:
-		Bullet.setPoint(0, sf::Vector2f(5.f, 15.f));
-		Bullet.setPoint(1, sf::Vector2f(10.f, 10.f));
-		Bullet.setPoint(2, sf::Vector2f(20.f, 10.f));
-		Bullet.setPoint(3, sf::Vector2f(20.f, 20.f));
-		Bullet.setPoint(4, sf::Vector2f(10.f, 20.f));
-		break;
-	case direction::Down:
-		Bullet.setPoint(0, sf::Vector2f(10.f, 10.f));
-		Bullet.setPoint(1, sf::Vector2f(20.f, 10.f));
-		Bullet.setPoint(2, sf::Vector2f(20.f, 20.f));
-		Bullet.setPoint(3, sf::Vector2f(15.f, 25.f));
-		Bullet.setPoint(4, sf::Vector2f(10.f, 20.f));
-		break;
-	case direction::Up:
-		Bullet.setPoint(0, sf::Vector2f(15.f, 5.f));
-		Bullet.setPoint(1, sf::Vector2f(20.f, 10.f));
-		Bullet.setPoint(2, sf::Vector2f(20.f, 20.f));
-		Bullet.setPoint(3, sf::Vector2f(10.f, 20.f));
-		Bullet.setPoint(4, sf::Vector2f(10.f, 10.f));
-		break;
-	}
+	isMove = true;
+	crabOpen = 0;
 
-	Bullet.setOutlineColor(sf::Color::Blue);
-	Bullet.setOutlineThickness(1.5f);
+	this->clock2_bullet.restart();
+	if (!this->bullettexture.loadFromFile("Images/bullet.png"))
+		std::cout << "Images/Dragon file not loaded\n";
+	this->bulletCurrentFrame = sf::IntRect(0, 0, 30, 30);
+
 }
 
 void gun::initGunShape()
 {
+	this->clock1_gun.restart();
+	if (!this->guntexture.loadFromFile("Images/Sprite.png"))
+		std::cout << "Images/Dragon file not loaded\n";
+	this->gunCurrentFrame = sf::IntRect(0, 0, 30, 30);
+	this->gunbackground.setSize(sf::Vector2f(BASE_SIZE, BASE_SIZE));
+	this->gunbackground.setFillColor(sf::Color(0, 0, 0, 180));
+	this->gunbackground.setPosition(GunPosition);
+}
 
-	Gunshape.setSize(sf::Vector2f(30.f, 30.f));
-	Gunshape.setPosition(GunPosition);
-	Gunshape.setFillColor(sf::Color::Magenta);
+void gun::initSprite()
+{
+	this->bulletShape.setPosition(GunPosition);
+	this->bulletShape.setTexture(bullettexture);
+	this->bulletShape.setTextureRect(bulletCurrentFrame);
+	this->bulletShape.setOrigin(BASE_SIZE / 2, BASE_SIZE / 2);
+	this->bulletShape.setPosition(GunPosition.x + BASE_SIZE / 2, GunPosition.y + BASE_SIZE / 2);
+
+	this->gunShape.setPosition(GunPosition);
+	this->gunShape.setTexture(guntexture);
+	this->gunShape.setTextureRect(gunCurrentFrame);
+	this->gunShape.setOrigin(BASE_SIZE / 2, BASE_SIZE / 2);
+	this->gunShape.setPosition(GunPosition.x + BASE_SIZE / 2, GunPosition.y + BASE_SIZE / 2);
+
+	switch (dir)
+	{
+	case gun::direction::Left:
+		this->gunShape.setRotation(270.f);
+		this->bulletShape.setRotation(90.f);
+		break;
+	case gun::direction::Down:
+		this->gunShape.setRotation(180.f);
+		this->bulletShape.setRotation(180.f);
+		break;
+	case gun::direction::Up:
+		break;
+	case gun::direction::Right:
+		this->gunShape.setRotation(90.f);
+		this->bulletShape.setRotation(270.f);
+		break;
+	default:
+		break;
+	}
 }
 
 void gun::initDirection()
@@ -62,6 +72,52 @@ void gun::initDirection()
 		dir = direction::Up;
 }
 
+void gun::Animation(float dt)
+{
+	if (this->clock1_gun.getElapsedTime().asSeconds() >= 0.2f)
+	{
+
+		switch (crabOpen)
+		{
+		case 0:
+			this->gunCurrentFrame.left = 0;
+			break;
+		case 1:
+			this->gunCurrentFrame.left += 30;
+			if (this->gunCurrentFrame.left >= 60)
+				crabOpen = -1;
+			break;
+		case -1:
+			this->gunCurrentFrame.left -= 30;
+			if (this->gunCurrentFrame.left <= 0)
+				crabOpen = 0;
+			break;
+		default:
+			break;
+		}
+
+		this->clock1_gun.restart();
+		this->gunShape.setTextureRect(this->gunCurrentFrame);
+	}
+
+	if (this->clock2_bullet.getElapsedTime().asSeconds() >= 0.2f)
+	{
+		if (this->bulletCurrentFrame.left == 0 && this->bulletCurrentFrame.top == 0)
+			this->bulletCurrentFrame.left += 30;
+		else if (this->bulletCurrentFrame.left == 30 && this->bulletCurrentFrame.top == 0)
+			this->bulletCurrentFrame.top += 30;
+		else if (this->bulletCurrentFrame.left == 30 && this->bulletCurrentFrame.top == 30)
+			this->bulletCurrentFrame.left -= 30;
+		else if (this->bulletCurrentFrame.left == 0 && this->bulletCurrentFrame.top == 30)
+			this->bulletCurrentFrame.top -= 30;
+
+		this->clock2_bullet.restart();
+		this->bulletShape.setTextureRect(this->bulletCurrentFrame);
+	}
+	this->bulletShape.setScale(BASE_SIZE / bulletShape.getGlobalBounds().width, BASE_SIZE / bulletShape.getGlobalBounds().height);
+
+}
+
 gun::gun(sf::Vector2u GunPosition, sf::Vector2u TargetPosition)
 {
 	BASE_SIZE = 30.f;
@@ -73,18 +129,19 @@ gun::gun(sf::Vector2u GunPosition, sf::Vector2u TargetPosition)
 	initGunShape();
 	initDirection();
 	initBullet();
+	initSprite();
 
-	(this->Bullets).push_back(this->Bullet);
 }
 
 gun::~gun()
 {
+
 }
 
 void gun::setGunPosition(sf::Vector2f GunPosition)
 {
 	this->GunPosition.x = BASE_SIZE * GunPosition.x;		this->GunPosition.y = BASE_SIZE * GunPosition.y;
-	Gunshape.setPosition(GunPosition);
+	gunShape.setPosition(GunPosition);
 }
 
 void gun::setTargetPosition(sf::Vector2f TargetPosition)
@@ -95,30 +152,40 @@ void gun::setTargetPosition(sf::Vector2f TargetPosition)
 
 void gun::update(const float dt)
 {
+	this->Animation(dt);
 	//check erase
-	for (size_t i = 0; i < Bullets.size(); i++)
+
+	switch (dir)
 	{
-
-		switch (dir)
+	case direction::Right:
+		if (bulletShape.getPosition().x >= TargetPosition.x)
 		{
-		case direction::Right:
-			if (Bullets[i].getPosition().x >= TargetPosition.x)
-				Bullets.erase(Bullets.begin() + i);
-			break;
-		case direction::Left:
-			if (Bullets[i].getPosition().x <= TargetPosition.x)
-				Bullets.erase(Bullets.begin() + i);
-			break;
-		case direction::Down:
-			if (Bullets[i].getPosition().y >= TargetPosition.y)
-				Bullets.erase(Bullets.begin() + i);
-			break;
-		case direction::Up:
-			if (Bullets[i].getPosition().y <= TargetPosition.y)
-				Bullets.erase(Bullets.begin() + i);
-			break;
-
+			this->bulletShape.setPosition(GunPosition.x + BASE_SIZE / 2, GunPosition.y + BASE_SIZE / 2);
+			isMove = false;
 		}
+		break;
+	case direction::Left:
+		if (bulletShape.getPosition().x <= TargetPosition.x)
+		{
+			this->bulletShape.setPosition(GunPosition.x + BASE_SIZE / 2, GunPosition.y + BASE_SIZE / 2);
+			isMove = false;
+		}
+		break;
+	case direction::Down:
+		if (bulletShape.getPosition().y >= TargetPosition.y)
+		{
+			this->bulletShape.setPosition(GunPosition.x + BASE_SIZE / 2, GunPosition.y + BASE_SIZE / 2);
+			isMove = false;
+		}
+		break;
+	case direction::Up:
+		if (bulletShape.getPosition().y <= TargetPosition.y)
+		{
+			this->bulletShape.setPosition(GunPosition.x + BASE_SIZE / 2, GunPosition.y + BASE_SIZE / 2);
+			isMove = false;
+		}
+		break;
+
 	}
 
 	//update new bullets
@@ -126,57 +193,52 @@ void gun::update(const float dt)
 	float dist = fabs((TargetPosition.x - GunPosition.x + TargetPosition.y - GunPosition.y + 300.f)/300.f);
 	
 	
-	if (counter < dist )
+	if (counter < 2*dist )
 		counter+=dt;
-	if (counter >= dist )
+	if (counter >= 2*dist )
 	{
 		counter = 0;
-		Bullets.push_back(Bullet);
+		isMove = true;
+		crabOpen = 1;
 	}
 	
 
 	// move
 
-	for (size_t i = 0; i < Bullets.size(); i++)
+	
+	float speed = 200.f; // 5.f at frame rate 60
+	if (isMove)
 	{
-		float speed = 300.f; // 5.f at frame rate 60
-
 		switch (dir)
 		{
 		case direction::Right:
-			Bullets[i].move(dt * speed, 0.f);
+			bulletShape.move(dt * speed, 0.f);
 			break;
 		case direction::Left:
-			Bullets[i].move(-speed * dt, 0.f);
+			bulletShape.move(-speed * dt, 0.f);
 			break;
 		case direction::Down:
-			Bullets[i].move(0.f, dt * speed);
+			bulletShape.move(0.f, dt * speed);
 			break;
 		case direction::Up:
-			Bullets[i].move(0.f, -dt * speed);
+			bulletShape.move(0.f, -dt * speed);
 			break;
-
 		}
-
 	}
 
 }
 
 void gun::render(sf::RenderTarget* window)
 {
-
-	for (size_t j = 0; j < Bullets.size(); j++)
-	{
-		window->draw(Bullets[j]);
-	}
-
-	window->draw(Gunshape);
+	window->draw(gunbackground);
+	window->draw(bulletShape);
+	window->draw(gunShape);
 
 }
 
 const sf::Vector2f gun::getGunPosition()
 {
-	return sf::Vector2f(Gunshape.getPosition());
+	return sf::Vector2f(gunShape.getPosition());
 }
 
 const sf::Vector2f gun::getTargetPosition()
@@ -186,11 +248,9 @@ const sf::Vector2f gun::getTargetPosition()
 
 const bool gun::isCollide(const sf::FloatRect &shape)
 {
-	for (size_t i = 0; i < Bullets.size(); i++)
-	{
-		if (Bullets[i].getGlobalBounds().intersects(shape))
-			return true;
-	}
+	if (bulletShape.getGlobalBounds().intersects(shape))
+		return true;
+	
 	return false;
 }
 

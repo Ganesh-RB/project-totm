@@ -10,6 +10,7 @@ private:
 	float BASE_SIZE = 30.f;
 	enum direction { Left = -2, Down = -1, Up = 1, Right = 2 }moving_dir;
 
+	int isStuck;
 	sf::Clock clock;
 
 	sf::Sprite dragonShape;

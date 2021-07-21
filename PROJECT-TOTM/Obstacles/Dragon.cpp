@@ -4,10 +4,10 @@
 void Dragon::initVariable()
 {
 	this->clock.restart();
+	this->isStuck = 0;
 	if (!this->texture.loadFromFile("Images/Dragon.png"))
 		std::cout << "Images/Dragon file not loaded\n";
-	this->CurrentFrame = sf::IntRect(0, 0, 44, 44);
-	//this->CurrentFrame = sf::IntRect(0, 0, texture.getSize().x/4, texture.getSize().y);
+	this->CurrentFrame = sf::IntRect(0, 0, 30, 30);
 
 	this->moving_dir = this->dir.first;
 }
@@ -42,7 +42,6 @@ void Dragon::initSprite()
 	this->dragonShape.setPosition(this->InitialPosition);
 	this->dragonShape.setTexture(this->texture);
 	this->dragonShape.setTextureRect(this->CurrentFrame);
-	this->dragonShape.setScale(BASE_SIZE / dragonShape.getLocalBounds().width, BASE_SIZE / dragonShape.getLocalBounds().height);
 
 }
 
@@ -59,13 +58,12 @@ void Dragon::fly()
 {
 	if (this->clock.getElapsedTime().asSeconds() >= 0.2f)
 	{
-		this->CurrentFrame.left += 44;
-		if (this->CurrentFrame.left >= 132)
+		this->CurrentFrame.left += 30;
+		if (this->CurrentFrame.left >= 90)
 			this->CurrentFrame.left = 0;
 
 		this->clock.restart();
 		this->dragonShape.setTextureRect(this->CurrentFrame);
-		this->dragonShape.setScale(BASE_SIZE / dragonShape.getLocalBounds().width, BASE_SIZE / dragonShape.getLocalBounds().height);
 	}
 
 }
@@ -94,59 +92,69 @@ void Dragon::update(float dt)
 
 	fly();
 
-
-	switch (this->dir.first)
+	if (isStuck <= 200)
+		isStuck++;
+	else
 	{
+		isStuck++;
 
-	case direction::Right:
-		if (dragonShape.getPosition().x <= FinalPosition.x	&&  dragonShape.getPosition().x >= InitialPosition.x)
-		{
-			update_movement(1.f, dt);
-		}
-		else
-		{
-			moving_dir = direction(-moving_dir);
-			update_movement(3.f, dt);
-		}
-		break;
 
-	case direction::Left:
-		if (dragonShape.getPosition().x >= FinalPosition.x	&&  dragonShape.getPosition().x <= InitialPosition.x)
+		switch (this->dir.first)
 		{
-			update_movement(1.f, dt);
+
+		case direction::Right:
+			if (dragonShape.getPosition().x <= FinalPosition.x	&&  dragonShape.getPosition().x >= InitialPosition.x)
+			{
+				update_movement(1.f, dt);
+			}
+			else
+			{
+				isStuck = 0;
+				moving_dir = direction(-moving_dir);
+				update_movement(3.f, dt);
+			}
+			break;
+
+		case direction::Left:
+			if (dragonShape.getPosition().x >= FinalPosition.x	&&  dragonShape.getPosition().x <= InitialPosition.x)
+			{
+				update_movement(1.f, dt);
+			}
+			else
+			{
+				isStuck = 0;
+				moving_dir = direction(-moving_dir);
+				update_movement(3.f, dt);
+			}
+			break;
+		case direction::Up:
+			if (dragonShape.getPosition().y >= FinalPosition.y	&&  dragonShape.getPosition().y <= InitialPosition.y)
+			{
+				update_movement(1.f, dt);
+			}
+			else
+			{
+				isStuck = 0;
+				moving_dir = direction(-moving_dir);
+				update_movement(3.f, dt);
+			}
+			break;
+		case direction::Down:
+			if (dragonShape.getPosition().y <= FinalPosition.y	&&  dragonShape.getPosition().y >= InitialPosition.y)
+			{
+				update_movement(1.f, dt);
+			}
+			else
+			{
+				isStuck = 0;
+				moving_dir = direction(-moving_dir);
+				update_movement(3.f, dt);
+			}
+			break;
+		default:
+			break;
 		}
-		else
-		{
-			moving_dir = direction(-moving_dir);
-			update_movement(3.f, dt);
-		}
-		break;
-	case direction::Up:
-		if (dragonShape.getPosition().y >= FinalPosition.y	&&  dragonShape.getPosition().y <= InitialPosition.y)
-		{
-			update_movement(1.f, dt);
-		}
-		else
-		{
-			moving_dir = direction(-moving_dir);
-			update_movement(3.f, dt);
-		}
-		break;
-	case direction::Down:
-		if (dragonShape.getPosition().y <= FinalPosition.y	&&  dragonShape.getPosition().y >= InitialPosition.y)
-		{
-			update_movement(1.f, dt);
-		}
-		else
-		{
-			moving_dir = direction(-moving_dir);
-			update_movement(3.f, dt);
-		}
-		break;
-	default:
-		break;
 	}
-
 }
 
 void Dragon::render(sf::RenderTarget * target)

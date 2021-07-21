@@ -10,9 +10,17 @@ private:
 	sf::Vector2f GunPosition;
 	sf::Vector2f TargetPosition;
 
-	sf::RectangleShape Gunshape;
-	sf::ConvexShape Bullet;
-	std::vector<sf::ConvexShape> Bullets;
+	sf::Clock clock1_gun;
+	sf::Sprite gunShape;
+	sf::Texture guntexture;
+	sf::IntRect gunCurrentFrame;
+	sf::RectangleShape gunbackground;
+
+	sf::Clock clock2_bullet;
+	sf::Sprite bulletShape;
+	sf::Texture bullettexture;
+	sf::IntRect bulletCurrentFrame;
+
 
 	///////////////////////////////////////////////////
 	///
@@ -22,10 +30,15 @@ private:
 	enum class direction { Left, Down, Up, Right }dir;
 	
 	double counter;
+	int crabOpen;
+	bool isMove;
 
 	void initBullet();
 	void initGunShape();
+	void initSprite();
 	void initDirection();
+
+	void Animation(float dt);
 
 public:
 
