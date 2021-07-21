@@ -1,0 +1,4 @@
+to successfully run tests do the following
+1. Link google test to whichever IDE/system on which project is currently running
+2. Add these files into directory,replace with the files if same name conflict emerges
+3. Now the tests should work properly.
