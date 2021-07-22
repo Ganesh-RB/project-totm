@@ -60,7 +60,7 @@ Level::Level(std::shared_ptr<context>& context):m_context(context)
 	is_pause = false;
 	if (!Data::read(this->data))
 		std::cout << "data file not readed correctly\n";
-	//m_context->m_window->setFramerateLimit(60);
+	//m_context->m_window->setFramerateLimit(10);
 }
 
 Level::~Level()
@@ -175,15 +175,16 @@ void Level::update(float& _dt)
 	if (((!is_pause) && alive) && (!player.level_complete())) {
 
 		this->player.update(m_context->m_window.get(), &dt, &time_mult);
-		for (auto i : wall_generator.walls) {
-			player.update_collision(&i);
-		}
 
 		for (auto obs : obstacles)
 		{
 			obs->update(this->dt);
 		}
 		
+		for (auto i : wall_generator.walls) {
+			player.update_collision(&i);
+		}
+
 		for (auto obs : obstacles)
 		{
 			if (obs->isCollide(player.shape.getGlobalBounds())) {

@@ -54,7 +54,9 @@ void teleporter::update(float _dt)
 			player_var.trails.push_back(player_var.curr_trail(&player_var.start_trail, &player_var.end_trail));
 			portals[1-i].second=false;
 			player_var.shape.setPosition(portals[1-i].first.getPosition());
+			player_var.updatemarkers();
 			player_var.get_start_trail(player_var.movedirection, portals[1-i].first.getGlobalBounds());
+			player_var.get_end_trail(player_var.movedirection, portals[1 - i].first.getGlobalBounds());
 			m_assets.play_sound(asset_holder::group_member_name::OJJAS,asset_holder::TELEPORT);
 		}
 	}

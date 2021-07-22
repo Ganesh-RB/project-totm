@@ -324,7 +324,7 @@ void player::update_collision(sf::RectangleShape* object) {
 	switch (movedirection) {
 	case move_dir_no::MOVE_LEFT:
 		if ((pb.top >= ob.top - 5.f) && (pb.top + pb.height <= ob.top + ob.height + 5.f)) {
-			if (!(pb.left + pb.width < ob.left)) {
+			if (!(pb.left + pb.width < ob.left+5.f)) {
 				if (pb.left < ob.left + ob.width) {
 					flag1 = 1;
 					this->shape.setPosition(ob.left + ob.width, pb.top);
@@ -334,7 +334,7 @@ void player::update_collision(sf::RectangleShape* object) {
 		break;
 	case move_dir_no::MOVE_RIGHT:
 		if ((pb.top >= ob.top - 5.f) && (pb.top + pb.height <= ob.top + ob.height + 5.f)) {
-			if (!(pb.left > ob.left + ob.width)) {
+			if (!(pb.left+5.f > ob.left + ob.width)) {
 				if (pb.left + pb.width > ob.left) {
 					flag1 = 1;
 					this->shape.setPosition(ob.left - pb.width, pb.top);
@@ -344,7 +344,7 @@ void player::update_collision(sf::RectangleShape* object) {
 		break;
 	case move_dir_no::MOVE_DOWN:
 		if ((pb.left >= ob.left - 5.f) && (pb.left + pb.width <= ob.left + ob.width + 5.f)) {
-			if (!(pb.top > ob.top + ob.height)) {
+			if (!(pb.top+5.f > ob.top + ob.height)) {
 				if (pb.top + pb.height > ob.top) {
 					flag1 = 1;
 					this->shape.setPosition(pb.left, ob.top - pb.height);
@@ -354,7 +354,7 @@ void player::update_collision(sf::RectangleShape* object) {
 		break;
 	case move_dir_no::MOVE_UP:
 		if ((pb.left >= ob.left - 5.f) && (pb.left + pb.width <= ob.left + ob.width + 5.f)) {
-			if (!(pb.top + pb.height < ob.top)) {
+			if (!(pb.top + pb.height < ob.top+5.f)) {
 				if (pb.top < ob.top + ob.height) {
 					flag1 = 1;
 					this->shape.setPosition(pb.left, ob.top + ob.height);
@@ -412,12 +412,12 @@ void player::update(sf::RenderWindow* target, float* _dt, float* _time_mult)
 {
 	dt = *_dt;
 	time_mult = *_time_mult;
-	this->update_animation(dt);
 	if(!level_complete()&& !dead){
 		this->update_input_and_movement();
 		this->updatewindowcollision(target);
 		this->updatemarkers();
 	}
+	this->update_animation(dt);
 }
 
 void player::render(sf::RenderWindow * target)

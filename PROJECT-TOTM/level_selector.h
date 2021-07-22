@@ -4,7 +4,7 @@
 #include "context.h"
 #include "Level.h"
 
-#define NUMBER_OF_LEVELS 2U
+#define NUMBER_OF_LEVELS 5U
 class level_selector : public state
 {
 private:
