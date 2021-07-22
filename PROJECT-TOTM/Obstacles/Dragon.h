@@ -2,19 +2,24 @@
 #define DRAGON_H
 
 #include "Obstacle.h"
+#include "../asset_holder.h"
 
 class Dragon : public Obstacle
 {
 private:
 
 	float BASE_SIZE = 30.f;
+
+	asset_holder& m_assets;
+
 	enum direction { Left = -2, Down = -1, Up = 1, Right = 2 }moving_dir;
 
 	int isStuck;
+	int counter_sound;
+
 	sf::Clock clock;
 
 	sf::Sprite dragonShape;
-	sf::Texture texture;
 	sf::IntRect CurrentFrame;
 
 	sf::Vector2f InitialPosition;
@@ -40,7 +45,7 @@ public:
 	///	\param FinalPosition sf::Vector2u final position of bat 
 	///	
 	///////////////////////////////////////////////////
-	Dragon(sf::Vector2u InitialPosition, sf::Vector2u FinalPosition);
+	Dragon(sf::Vector2u InitialPosition, sf::Vector2u FinalPosition, asset_holder* assets);
 
 	///////////////////////////////////////////////////
 	///	

@@ -14,12 +14,17 @@ public:
 	enum ojjas_sounds { BUTTON_FORWARD, BUTTON_BACKWARD, BEEP, BOUNCE, TELEPORT,COLLIDE,DEATH,VICTORY,STRETCH };
 	enum ojjas_textures { SPRING, TELEPORTER,PLAYER,PUFFERFISH };
 
+	enum ganesh_sounds {BAT_FLY,BAT_DIR_CHANGE,FIRE_START,FIRE_END};
+	enum ganesh_textures {BULLET,GUN_CRAB,DRAGON};
+
 	enum fonts {DOSIS_EXTRALIGHT,DOSIS_LIGHT,DOSIS_REGULAR,DOSIS_MEDIUM,DOSIS_SEMIBOLD,DOSIS_BOLD,DOSIS_EXTRABOLD};
 
 	////////////////////////////////////////////////////////////
 	/// \brief constructor
 	///
 	////////////////////////////////////////////////////////////
+	
+
 	asset_holder();
 
 	////////////////////////////////////////////////////////////

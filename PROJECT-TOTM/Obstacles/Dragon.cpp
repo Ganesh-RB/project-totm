@@ -5,10 +5,8 @@ void Dragon::initVariable()
 {
 	this->clock.restart();
 	this->isStuck = 0;
-	if (!this->texture.loadFromFile("Images/Dragon.png"))
-		std::cout << "Images/Dragon file not loaded\n";
 	this->CurrentFrame = sf::IntRect(0, 0, 30, 30);
-
+	counter_sound = 0;
 	this->moving_dir = this->dir.first;
 }
 
@@ -40,7 +38,7 @@ void Dragon::initDirection()
 void Dragon::initSprite()
 {
 	this->dragonShape.setPosition(this->InitialPosition);
-	this->dragonShape.setTexture(this->texture);
+	this->dragonShape.setTexture(m_assets.get_texture(asset_holder::group_member_name::GANESH, asset_holder::ganesh_textures::DRAGON));
 	this->dragonShape.setTextureRect(this->CurrentFrame);
 
 }
@@ -68,13 +66,13 @@ void Dragon::fly()
 
 }
 
-Dragon::Dragon(sf::Vector2u InitialPosition, sf::Vector2u FinalPosition)
+Dragon::Dragon(sf::Vector2u InitialPosition, sf::Vector2u FinalPosition, asset_holder *assets) :m_assets(*assets)
 {
 	this->Type = Obstacle::obstacle_type::Dragon;
 
-	this->InitialPosition.x = InitialPosition.x * BASE_SIZE;		
+	this->InitialPosition.x = InitialPosition.x * BASE_SIZE;
 	this->InitialPosition.y = BASE_SIZE * InitialPosition.y;
-	this->FinalPosition.x = FinalPosition.x * BASE_SIZE;		
+	this->FinalPosition.x = FinalPosition.x * BASE_SIZE;
 	this->FinalPosition.y = BASE_SIZE * FinalPosition.y;
 
 	this->initDirection();
@@ -97,7 +95,19 @@ void Dragon::update(float dt)
 	else
 	{
 		isStuck++;
+		
+		counter_sound++;
+		
+		if (counter_sound == 250)
+		{
+			m_assets.play_sound(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::BAT_FLY, 10.f);
+		}
 
+		if (counter_sound == 500)
+		{
+			counter_sound = 0;
+			m_assets.play_sound(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::BAT_DIR_CHANGE, 10.f);
+		}
 
 		switch (this->dir.first)
 		{
@@ -109,9 +119,13 @@ void Dragon::update(float dt)
 			}
 			else
 			{
+				if (dragonShape.getPosition().x <= FinalPosition.x)
+					dragonShape.setPosition(this->InitialPosition);
+				else
+					dragonShape.setPosition(this->FinalPosition);
+				
 				isStuck = 0;
 				moving_dir = direction(-moving_dir);
-				update_movement(3.f, dt);
 			}
 			break;
 
@@ -122,9 +136,13 @@ void Dragon::update(float dt)
 			}
 			else
 			{
+				if (dragonShape.getPosition().x >= FinalPosition.x)
+					dragonShape.setPosition(this->InitialPosition);
+				else
+					dragonShape.setPosition(this->FinalPosition);
+
 				isStuck = 0;
 				moving_dir = direction(-moving_dir);
-				update_movement(3.f, dt);
 			}
 			break;
 		case direction::Up:
@@ -134,9 +152,13 @@ void Dragon::update(float dt)
 			}
 			else
 			{
+				if (dragonShape.getPosition().x >= FinalPosition.y)
+					dragonShape.setPosition(this->InitialPosition);
+				else
+					dragonShape.setPosition(this->FinalPosition);
+
 				isStuck = 0;
 				moving_dir = direction(-moving_dir);
-				update_movement(3.f, dt);
 			}
 			break;
 		case direction::Down:
@@ -146,9 +168,13 @@ void Dragon::update(float dt)
 			}
 			else
 			{
+				if (dragonShape.getPosition().x <= FinalPosition.y)
+					dragonShape.setPosition(this->InitialPosition);
+				else
+					dragonShape.setPosition(this->FinalPosition);
+
 				isStuck = 0;
 				moving_dir = direction(-moving_dir);
-				update_movement(3.f, dt);
 			}
 			break;
 		default:

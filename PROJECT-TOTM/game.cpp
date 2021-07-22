@@ -18,6 +18,9 @@ void game::InitTextures()
 	m_context->m_assets->add_texture(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_textures::TELEPORTER, "Images/teleporter.png");
 	m_context->m_assets->add_texture(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_textures::PLAYER, "Images/player.png");
 	m_context->m_assets->add_texture(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_textures::PUFFERFISH, "Images/pufferfish.png");
+	m_context->m_assets->add_texture(asset_holder::group_member_name::GANESH, asset_holder::ganesh_textures::BULLET, "Images/bullet.png");
+	m_context->m_assets->add_texture(asset_holder::group_member_name::GANESH, asset_holder::ganesh_textures::GUN_CRAB, "Images/Sprite.png");
+	m_context->m_assets->add_texture(asset_holder::group_member_name::GANESH, asset_holder::ganesh_textures::DRAGON, "Images/Dragon.png");
 }
 void game::InitSounds() {
 	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::OJJAS,asset_holder::ojjas_sounds::BUTTON_FORWARD, "Sounds/button_forward.flac");
@@ -29,6 +32,10 @@ void game::InitSounds() {
 	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::DEATH, "Sounds/death.flac");
 	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::VICTORY, "Sounds/victory.flac");
 	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::STRETCH, "Sounds/stretch.flac");
+	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::FIRE_START, "Sounds/fireStart.wav");
+	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::FIRE_END, "Sounds/fireEnd.wav");
+	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::BAT_FLY, "Sounds/batFlying.wav");
+	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::BAT_DIR_CHANGE, "Sounds/batDirChanging.wav");
 }
 game::game()
 

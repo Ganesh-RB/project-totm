@@ -71,8 +71,8 @@ bool Data::read(std::vector<Data>& data)
 		for (size_t i = 0; i < size; i++)
 
 		{
-			fin >> temp_var1 >> temp_var2;
-			data_p->marker_pos_sing.push_back(sf::Vector2f(temp_var1, temp_var2));
+			fin >> f_var1 >> f_var2;
+			data_p->marker_pos_sing.push_back(sf::Vector2f(f_var1, f_var2));
 		}
 
 

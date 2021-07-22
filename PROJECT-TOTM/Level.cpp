@@ -5,29 +5,6 @@
 void Level::initvariables()
 {
 	
-	//CHAIN METHOD
-	/*wall_generator.add_wall_chain(std::vector<sf::Vector2u>{ sf::Vector2u(2U, 19U), sf::Vector2u(10U, 19U), sf::Vector2u(10U, 18U), sf::Vector2u(11U, 18U), sf::Vector2u(11U, 17U), sf::Vector2u(12U, 17U), sf::Vector2u(12U, 8U),
-		sf::Vector2u(4U, 8U), sf::Vector2u(4U, 9U), sf::Vector2u(2U, 9U), sf::Vector2u(2U, 12U), sf::Vector2u(5U, 12U), sf::Vector2u(5U, 14U), sf::Vector2u(4U, 14U), sf::Vector2u(4U, 15U), sf::Vector2u(2U, 15U),
-		sf::Vector2u(2U, 19U) });
-	//FLOATERS/SINGLE WALLS
-
-
-	wall_generator.add_wall_single(sf::Vector2u(11U, 14U), 3, wall_generator.UP);
-	wall_generator.add_wall_single(sf::Vector2u(4U, 17U), 2, wall_generator.RIGHT);
-	wall_generator.add_wall_single(sf::Vector2u(7U, 16U), 1, wall_generator.RIGHT);
-	wall_generator.add_wall_single(sf::Vector2u(6U, 11U), 1, wall_generator.RIGHT);
-	wall_generator.add_wall_single(sf::Vector2u(7U, 10U), 1, wall_generator.RIGHT);
-	wall_generator.add_wall_single(sf::Vector2u(8U, 12U), 1, wall_generator.RIGHT);
-	wall_generator.add_wall_single(sf::Vector2u(6U, 14U), 3, wall_generator.RIGHT);
-	player.add_marker_chain(std::vector<sf::Vector2f>{sf::Vector2f(3.5f, 18.5f), sf::Vector2f(9.5f, 18.5f), sf::Vector2f(9.5f, 17.5f), sf::Vector2f(10.5f, 17.5f), sf::Vector2f(10.5f, 16.5f),
-		sf::Vector2f(11.5f, 16.5f), sf::Vector2f(11.5f, 14.5f), sf::Vector2f(10.5f, 14.5f), sf::Vector2f(10.5f, 15.5f), sf::Vector2f(9.5f, 15.5f),
-		sf::Vector2f(9.5f, 16.5f), sf::Vector2f(8.5f, 16.5f), sf::Vector2f(8.5f, 17.5f), sf::Vector2f(6.5f, 17.5f), sf::Vector2f(6.5f, 16.5f)});
-	player.add_marker_chain(std::vector<sf::Vector2f>{ sf::Vector2f(3.5f, 18.5f), sf::Vector2f(3.5f, 16.5f), sf::Vector2f(5.5f, 16.5f), sf::Vector2f(5.5f, 15.5f), sf::Vector2f(9.5f, 15.5f),
-		sf::Vector2f(9.5f, 9.5f), sf::Vector2f(11.5f, 9.5f), sf::Vector2f(11.5f, 10.5f), sf::Vector2f(10.5f, 10.5f), sf::Vector2f(10.5f, 13.5f) });
-	player.add_marker_chain(std::vector<sf::Vector2f>{ sf::Vector2f(8.5f, 13.5f), sf::Vector2f(6.5f, 13.5f), sf::Vector2f(6.5, 12.5f), sf::Vector2f(7.5f, 12.5f), sf::Vector2f(7.5f, 11.5f),
-		sf::Vector2f(8.5f, 11.5f), sf::Vector2f(8.5f, 9.5f), sf::Vector2f(5.5f, 9.5f), sf::Vector2f(5.5f, 11.5f), sf::Vector2f(3.5f, 11.5f), sf::Vector2f(3.5f, 10.5f),
-		sf::Vector2f(6.5f, 10.5f) });*/
-
 	this->assign(*m_context->m_level_no.get());
 
 	this->alive = true;
@@ -124,12 +101,12 @@ const bool Level::assign(int lev_no)
         
             for (auto obs = _data->gun_arg.begin(); obs != _data->gun_arg.end(); obs++)
 			{
-				this->obstacles.push_back(new gun(obs->first,obs->second));
+				this->obstacles.push_back(new gun(obs->first, obs->second, m_context->m_assets.get()));
 			}
 		
             for (auto obs = _data->dragon_arg.begin(); obs != _data->dragon_arg.end(); obs++)
 			{
-				this->obstacles.push_back(new Dragon(obs->first,obs->second));
+				this->obstacles.push_back(new Dragon(obs->first, obs->second, m_context->m_assets.get()));
 			}
 
             for (auto obs = _data->Pfish_arg.begin(); obs != _data->Pfish_arg.end(); obs++)
@@ -242,7 +219,6 @@ void Level::render()
 	{
 		obs->render(this->m_context->m_window.get());
 	}
-	/*this->test_drag.render(this->m_context->m_window.get());*/
 	if (victory || !alive) {
 		this->m_context->m_window->draw(this->end_game_text);
 	}

@@ -7,8 +7,6 @@ void gun::initBullet()
 	crabOpen = 0;
 
 	this->clock2_bullet.restart();
-	if (!this->bullettexture.loadFromFile("Images/bullet.png"))
-		std::cout << "Images/Dragon file not loaded\n";
 	this->bulletCurrentFrame = sf::IntRect(0, 0, 30, 30);
 
 }
@@ -16,8 +14,6 @@ void gun::initBullet()
 void gun::initGunShape()
 {
 	this->clock1_gun.restart();
-	if (!this->guntexture.loadFromFile("Images/Sprite.png"))
-		std::cout << "Images/Dragon file not loaded\n";
 	this->gunCurrentFrame = sf::IntRect(0, 0, 30, 30);
 	this->gunbackground.setSize(sf::Vector2f(BASE_SIZE, BASE_SIZE));
 	this->gunbackground.setFillColor(sf::Color(0, 0, 0, 180));
@@ -27,13 +23,13 @@ void gun::initGunShape()
 void gun::initSprite()
 {
 	this->bulletShape.setPosition(GunPosition);
-	this->bulletShape.setTexture(bullettexture);
+	this->bulletShape.setTexture(m_assets.get_texture(asset_holder::group_member_name::GANESH, asset_holder::ganesh_textures::BULLET));
 	this->bulletShape.setTextureRect(bulletCurrentFrame);
 	this->bulletShape.setOrigin(BASE_SIZE / 2, BASE_SIZE / 2);
 	this->bulletShape.setPosition(GunPosition.x + BASE_SIZE / 2, GunPosition.y + BASE_SIZE / 2);
 
 	this->gunShape.setPosition(GunPosition);
-	this->gunShape.setTexture(guntexture);
+	this->gunShape.setTexture(m_assets.get_texture(asset_holder::group_member_name::GANESH, asset_holder::ganesh_textures::GUN_CRAB));
 	this->gunShape.setTextureRect(gunCurrentFrame);
 	this->gunShape.setOrigin(BASE_SIZE / 2, BASE_SIZE / 2);
 	this->gunShape.setPosition(GunPosition.x + BASE_SIZE / 2, GunPosition.y + BASE_SIZE / 2);
@@ -118,7 +114,7 @@ void gun::Animation(float dt)
 
 }
 
-gun::gun(sf::Vector2u GunPosition, sf::Vector2u TargetPosition)
+gun::gun(sf::Vector2u GunPosition, sf::Vector2u TargetPosition,asset_holder* assets):m_assets(*assets)
 {
 	BASE_SIZE = 30.f;
 	this->Type = Obstacle::obstacle_type::Gun;
@@ -161,6 +157,7 @@ void gun::update(const float dt)
 		if (bulletShape.getPosition().x >= TargetPosition.x)
 		{
 			this->bulletShape.setPosition(GunPosition.x + BASE_SIZE / 2, GunPosition.y + BASE_SIZE / 2);
+			m_assets.play_sound(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::FIRE_END, 10.f);
 			isMove = false;
 		}
 		break;
@@ -168,6 +165,7 @@ void gun::update(const float dt)
 		if (bulletShape.getPosition().x <= TargetPosition.x)
 		{
 			this->bulletShape.setPosition(GunPosition.x + BASE_SIZE / 2, GunPosition.y + BASE_SIZE / 2);
+			m_assets.play_sound(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::FIRE_END, 10.f);
 			isMove = false;
 		}
 		break;
@@ -175,6 +173,7 @@ void gun::update(const float dt)
 		if (bulletShape.getPosition().y >= TargetPosition.y)
 		{
 			this->bulletShape.setPosition(GunPosition.x + BASE_SIZE / 2, GunPosition.y + BASE_SIZE / 2);
+			m_assets.play_sound(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::FIRE_END, 10.f);
 			isMove = false;
 		}
 		break;
@@ -182,6 +181,7 @@ void gun::update(const float dt)
 		if (bulletShape.getPosition().y <= TargetPosition.y)
 		{
 			this->bulletShape.setPosition(GunPosition.x + BASE_SIZE / 2, GunPosition.y + BASE_SIZE / 2);
+			m_assets.play_sound(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::FIRE_END, 10.f);
 			isMove = false;
 		}
 		break;
@@ -197,6 +197,7 @@ void gun::update(const float dt)
 		counter+=dt;
 	if (counter >= 2*dist )
 	{
+		m_assets.play_sound(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::FIRE_START, 10.f);
 		counter = 0;
 		isMove = true;
 		crabOpen = 1;

@@ -2,6 +2,7 @@
 #define GUN_H
 
 #include "Obstacle.h"
+#include "../asset_holder.h"
 
 class gun : public Obstacle
 {
@@ -12,15 +13,14 @@ private:
 
 	sf::Clock clock1_gun;
 	sf::Sprite gunShape;
-	sf::Texture guntexture;
 	sf::IntRect gunCurrentFrame;
 	sf::RectangleShape gunbackground;
 
 	sf::Clock clock2_bullet;
 	sf::Sprite bulletShape;
-	sf::Texture bullettexture;
 	sf::IntRect bulletCurrentFrame;
 
+	asset_holder& m_assets;
 
 	///////////////////////////////////////////////////
 	///
@@ -49,7 +49,7 @@ public:
 	/// \param TargetPosition sf::Vector2u position of target or last wall in player coordinate
 	/// \param Type type of gun 
 	///////////////////////////////////////////////////
-	gun(sf::Vector2u GunPosition, sf::Vector2u TargetPosition);
+	gun(sf::Vector2u GunPosition, sf::Vector2u TargetPosition,asset_holder* assets);
 
 	/////////////////////////////////////////////////////
 	/////	\brief default destructor
