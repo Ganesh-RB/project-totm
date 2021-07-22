@@ -4,9 +4,9 @@
 void Dragon::initVariable()
 {
 	this->clock.restart();
-	this->isStuck = 0;
+	this->isStuck = 0.f;
 	this->CurrentFrame = sf::IntRect(0, 0, 30, 30);
-	counter_sound = 0;
+	counter_sound = 0.f;
 	this->moving_dir = this->dir.first;
 }
 
@@ -90,23 +90,30 @@ void Dragon::update(float dt)
 
 	fly();
 
-	if (isStuck <= 200)
-		isStuck++;
+	if (isStuck <= 100.f)
+		isStuck += dt * 60.f;
 	else
 	{
-		isStuck++;
+		isStuck += dt * 60.f;
 		
-		counter_sound++;
+		counter_sound += dt * 60.f;
 		
-		if (counter_sound == 250)
+		if (counter_sound >= 100.f && counter_sound <=102.f)
 		{
-			m_assets.play_sound(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::BAT_FLY, 10.f);
+			counter_sound = 103.f;
+			m_assets.play_sound(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::BIRD1, 10.f);
 		}
 
-		if (counter_sound == 500)
+		if (counter_sound >= 200.f && counter_sound <= 202.f)
 		{
-			counter_sound = 0;
-			m_assets.play_sound(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::BAT_DIR_CHANGE, 10.f);
+			counter_sound = 203.f;
+			m_assets.play_sound(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::BIRD2, 10.f);
+		}
+
+		if (counter_sound >= 300.f)
+		{
+			counter_sound = 0.f;
+			m_assets.play_sound(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::BIRD_NIGHT, 10.f);
 		}
 
 		switch (this->dir.first)
@@ -152,7 +159,7 @@ void Dragon::update(float dt)
 			}
 			else
 			{
-				if (dragonShape.getPosition().x >= FinalPosition.y)
+				if (dragonShape.getPosition().y >= FinalPosition.y)
 					dragonShape.setPosition(this->InitialPosition);
 				else
 					dragonShape.setPosition(this->FinalPosition);
@@ -168,7 +175,7 @@ void Dragon::update(float dt)
 			}
 			else
 			{
-				if (dragonShape.getPosition().x <= FinalPosition.y)
+				if (dragonShape.getPosition().y <= FinalPosition.y)
 					dragonShape.setPosition(this->InitialPosition);
 				else
 					dragonShape.setPosition(this->FinalPosition);

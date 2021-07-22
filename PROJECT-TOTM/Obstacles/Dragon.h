@@ -14,8 +14,8 @@ private:
 
 	enum direction { Left = -2, Down = -1, Up = 1, Right = 2 }moving_dir;
 
-	int isStuck;
-	int counter_sound;
+	float isStuck;
+	float counter_sound;
 
 	sf::Clock clock;
 

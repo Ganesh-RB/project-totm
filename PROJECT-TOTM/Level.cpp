@@ -5,7 +5,10 @@
 void Level::initvariables()
 {
 	
-	this->assign(*m_context->m_level_no.get());
+	if (!this->assign(*m_context->m_level_no.get()))
+	{
+		std::cout << "Level " << *m_context->m_level_no.get() << " not found \n";
+	}
 
 	this->alive = true;
 	this->is_running = true;
@@ -58,21 +61,24 @@ void Level::win()
 Level::Level(std::shared_ptr<context>& context):m_context(context)
 {
 	is_pause = false;
-	if (!Data::read(this->data))
-		std::cout << "data file not readed correctly\n";
+
 	//m_context->m_window->setFramerateLimit(10);
 }
 
 Level::~Level()
 {
 	m_context->m_window->setFramerateLimit(0);
+	for (auto obs : obstacles)
+	{
+		delete obs;
+	}
 }
 
 
 const bool Level::assign(int lev_no)
 {
     bool is_assign=false;
-    for (auto _data = data.begin(); _data != data.end(); _data++)
+    for (auto _data = m_context->m_data.get()->begin(); _data != m_context->m_data.get()->end(); _data++)
     {
         if(_data->level_no==lev_no)
         {

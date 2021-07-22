@@ -21,4 +21,13 @@ https://opengameart.org/content/win-sound-effect
 stretch sound
 https://freesound.org/people/hans/sounds/107784/
 
-Sprites of teleporter,springs and player were made by using pixil.com website
+dragon sound
+https://opengameart.org/content/birdcricketfrog-and-mosquito-sounds
+
+gun sound
+https://opengameart.org/content/battle-sound-effects
+
+fire ball sprites
+https://opengameart.org/content/fire-ball-pixel
+
+Sprites of dragon, gun/crab, teleporter, springs and player were made by using pixil.com website

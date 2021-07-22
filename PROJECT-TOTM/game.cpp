@@ -34,13 +34,15 @@ void game::InitSounds() {
 	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::STRETCH, "Sounds/stretch.flac");
 	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::FIRE_START, "Sounds/fireStart.wav");
 	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::FIRE_END, "Sounds/fireEnd.wav");
-	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::BAT_FLY, "Sounds/batFlying.wav");
-	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::BAT_DIR_CHANGE, "Sounds/batDirChanging.wav");
+	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::BIRD1, "Sounds/BIRD1.wav");
+	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::BIRD2, "Sounds/BIRD2.wav");
+	m_context->m_assets->add_sound_buffer(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::BIRD_NIGHT, "Sounds/BIRD_NIGHT.wav");
 }
 game::game()
 
 {
 	m_context = std::make_shared<context>();
+	Data::read(*m_context->m_data.get());
 	m_context->m_window->create(sf::VideoMode(900,600), "TOTM Color game", sf::Style::Close);
 	InitTextures();
 	InitFonts();
