@@ -43,7 +43,7 @@ game::game()
 {
 	m_context = std::make_shared<context>();
 	Data::read(*m_context->m_data.get());
-	m_context->m_window->create(sf::VideoMode(900,600), "TOTM Color game", sf::Style::Close);
+	m_context->m_window->create(sf::VideoMode(30*(int)PLAYER_BASE_SIZE,20*(int)PLAYER_BASE_SIZE), "TOTM Color game", sf::Style::Close);
 	InitTextures();
 	InitFonts();
 	InitSounds();

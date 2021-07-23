@@ -66,10 +66,10 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief constructor
 	///
-	/// \param _portal1 position of first portal in player-size units
-	/// \param _portal2 position of second portal in player-size units
-	/// \param _player_var reference to player object to be teleported
-	/// \param asset_source pointer to asset class to be used
+	/// \param _portal1 sf::Vector2u position of first portal in player-size units
+	/// \param _portal2 sf::Vector2u position of second portal in player-size units
+	/// \param _player_var  player& reference to player object to be teleported
+	/// \param asset_source asset_holder* pointer to asset class to be used
 	///
 	////////////////////////////////////////////////////////////
 	teleporter(sf::Vector2u portal1, sf::Vector2u portal2, player& _player_var,asset_holder* _assets);
@@ -85,7 +85,7 @@ public:
 	///
 	/// serves as container for all other update function/calls
 	///
-	/// \param _dt delta time value for which frame rate is adjusted
+	/// \param _dt float delta time value for which frame rate is adjusted
 	///
 	////////////////////////////////////////////////////////////
 	void update(float _dt);
@@ -95,17 +95,29 @@ public:
 	///
 	/// serves as container for all other render functions/calls.
 	///
-	/// \param target pointer to window in 
+	/// \param target sf::RenderTarget* pointer to window in 
 	/// which object is to be rendered
 	///
 	////////////////////////////////////////////////////////////
 	void render(sf::RenderTarget* target);
 
+	////////////////////////////////////////////////////////////
+	/// \brief implementation of pure virtual function of parent class
+	///
+	/// \param sf::FloatRect& any floatrect
+	/// 
+	/// this function is a pure virtual from parent class which
+	/// is given the simple implementation of always returning false
+	/// as teleporter class can not kill the player
+	/// 
+	/// \return always return false
+	///
+	////////////////////////////////////////////////////////////
 	const bool isCollide(const sf::FloatRect &shape);
 
 	///////////////////////////////////////////////////
 	///	
-	///	\brief read the details of pufferfish from the file
+	///	\brief read the details of teleporter from the file
 	///	
 	///	\param fin std::ifstream& file stream
 	///	\param data Data& file stream \file Data.h
@@ -117,4 +129,16 @@ public:
 
 };
 
+////////////////////////////////////////////////////////////
+/// 
+/// \class teleporter
+///
+/// \brief class for the teleporter obstacle
+///
+/// this class creates a teleporter object pair which manipulates
+/// movement of player given in constructor by changing its
+/// position by teleportation upon collision.this class is 
+/// a friend of player
+///
+////////////////////////////////////////////////////////////
 #endif

@@ -17,10 +17,10 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief constructor
 	///
-	/// \param _position position of spring in units of player size
-	/// \param _dir direction for spring created
-	/// \param _player_var reference to player object
-	/// \param asset_source pointer to asset class to be used
+	/// \param _position sf::Vector2u position of spring in units of player size
+	/// \param _dir int direction for spring created
+	/// \param _player_var player& reference to player object
+	/// \param asset_source  asset_holder* pointer to asset class to be used
 	///
 	////////////////////////////////////////////////////////////
 	spring(sf::Vector2u _position,int _dir,player& _player_var, asset_holder* asset_source);
@@ -36,7 +36,7 @@ public:
 	///
 	/// serves as container for all other update function/calls
 	///
-	/// \param _dt delta time value for which frame rate is adjusted
+	/// \param _dt float delta time value for which frame rate is adjusted
 	///
 	////////////////////////////////////////////////////////////
 	void update(float dt);
@@ -46,12 +46,24 @@ public:
 	///
 	/// serves as container for all other render functions/calls.
 	///
-	/// \param target pointer to window in 
+	/// \param target sf::RenderTarget* pointer to window in 
 	/// which object is to be rendered
 	///
 	////////////////////////////////////////////////////////////
 	void render(sf::RenderTarget* target);
 
+	////////////////////////////////////////////////////////////
+	/// \brief implementation of pure virtual function of parent class
+	///
+	/// \param sf::FloatRect& any floatrect
+	/// 
+	/// this function is a pure virtual from parent class which
+	/// is given the simple implementation of always returning false
+	/// as spring class can not kill the player
+	/// 
+	/// \return bool always returns false
+	///
+	////////////////////////////////////////////////////////////
 	const bool isCollide(const sf::FloatRect &shape);
 
 	///////////////////////////////////////////////////
@@ -162,4 +174,17 @@ private:
 	std::pair <player::move_dir_no[2],player::move_dir_no[2]> directions;
 
 };
+
+////////////////////////////////////////////////////////////
+/// 
+/// \class spring
+///
+/// \brief class for the spring obstacle
+///
+/// this class creates a spring object which manipulates movement
+/// of player given in constructor by changing its direction upon
+/// collision.this class is a friend class of player
+///
+////////////////////////////////////////////////////////////
+
 #endif 

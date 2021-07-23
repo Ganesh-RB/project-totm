@@ -22,10 +22,9 @@ void player::initvariables()
 	}
 	last_moving_direction = move_dir_no::MOVE_DOWN;
 	player_sprite.setTexture(m_assets.get_texture(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_textures::PLAYER));
-	player_sprite.setOrigin(BASE_SIZE / 2.f, BASE_SIZE / 2.f);
+	player_sprite.setScale(BASE_SIZE / 30.f, BASE_SIZE / 30.f);
 	player_sprite.setTextureRect(display_frame[0]);
-	player_sprite.setScale(30.f / BASE_SIZE, 30.f / BASE_SIZE);
-	player_sprite.setPosition(shape.getPosition() + sf::Vector2f(BASE_SIZE / 2.f, BASE_SIZE / 2.f));
+	player_sprite.setPosition(shape.getPosition());
 	anim_dir = 1;
 	anim_timer = 0.f;
 	trail_timer = 0.f;
@@ -143,7 +142,7 @@ void player::update_animation(float _dt)
 		anim_timer += 180 * anim_dir* _dt;
 		if (anim_timer > 60.f) { anim_dir = -1; }
 		if (anim_timer < 0.f) { anim_dir = 1; }
-		player_sprite.setPosition(shape.getPosition() + sf::Vector2f(BASE_SIZE / 2.f, BASE_SIZE / 2.f));
+		
 		if (moving && previous_moving) {
 			trail_timer += movementspeed * 24.f*_dt;
 			if (trail_timer > 60.f) { player_sprite.setTextureRect(display_frame[5]); }
@@ -167,21 +166,46 @@ void player::update_animation(float _dt)
 		{
 		case move_dir_no::MOVE_LEFT:
 			temp = 90.f;
+			
 			break;
 		case move_dir_no::MOVE_RIGHT:
 			temp = -90.f;
+			
 			break;
 		case move_dir_no::MOVE_UP:
 			temp = 180.f;
+			
 			break;
 		case move_dir_no::MOVE_DOWN:
 			temp = 0.f;
+			
 			break;
 		default:
 			printf("ERROR::PLAYER::UPDATE_ANIMATION::invalid value of last_moving_direction\n");
 			break;
 		}
-		player_sprite.setRotation(temp + ((moving&&previous_moving)*-90.f));
+		temp += (moving&&previous_moving)*-90.f;
+		player_sprite.setRotation(temp);
+		switch (((((int)temp)/90)+4)%4) {
+		case 0:
+			player_sprite.setPosition(shape.getPosition());
+			break;
+		case 1:
+			player_sprite.setPosition(shape.getPosition() + sf::Vector2f(BASE_SIZE, 0.f));
+			break;
+		case 2:
+			player_sprite.setPosition(shape.getPosition() + sf::Vector2f(BASE_SIZE, BASE_SIZE));
+			break;
+		case 3:
+			player_sprite.setPosition(shape.getPosition() + sf::Vector2f(0.f, BASE_SIZE));
+			break;
+		default:
+			printf("ERROR::PLAYER::UPDATE_ANIMATION::temp not processed correctly\n");
+			break;
+
+		
+		}
+		
 	}
 	else {
 		anim_timer += 6 * anim_dir* _dt;
@@ -191,19 +215,21 @@ void player::update_animation(float _dt)
 		switch ((int)anim_timer % 4) {
 		case 0:
 			player_sprite.setRotation(0.f);
+			player_sprite.setPosition(shape.getPosition());
 			break;
 		case 1:
 			player_sprite.setRotation(90.f);
+			player_sprite.setPosition(shape.getPosition() + sf::Vector2f(BASE_SIZE, 0.f));
 			break;
 		case 2:
 			player_sprite.setRotation(180.f);
+			player_sprite.setPosition(shape.getPosition() + sf::Vector2f(BASE_SIZE, BASE_SIZE));
 			break;
 		case 3:
 			player_sprite.setRotation(270.f);
+			player_sprite.setPosition(shape.getPosition() + sf::Vector2f(0.f, BASE_SIZE));
 			break;
 		}
-		
-
 	}
 }
 
@@ -371,7 +397,7 @@ void player::update_collision(sf::RectangleShape* object) {
 		movedirection = move_dir_no::MOVE_NULL;
 		if ((fabs(start_trail.x - end_trail.x) > pb.width*1.2f) || (fabs(start_trail.y - end_trail.y) > pb.height*1.2f))
 		{
-			m_assets.play_sound(asset_holder::group_member_name::OJJAS,asset_holder::ojjas_sounds::COLLIDE);
+			m_assets.play_sound(asset_holder::group_member_name::OJJAS,asset_holder::ojjas_sounds::COLLIDE,50.f);
 			trails.push_back(curr_trail(&start_trail, &end_trail));
 			//std::cout << "number of elements in trail vector are " << trails.size() << std::endl;
 		}
@@ -418,6 +444,7 @@ void player::update(sf::RenderWindow* target, float* _dt, float* _time_mult)
 		this->updatemarkers();
 	}
 	this->update_animation(dt);
+	
 }
 
 void player::render(sf::RenderWindow * target)

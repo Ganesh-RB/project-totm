@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "game.h"
 
+// runs the game loop
 int main()
 {
 	game game_variable;

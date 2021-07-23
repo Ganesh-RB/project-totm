@@ -11,16 +11,15 @@ void spring::initvariables()
 	currentframe = sf::IntRect(0, 0, 30, 30);
 	spring_sprite.setTexture(m_assets.get_texture(asset_holder::group_member_name::OJJAS,asset_holder::ojjas_textures::SPRING));
 	spring_sprite.setTextureRect(currentframe);
-	spring_sprite.setScale(BASE_SIZE/ spring_sprite.getLocalBounds().width, BASE_SIZE / spring_sprite.getLocalBounds().height);
+	spring_sprite.setScale(BASE_SIZE/30.f, BASE_SIZE /30.f);
 	is_active = true;
-	spring_sprite.setOrigin(BASE_SIZE / 2.f, BASE_SIZE / 2.f);
-	spring_sprite.setPosition(trigger_point);
 	switch (dir) {
 	case spring_dir::DOWN_RIGHT:
 		directions.first[0] = player::move_dir_no::MOVE_UP;
 		directions.first[1] = player::move_dir_no::MOVE_RIGHT;
 		directions.second[0] = player::move_dir_no::MOVE_LEFT;
 		directions.second[1] = player::move_dir_no::MOVE_DOWN;
+		spring_sprite.setPosition(trigger_point-sf::Vector2f(BASE_SIZE/2.f,BASE_SIZE/2.f));
 		
 		break;
 	case spring_dir::DOWN_LEFT:
@@ -30,6 +29,7 @@ void spring::initvariables()
 		directions.second[1] = player::move_dir_no::MOVE_DOWN;
 
 		spring_sprite.setRotation(90.f);
+		spring_sprite.setPosition(trigger_point - sf::Vector2f(-BASE_SIZE / 2.f, BASE_SIZE / 2.f));
 		break;
 
 	case spring_dir::UP_LEFT:
@@ -38,6 +38,7 @@ void spring::initvariables()
 		directions.second[0] = player::move_dir_no::MOVE_RIGHT;
 		directions.second[1] = player::move_dir_no::MOVE_UP;
 		spring_sprite.setRotation(180.f);
+		spring_sprite.setPosition(trigger_point - sf::Vector2f(-BASE_SIZE / 2.f, -BASE_SIZE / 2.f));
 		break;
 
 	case spring_dir::UP_RIGHT:
@@ -46,6 +47,7 @@ void spring::initvariables()
 		directions.second[0] = player::move_dir_no::MOVE_LEFT;
 		directions.second[1] = player::move_dir_no::MOVE_UP;
 		spring_sprite.setRotation(-90.f);
+		spring_sprite.setPosition(trigger_point - sf::Vector2f(BASE_SIZE / 2.f, -BASE_SIZE / 2.f));
 		break;
 	}
 	
@@ -100,7 +102,7 @@ void spring::update(float _dt)
 			is_active= false;
 			player_var.movedirection = directions.first[1];
 			player_var.last_moving_direction = player_var.movedirection;
-			player_var.shape.setPosition(spring_sprite.getPosition() - sf::Vector2f(BASE_SIZE / 2.f, BASE_SIZE / 2.f));
+			player_var.shape.setPosition(trigger_point-sf::Vector2f(BASE_SIZE/2.f,BASE_SIZE/2.f));
 			player_var.get_start_trail(player_var.movedirection, spring_sprite.getGlobalBounds());
 			player_var.previous_moving = false;
 			player_var.spring_flag = true;
@@ -111,7 +113,7 @@ void spring::update(float _dt)
 			is_active = false;
 			player_var.movedirection = directions.second[1];
 			player_var.last_moving_direction = player_var.movedirection;
-			player_var.shape.setPosition(spring_sprite.getPosition()-sf::Vector2f(BASE_SIZE/2.f,BASE_SIZE/2.f));
+			player_var.shape.setPosition(trigger_point - sf::Vector2f(BASE_SIZE / 2.f, BASE_SIZE / 2.f));
 			player_var.get_start_trail(player_var.movedirection, spring_sprite.getGlobalBounds());
 			player_var.previous_moving = false;
 			player_var.spring_flag = true;

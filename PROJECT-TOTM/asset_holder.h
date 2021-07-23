@@ -36,10 +36,10 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief adds texture to assets
 	///
-	/// \param _name name of owner
-	/// \param _id unique id of owner's texture
-	/// \param filepath path to file where texture present 
-	/// \param setrepeated decides whether texture can be repeated
+	/// \param _name group_member_name name of owner
+	/// \param _id int unique id of owner's texture
+	/// \param filepath const std::string& path to file where texture present 
+	/// \param setrepeated bool decides whether texture can be repeated
 	///
 	////////////////////////////////////////////////////////////
 	void add_texture(group_member_name _name,int id, const std::string& filepath, bool setrepeated = false);
@@ -47,8 +47,8 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief adds font to assets
 	///
-	/// \param _id unique id of font
-	/// \param filepath path to file where font present 
+	/// \param _id int unique id of font
+	/// \param filepath const std::string& path to file where font present 
 	///
 	////////////////////////////////////////////////////////////
 	void add_font(int id, const std::string& filepath);
@@ -56,9 +56,9 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief adds sound buffer to assets
 	///
-	/// \param _name name of owner 
-	/// \param _id unique id of owner's sound buffer
-	/// \param filepath path to file where sound buffer present 
+	/// \param _name group_member_name name of owner 
+	/// \param _id int unique id of owner's sound buffer
+	/// \param filepath const std::string& path to file where sound buffer present 
 	///
 	////////////////////////////////////////////////////////////
 	void add_sound_buffer(group_member_name _name, int id, const std::string& filepath);
@@ -73,9 +73,9 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief plays a sound 
 	///
-	/// \param _name name of owner
-	/// \param id unique id of owner's texture
-	/// \param volume sets the volume of sound value should be
+	/// \param _name group_member_name name of owner
+	/// \param id int unique id of owner's texture
+	/// \param volume float sets the volume of sound value should be
 	/// in between 0 and 100
 	///
 	/// takes key to a sound buffer already present and
@@ -88,8 +88,8 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief gets specified texture
 	///
-	/// \param _name name of owner
-	/// \param id unique id of owner's texture
+	/// \param _name group_member_name name of owner
+	/// \param id int unique id of owner's texture
 	///
 	/// \return lvalue reference to given texture
 	///
@@ -99,7 +99,7 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief gets specified texture
 	///
-	/// \param id unique id of font
+	/// \param id int unique id of font
 	///
 	/// \return lvalue reference to given font
 	///
@@ -109,8 +109,8 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief gets specified soundbuffer
 	///
-	/// \param _name name of owner
-	/// \param id unique id of owner's soundbuffer
+	/// \param _name group_member_name name of owner
+	/// \param id int unique id of owner's soundbuffer
 	///
 	/// \return lvalue reference to given soundbuffer
 	///
@@ -166,4 +166,17 @@ private:
 	};
 };
 
+////////////////////////////////////////////////////////////
+/// 
+/// \class asset_holder
+///
+/// \brief class for the asset manager
+///
+/// This class mantains all assets in the game such as fonts
+/// images and sounds,allows for their addition and access
+/// and also methods for playing sounds and clearing unnecessary
+/// sf::sound objects to mantain the less than 256 sounds 
+/// limitation of sfml
+///
+////////////////////////////////////////////////////////////
 #endif

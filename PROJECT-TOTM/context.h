@@ -4,15 +4,16 @@
 #include "stateman.h"
 #include "asset_holder.h"
 #include "Data.h"
+
 ////////////////////////////////////////////////////////////
 /// \struct 
 /// \brief contains all info needed for state implementation
 /// 
-/// \param m_states unique ptr to statestack
+/// \param m_states unique ptr to a statestack
 /// \param m_window unique ptr to a window
-/// \param m_assets
-/// \param m_level_no
-/// \param m_data
+/// \param m_assets unique ptr to an assetholder
+/// \param m_level_no unqiue ptr to an unsigned which shows number of levels
+/// \param m_data unique ptr to std::vector of type data
 ///
 ////////////////////////////////////////////////////////////
 struct context

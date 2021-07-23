@@ -34,7 +34,7 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief Default constructor
 	///
-	/// \param _base_size base size of player which is used to scale wall size
+	/// \param _base_size float base size of player which is used to scale wall size
 	///
 	////////////////////////////////////////////////////////////
 	wall_gen(float _base_size = 30.f);
@@ -54,7 +54,7 @@ public:
 	enum wall_dir_no { LEFT, RIGHT, DOWN, UP };
 	
 	////////////////////////////////////////////////////////////
-	/// \brief vector containing all the individual walls
+	/// \brief vector of sf::RectangleShape containing all the individual walls
 	///
 	////////////////////////////////////////////////////////////
 	std::vector<sf::RectangleShape> walls;
@@ -69,10 +69,9 @@ public:
 	///  of square player is 10 then the new wall's position will be set to (10*x_coord,10*y_coord)
 	///  length will be len*10 and direction as given by dir
 	///
-	///  \param x_coord x coordinate in terms of player length
-	///  \param y_coord y coordinate in terms of player length
-	///  \param len length in terms of player length
-	///  \param dir direction as given in wall_dir_no
+	///  \param coord sf::Vector2u position of wall origin in x-y coordinates 
+	///  \param len int length in terms of player length
+	///  \param dir int direction as given in wall_dir_no
 	///  
 	////////////////////////////////////////////////////////////
 	void add_wall_single(const sf::Vector2u coord, int len, int dir);
@@ -106,7 +105,7 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief draws all members of walls on given target
 	///
-	/// \param target Target to draw to
+	/// \param target sf::RenderTarget* Target to draw to
 	/// 
 	////////////////////////////////////////////////////////////
 	void render(sf::RenderTarget* target);

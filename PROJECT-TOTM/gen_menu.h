@@ -67,7 +67,7 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief constructor
 	///
-	/// \param context refernce to the active context
+	/// \param context std::shared_ptr<context>& refernce to the active context
 	///
 	////////////////////////////////////////////////////////////
 	gen_menu(std::shared_ptr<context>& context);
@@ -108,6 +108,8 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief updates which button is selected
 	///
+	/// \param float& deltatime value
+	/// 
 	/// simply highlights selected button if selection changed
 	///
 	////////////////////////////////////////////////////////////
@@ -123,4 +125,15 @@ public:
 	
 
 };
+
+////////////////////////////////////////////////////////////
+/// 
+/// \class gen_menu
+///
+/// \brief base class for other menu's
+///
+/// This class has the general layout for other menu's
+/// and helps in quickly creating them
+///
+////////////////////////////////////////////////////////////
 #endif

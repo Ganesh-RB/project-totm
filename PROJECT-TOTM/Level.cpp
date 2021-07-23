@@ -160,10 +160,6 @@ void Level::pollevents()
 			}
 			break;
 		case sf::Event::KeyPressed:
-			if (this->ev.key.code == sf::Keyboard::Escape) {
-				this->is_running = false;
-				this->m_context->m_window->close();
-			}
 			if (this->ev.key.code == sf::Keyboard::P && pause_timer.getElapsedTime().asSeconds() > 0.2f) {
 				this->is_pause = true;
 				m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::BUTTON_BACKWARD);

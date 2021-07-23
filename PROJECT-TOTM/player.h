@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "asset_holder.h"
+#include "define.h"
 
 ////////////////////////////////////////////////////////////
 /// \brief class dealing with player movement,collision and markers
@@ -20,7 +21,7 @@ private:
 	/// \brief size of player
 	///
 	////////////////////////////////////////////////////////////
-	float BASE_SIZE = 30.f;
+	float BASE_SIZE = PLAYER_BASE_SIZE;
 
 	//movement variables
 	////////////////////////////////////////////////////////////
@@ -259,6 +260,11 @@ private:
 	////////////////////////////////////////////////////////////
 	bool spring_flag;
 
+	////////////////////////////////////////////////////////////
+	/// \brief  flag to play death animation and declare 
+	/// player dead 
+	///
+	////////////////////////////////////////////////////////////
 	bool dead;
 public:
 
@@ -281,6 +287,8 @@ public:
 	/// and level has finished(grid has been colored entirely),
 	/// false means still some squares uncolored
 	///
+	/// \return bool showing if level complete
+	///
 	////////////////////////////////////////////////////////////
 	bool level_complete();
 
@@ -292,7 +300,7 @@ public:
 	/// x and/or y direction  equal to player length between 
 	/// consecutive points in vector
 	///
-	/// \param points vector of sf::vector2f points
+	/// \param points std::vector<sf::Vector2f> vector of sf::vector2f points
 	///
 	/// \note place markers in middle of grid squares
 	/// 
@@ -310,8 +318,7 @@ public:
 	/// enter coordinates of marker in player length units 
 	/// to generate a marker at that position 
 	///
-	/// \param x x coordinate in player units
-	/// \param y y coordinate in player units
+	/// \param pos sf::Vector2f position of point
 	///
 	/// \note place markers in middle of grid squares
 	/// 
@@ -322,8 +329,11 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief constructor
 	///
+	/// \param assets asset_holder* pointer to game's asset holder
+	///
 	/// \note Assign Player position as (0,0)
 	/// 
+	///
 	////////////////////////////////////////////////////////////
 	player(asset_holder* assets);
 
@@ -381,9 +391,9 @@ public:
 	///
 	/// serves as container for all other update function/calls
 	///
-	/// \param target pointer to window in which object present
-	/// \param _dt delta time value for which frame rate is adjusted
-	/// \param _time_mult targeted value of fps
+	/// \param target sf::RenderWindow* pointer to window in which object present
+	/// \param _dt float* delta time value for which frame rate is adjusted
+	/// \param _time_mult float* targeted value of fps
 	/// for which frame rate independence is implemented
 	///
 	////////////////////////////////////////////////////////////
@@ -394,7 +404,7 @@ public:
 	///
 	/// serves as container for all other render functions/calls.
 	///
-	/// \param target pointer to window in 
+	/// \param target sf::RenderWindow* pointer to window in 
 	/// which object is to be rendered
 	///
 	////////////////////////////////////////////////////////////
@@ -402,4 +412,17 @@ public:
 
 };
 
+////////////////////////////////////////////////////////////
+/// 
+/// \class player
+///
+/// \brief class for the player
+///
+/// this class allows for the player's creation,movement,
+/// input and collisions while also creating the trails which
+/// colour the screen and the marker system which keeps track
+/// of whether a level is completely coloured or not, along
+/// with methods to add foresaid markers
+///
+////////////////////////////////////////////////////////////
 #endif

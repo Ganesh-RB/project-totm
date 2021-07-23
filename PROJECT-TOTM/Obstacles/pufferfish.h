@@ -1,15 +1,15 @@
 #ifndef PUFFERFISH_H
 #define PUFFERFISH_H
 
+#include "../define.h"
 #include "Obstacle.h"
 #include "../asset_holder.h"
 
 class pufferfish : public Obstacle
 {
 
-
 private:
-	float BASE_SIZE;
+	float BASE_SIZE= PLAYER_BASE_SIZE;
 
 	sf::Vector2f FishPosition;
 

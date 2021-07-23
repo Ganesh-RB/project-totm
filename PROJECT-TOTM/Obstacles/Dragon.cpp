@@ -40,6 +40,7 @@ void Dragon::initSprite()
 	this->dragonShape.setPosition(this->InitialPosition);
 	this->dragonShape.setTexture(m_assets.get_texture(asset_holder::group_member_name::GANESH, asset_holder::ganesh_textures::DRAGON));
 	this->dragonShape.setTextureRect(this->CurrentFrame);
+	this->dragonShape.setScale(BASE_SIZE/30.f,BASE_SIZE/30.f);
 
 }
 
@@ -90,13 +91,13 @@ void Dragon::update(float dt)
 
 	fly();
 
-	if (isStuck <= 100.f)
+	if (isStuck <= 50.f)
 		isStuck += dt * 60.f;
 	else
 	{
 		isStuck += dt * 60.f;
 		
-		counter_sound += dt * 60.f;
+		counter_sound += dt * 180.f;
 		
 		if (counter_sound >= 100.f && counter_sound <=102.f)
 		{
@@ -113,7 +114,7 @@ void Dragon::update(float dt)
 		if (counter_sound >= 300.f)
 		{
 			counter_sound = 0.f;
-			m_assets.play_sound(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::BIRD_NIGHT, 10.f);
+			m_assets.play_sound(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::BIRD_NIGHT, 7.5f);
 		}
 
 		switch (this->dir.first)

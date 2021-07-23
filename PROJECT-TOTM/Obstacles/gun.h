@@ -1,13 +1,14 @@
 #ifndef GUN_H
 #define GUN_H
 
+#include "../define.h"
 #include "Obstacle.h"
 #include "../asset_holder.h"
 
 class gun : public Obstacle
 {
 private:
-	float BASE_SIZE = 30.f;
+	float BASE_SIZE = PLAYER_BASE_SIZE;
 	sf::Vector2f GunPosition;
 	sf::Vector2f TargetPosition;
 

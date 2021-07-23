@@ -12,6 +12,7 @@
 #include "pause_menu.h"
 #include "death_menu.h"
 #include "victory_menu.h"
+#include "define.h"
 
 class Level : public state
 {
@@ -54,7 +55,7 @@ public:
 	//constructor and destructor
 	Level(std::shared_ptr<context> &context);
 	virtual ~Level();
-	wall_gen wall_generator{ 30.f };
+	wall_gen wall_generator{ PLAYER_BASE_SIZE };
 	//functions from state 
     const bool assign(int lev_no);
 	void init() override;
@@ -65,4 +66,15 @@ public:
 	void start() override;
 };
 
+////////////////////////////////////////////////////////////
+/// 
+/// \class Level
+///
+/// \brief generalized level class
+///
+/// this class stores all level info and performs the running
+/// of level by getting info such as level data,assets and 
+/// statestack from the context in its constructor.
+///
+////////////////////////////////////////////////////////////
 #endif

@@ -16,6 +16,7 @@ private:
 	/// \brief state stack
 	///
 	/// state stack inside which game states mantained 
+	///
 	////////////////////////////////////////////////////////////
 	std::stack<std::unique_ptr<state>> m_statestack;
 
@@ -24,6 +25,7 @@ private:
 	///
 	/// stores unique ptr given by user until it is given to 
 	/// state stack in processstatechange function
+	///
 	////////////////////////////////////////////////////////////
 	std::unique_ptr<state> m_newstate;
 
@@ -38,6 +40,7 @@ private:
 	///
 	/// if true then addeed state will replace current,
 	/// if false simply added on top of stack
+	///
 	////////////////////////////////////////////////////////////
 	bool m_replace;
 
@@ -45,6 +48,7 @@ private:
 	/// \brief bool for removing top state
 	///
 	/// if true then current state is to be removed
+	///
 	////////////////////////////////////////////////////////////
 	bool m_remove;
 
@@ -69,8 +73,9 @@ public:
 	/// current state  of stack,state beneath added one is 
 	/// paused in every case
 	/// 
-	/// \param toAdd unique ptr of state to be added
-	/// \param replace specifies if it should replace current state 
+	/// \param toAdd std::unique_ptr<state> unique ptr of state to be added
+	/// \param replace bool specifies if it should replace current state 
+	///
 	////////////////////////////////////////////////////////////
 	void Add(std::unique_ptr<state> toAdd, bool replace = false);
 
@@ -99,6 +104,8 @@ public:
 	////////////////////////////////////////////////////////////
 	/// \brief returns bool showing if statestack is empty
 	///
+	/// \return bool showing if stack empty
+	///
 	////////////////////////////////////////////////////////////
 	bool is_empty();
 
@@ -111,4 +118,14 @@ public:
 	int no_of_states();
 };
 
+////////////////////////////////////////////////////////////
+/// 
+/// \class stateman
+///
+/// \brief class for the state manager
+///
+/// This class creates and mantains a stack of state class 
+/// unique ptrs and allows for addition ,removal and interface
+///
+////////////////////////////////////////////////////////////
 #endif

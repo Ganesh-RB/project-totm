@@ -46,7 +46,7 @@ public:
 	/// responsible for updating and mantaining time
 	/// independent movement
 	///
-	/// \param deltatime takes a float by reference to deltatime value
+	/// \param deltatime float& takes a float by reference to deltatime value
 	/// 
 	////////////////////////////////////////////////////////////
 	virtual void update(float& deltatime) = 0;
@@ -72,4 +72,14 @@ public:
 	virtual void start() {};
 };
 
+////////////////////////////////////////////////////////////
+/// 
+/// \class state
+///
+/// \brief pure virtual class for every game state
+///
+/// this class is the virtual class from which every 
+/// game state is made. 
+///
+////////////////////////////////////////////////////////////
 #endif

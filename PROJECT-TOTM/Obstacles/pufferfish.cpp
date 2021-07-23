@@ -14,7 +14,7 @@ void pufferfish::Anim(float dt,bool is_expanding)
 {
 	if (is_expanding) {
 		pufferfish_sprite.setTextureRect(display_frames[3]);
-		pufferfish_sprite.setScale(sf::Vector2f((BASE_SIZE*FishSize.x) / 900.f, (BASE_SIZE*FishSize.y) / 900.f));
+		pufferfish_sprite.setScale(sf::Vector2f(FishSize.x/30.f, FishSize.y/30.f));
 		pufferfish_sprite.setPosition(FishPosition);
 	}
 	else {
@@ -34,7 +34,6 @@ void pufferfish::Anim(float dt,bool is_expanding)
 pufferfish::pufferfish(sf::Vector2u Fishposition,asset_holder* assets):m_assets(*assets)
 {
 	this->Type = Obstacle::obstacle_type::Pufferfish;
-	BASE_SIZE = 30.f;
 	this->FishPosition2.x = Fishposition.x*BASE_SIZE - BASE_SIZE;
 	this->FishPosition2.y = Fishposition.y*BASE_SIZE - BASE_SIZE;
 	this->FishPosition1.x = Fishposition.x*BASE_SIZE;
@@ -63,15 +62,19 @@ void pufferfish::update(float dt)
 	timer += dt;
 	int i = (int(timer / u));
 	if (i < 13) {
-		this->FishPosition.x = this->FishPosition1.x - i * 2.5f; this->FishPosition.y = this->FishPosition1.y - i * 2.5f;
-		this->FishSize.x = BASE_SIZE + i * 5.f; this->FishSize.y = BASE_SIZE + i * 5.f;
+		this->FishPosition.x = this->FishPosition1.x - i * 2.5f*(BASE_SIZE/30.f);
+		this->FishPosition.y = this->FishPosition1.y - i * 2.5f*(BASE_SIZE / 30.f);
+		this->FishSize.x = BASE_SIZE + i * 5.f*(BASE_SIZE / 30.f);
+		this->FishSize.y = BASE_SIZE + i * 5.f*(BASE_SIZE / 30.f);
 		Fish1();
 		Anim(dt, true);
 	}
 	if (i > 12 && i < 25)
 	{
-		this->FishPosition.x = this->FishPosition2.x + (i - 12)*2.5f; this->FishPosition.y = this->FishPosition2.y + (i - 12)*2.5f;
-		this->FishSize.x = BASE_SIZE*3.f - (i - 12)*5.f; this->FishSize.y = BASE_SIZE*3.f - (i - 12)*5.f;
+		this->FishPosition.x = this->FishPosition2.x + (i - 12)*2.5f*(BASE_SIZE / 30.f);
+		this->FishPosition.y = this->FishPosition2.y + (i - 12)*2.5f*(BASE_SIZE / 30.f);
+		this->FishSize.x = BASE_SIZE*3.f - (i - 12)*5.f*(BASE_SIZE / 30.f);
+		this->FishSize.y = BASE_SIZE*3.f - (i - 12)*5.f*(BASE_SIZE / 30.f);
 		Fish1();
 		Anim(dt, true);
 	}

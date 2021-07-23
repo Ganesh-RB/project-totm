@@ -1,6 +1,7 @@
 #ifndef DRAGON_H
 #define DRAGON_H
 
+#include "../define.h"
 #include "Obstacle.h"
 #include "../asset_holder.h"
 
@@ -8,7 +9,7 @@ class Dragon : public Obstacle
 {
 private:
 
-	float BASE_SIZE = 30.f;
+	float BASE_SIZE = PLAYER_BASE_SIZE;
 
 	asset_holder& m_assets;
 

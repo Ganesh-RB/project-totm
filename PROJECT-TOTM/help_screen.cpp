@@ -13,7 +13,10 @@ void help_screen::init()
 {
 	Helpfull_text.setFont(m_context->m_assets->get_font(asset_holder::fonts::DOSIS_REGULAR));
 	Helpfull_text.setFillColor(sf::Color(0,255,50,255));
-	Helpfull_text.setString("Use WASD for movement and press Enter to select \nAvoid obstacles such as bats,guns,pufferfishes etc \nUse telporters and springs to your Advantage \nWin by painting entire level\n\n\n\n\n Press Esc to exit help menu");
+	Helpfull_text.setString("Use WASD for movement and press Enter to select \n"
+	"Press P to Pause/Unpause a Level\n"
+	"Avoid obstacles such as bats,guns,pufferfishes etc \nUse telporters and springs to your Advantage \n"
+	"Win by painting entire level\n\n\n\n\n        Press Esc to exit help menu" );
 }
 
 void help_screen::pollevents()

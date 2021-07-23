@@ -25,30 +25,38 @@ void gun::initSprite()
 	this->bulletShape.setPosition(GunPosition);
 	this->bulletShape.setTexture(m_assets.get_texture(asset_holder::group_member_name::GANESH, asset_holder::ganesh_textures::BULLET));
 	this->bulletShape.setTextureRect(bulletCurrentFrame);
-	this->bulletShape.setOrigin(BASE_SIZE / 2, BASE_SIZE / 2);
-	this->bulletShape.setPosition(GunPosition.x + BASE_SIZE / 2, GunPosition.y + BASE_SIZE / 2);
+	this->bulletShape.setScale(BASE_SIZE/30.f,BASE_SIZE/30.f);
+	//this->bulletShape.setOrigin(bulletShape.getGlobalBounds().width/ 2.f, bulletShape.getGlobalBounds().height/2.f);
 
-	this->gunShape.setPosition(GunPosition);
+	
 	this->gunShape.setTexture(m_assets.get_texture(asset_holder::group_member_name::GANESH, asset_holder::ganesh_textures::GUN_CRAB));
 	this->gunShape.setTextureRect(gunCurrentFrame);
-	this->gunShape.setOrigin(BASE_SIZE / 2, BASE_SIZE / 2);
-	this->gunShape.setPosition(GunPosition.x + BASE_SIZE / 2, GunPosition.y + BASE_SIZE / 2);
+	//this->gunShape.setOrigin(BASE_SIZE / 2.f, BASE_SIZE / 2.f);
+	this->gunShape.setScale(BASE_SIZE / 30.f, BASE_SIZE / 30.f);
 
 	switch (dir)
 	{
 	case gun::direction::Left:
 		this->gunShape.setRotation(270.f);
+		this->gunShape.setPosition(GunPosition+sf::Vector2f(0.f,BASE_SIZE));
 		this->bulletShape.setRotation(90.f);
+		this->bulletShape.setPosition(GunPosition+sf::Vector2f(BASE_SIZE,0.f));
 		break;
 	case gun::direction::Down:
 		this->gunShape.setRotation(180.f);
-		this->bulletShape.setRotation(180.f);
+		this->gunShape.setPosition(GunPosition + sf::Vector2f(BASE_SIZE, BASE_SIZE));
+		this->bulletShape.setPosition(GunPosition);
 		break;
 	case gun::direction::Up:
+		this->gunShape.setPosition(GunPosition);
+		this->bulletShape.setRotation(180.f);
+		this->bulletShape.setPosition(GunPosition + sf::Vector2f(BASE_SIZE, BASE_SIZE));
 		break;
 	case gun::direction::Right:
 		this->gunShape.setRotation(90.f);
+		this->gunShape.setPosition(GunPosition + sf::Vector2f(BASE_SIZE, 0.f) );
 		this->bulletShape.setRotation(270.f);
+		this->bulletShape.setPosition(GunPosition + sf::Vector2f(0.f, BASE_SIZE));
 		break;
 	default:
 		break;
@@ -110,16 +118,16 @@ void gun::Animation(float dt)
 		this->clock2_bullet.restart();
 		this->bulletShape.setTextureRect(this->bulletCurrentFrame);
 	}
-	this->bulletShape.setScale(BASE_SIZE / bulletShape.getGlobalBounds().width, BASE_SIZE / bulletShape.getGlobalBounds().height);
 
 }
 
 gun::gun(sf::Vector2u GunPosition, sf::Vector2u TargetPosition,asset_holder* assets):m_assets(*assets)
 {
-	BASE_SIZE = 30.f;
 	this->Type = Obstacle::obstacle_type::Gun;
-	this->GunPosition.x = BASE_SIZE * GunPosition.x;		this->GunPosition.y = BASE_SIZE * GunPosition.y;
-	this->TargetPosition.x = BASE_SIZE * TargetPosition.x;		this->TargetPosition.y = BASE_SIZE * TargetPosition.y;
+	this->GunPosition.x = BASE_SIZE * GunPosition.x;
+	this->GunPosition.y = BASE_SIZE * GunPosition.y;
+	this->TargetPosition.x = BASE_SIZE * TargetPosition.x;
+	this->TargetPosition.y = BASE_SIZE * TargetPosition.y;
 	this->counter = 0;
 
 	initGunShape();
@@ -136,13 +144,15 @@ gun::~gun()
 
 void gun::setGunPosition(sf::Vector2f GunPosition)
 {
-	this->GunPosition.x = BASE_SIZE * GunPosition.x;		this->GunPosition.y = BASE_SIZE * GunPosition.y;
+	this->GunPosition.x = BASE_SIZE * GunPosition.x;
+	this->GunPosition.y = BASE_SIZE * GunPosition.y;
 	gunShape.setPosition(GunPosition);
 }
 
 void gun::setTargetPosition(sf::Vector2f TargetPosition)
 {
-	this->TargetPosition.x = BASE_SIZE * TargetPosition.x;		this->TargetPosition.y = BASE_SIZE * TargetPosition.y;
+	this->TargetPosition.x = BASE_SIZE * TargetPosition.x;
+	this->TargetPosition.y = BASE_SIZE * TargetPosition.y;
 	initBullet();
 }
 
@@ -154,33 +164,33 @@ void gun::update(const float dt)
 	switch (dir)
 	{
 	case direction::Right:
-		if (bulletShape.getPosition().x >= TargetPosition.x)
+		if (bulletShape.getGlobalBounds().left+bulletShape.getGlobalBounds().width >= TargetPosition.x+(BASE_SIZE/4.f))
 		{
-			this->bulletShape.setPosition(GunPosition.x + BASE_SIZE / 2, GunPosition.y + BASE_SIZE / 2);
+			this->bulletShape.setPosition(GunPosition + sf::Vector2f(0.f, BASE_SIZE ));
 			m_assets.play_sound(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::FIRE_END, 10.f);
 			isMove = false;
 		}
 		break;
 	case direction::Left:
-		if (bulletShape.getPosition().x <= TargetPosition.x)
+		if (bulletShape.getGlobalBounds().left <= TargetPosition.x-(BASE_SIZE/4.f))
 		{
-			this->bulletShape.setPosition(GunPosition.x + BASE_SIZE / 2, GunPosition.y + BASE_SIZE / 2);
+			this->bulletShape.setPosition(GunPosition + sf::Vector2f(BASE_SIZE, 0.f));
 			m_assets.play_sound(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::FIRE_END, 10.f);
 			isMove = false;
 		}
 		break;
 	case direction::Down:
-		if (bulletShape.getPosition().y >= TargetPosition.y)
+		if (bulletShape.getGlobalBounds().top+bulletShape.getGlobalBounds().height >= TargetPosition.y+(BASE_SIZE/4.f))
 		{
-			this->bulletShape.setPosition(GunPosition.x + BASE_SIZE / 2, GunPosition.y + BASE_SIZE / 2);
+			this->bulletShape.setPosition(GunPosition);
 			m_assets.play_sound(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::FIRE_END, 10.f);
 			isMove = false;
 		}
 		break;
 	case direction::Up:
-		if (bulletShape.getPosition().y <= TargetPosition.y)
+		if (bulletShape.getGlobalBounds().top <= TargetPosition.y-(BASE_SIZE/4.f))
 		{
-			this->bulletShape.setPosition(GunPosition.x + BASE_SIZE / 2, GunPosition.y + BASE_SIZE / 2);
+			this->bulletShape.setPosition(GunPosition + sf::Vector2f(BASE_SIZE, BASE_SIZE));
 			m_assets.play_sound(asset_holder::group_member_name::GANESH, asset_holder::ganesh_sounds::FIRE_END, 10.f);
 			isMove = false;
 		}
