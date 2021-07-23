@@ -90,6 +90,11 @@ $(document).ready(function(){initNavTree('structcontext.html',''); initResizable
 <div class="title">context Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>contains all info needed for state implementation  
+ <a href="structcontext.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="context_8h_source.html">context.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -109,8 +114,22 @@ std::unique_ptr&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bot
 std::unique_ptr&lt; std::vector&lt; <a class="el" href="struct_data.html">Data</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_data</b></td></tr>
 <tr class="separator:af2c9d98c97473b461b316260a7fcb158"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li><a class="el" href="context_8h_source.html">context.h</a></li>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>contains all info needed for state implementation </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">m_states</td><td>unique ptr to a statestack </td></tr>
+    <tr><td class="paramname">m_window</td><td>unique ptr to a window </td></tr>
+    <tr><td class="paramname">m_assets</td><td>unique ptr to an assetholder </td></tr>
+    <tr><td class="paramname">m_level_no</td><td>unqiue ptr to an unsigned which shows number of levels </td></tr>
+    <tr><td class="paramname">m_data</td><td>unique ptr to std::vector of type data </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="context_8h_source.html#l00019">19</a> of file <a class="el" href="context_8h_source.html">context.h</a>.</p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<li>PROJECT-TOTM/<a class="el" href="context_8h_source.html">context.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PROJECT TOTM: Obstacles/Obstacle.h Source File</title>
+<title>PROJECT TOTM: PROJECT-TOTM/Obstacles/Obstacle.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,26 +96,34 @@ $(document).ready(function(){initNavTree('_obstacle_8h_source.html',''); initRes
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">enum class</span> obstacle_type { Gun = 1, <a class="code" href="class_dragon.html">Dragon</a>, Pufferfish, Sprite, Spring, Teleporter }Type;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="class_obstacle.html">Obstacle</a>() {}</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="class_obstacle.html">Obstacle</a>() {}</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> update(<span class="keywordtype">float</span> dt) = 0;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> render(sf::RenderTarget *target) = 0;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">bool</span> isCollide(<span class="keyword">const</span> sf::FloatRect &amp;shape) = 0;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;};</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="ttc" id="aclass_dragon_html"><div class="ttname"><a href="class_dragon.html">Dragon</a></div><div class="ttdoc">DRagon a obstacle flies regularly between two blocks ( initialposition and finalposition )</div><div class="ttdef"><b>Definition:</b> Dragon.h:9</div></div>
-<div class="ttc" id="aclass_obstacle_html"><div class="ttname"><a href="class_obstacle.html">Obstacle</a></div><div class="ttdef"><b>Definition:</b> Obstacle.h:7</div></div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_obstacle.html#a148a2954137cdbdebe646565c805b296">   16</a></span>&#160;    <span class="keyword">enum class</span> <a class="code" href="class_obstacle.html#a148a2954137cdbdebe646565c805b296">obstacle_type</a> { Gun = 1, <a class="code" href="class_dragon.html">Dragon</a>, Pufferfish, Sprite, Spring, Teleporter }Type;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_obstacle.html#a8f734072321fa06a7b7dae2d5f50f352">   24</a></span>&#160;    <a class="code" href="class_obstacle.html#a8f734072321fa06a7b7dae2d5f50f352">Obstacle</a>() {}</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="class_obstacle.html#ab596bd7dafe002c3495566bfadcc1255">   32</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_obstacle.html#ab596bd7dafe002c3495566bfadcc1255">~Obstacle</a>() {}</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="class_obstacle.html#a87813a0fa7dcf6bce011e19a1c68444f">   40</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_obstacle.html#a87813a0fa7dcf6bce011e19a1c68444f">update</a>(<span class="keywordtype">float</span> dt) = 0;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_obstacle.html#a1312548aaa0dec64272bf6589965418f">   48</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_obstacle.html#a1312548aaa0dec64272bf6589965418f">render</a>(sf::RenderTarget *target) = 0;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="class_obstacle.html#a3638096ebdb2ae8de9d71d69f1e0101b">   59</a></span>&#160;    <span class="keyword">virtual</span> <span class="keyword">const</span> <span class="keywordtype">bool</span> <a class="code" href="class_obstacle.html#a3638096ebdb2ae8de9d71d69f1e0101b">isCollide</a>(<span class="keyword">const</span> sf::FloatRect &amp;shape) = 0;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;};</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">////////////////////////////////////////////////////////////</span></div>
+<div class="ttc" id="aclass_dragon_html"><div class="ttname"><a href="class_dragon.html">Dragon</a></div><div class="ttdoc">bat/dragon a obstacle flies regularly between two blocks ( initialposition and finalposition )</div><div class="ttdef"><b>Definition:</b> <a href="_dragon_8h_source.html#l00008">Dragon.h:9</a></div></div>
+<div class="ttc" id="aclass_obstacle_html"><div class="ttname"><a href="class_obstacle.html">Obstacle</a></div><div class="ttdoc">Base class defining interface for all the obstacle.</div><div class="ttdef"><b>Definition:</b> <a href="_obstacle_8h_source.html#l00006">Obstacle.h:7</a></div></div>
+<div class="ttc" id="aclass_obstacle_html_a1312548aaa0dec64272bf6589965418f"><div class="ttname"><a href="class_obstacle.html#a1312548aaa0dec64272bf6589965418f">Obstacle::render</a></div><div class="ttdeci">virtual void render(sf::RenderTarget *target)=0</div><div class="ttdoc">virtual function Draw everything</div></div>
+<div class="ttc" id="aclass_obstacle_html_a148a2954137cdbdebe646565c805b296"><div class="ttname"><a href="class_obstacle.html#a148a2954137cdbdebe646565c805b296">Obstacle::obstacle_type</a></div><div class="ttdeci">obstacle_type</div><div class="ttdoc">Enum class dealing with obstacle type.</div><div class="ttdef"><b>Definition:</b> <a href="_obstacle_8h_source.html#l00016">Obstacle.h:16</a></div></div>
+<div class="ttc" id="aclass_obstacle_html_a3638096ebdb2ae8de9d71d69f1e0101b"><div class="ttname"><a href="class_obstacle.html#a3638096ebdb2ae8de9d71d69f1e0101b">Obstacle::isCollide</a></div><div class="ttdeci">virtual const bool isCollide(const sf::FloatRect &amp;shape)=0</div><div class="ttdoc">check collision between obstacle and shape</div></div>
+<div class="ttc" id="aclass_obstacle_html_a87813a0fa7dcf6bce011e19a1c68444f"><div class="ttname"><a href="class_obstacle.html#a87813a0fa7dcf6bce011e19a1c68444f">Obstacle::update</a></div><div class="ttdeci">virtual void update(float dt)=0</div><div class="ttdoc">function updates obstacles</div></div>
+<div class="ttc" id="aclass_obstacle_html_a8f734072321fa06a7b7dae2d5f50f352"><div class="ttname"><a href="class_obstacle.html#a8f734072321fa06a7b7dae2d5f50f352">Obstacle::Obstacle</a></div><div class="ttdeci">Obstacle()</div><div class="ttdoc">default constructor</div><div class="ttdef"><b>Definition:</b> <a href="_obstacle_8h_source.html#l00024">Obstacle.h:24</a></div></div>
+<div class="ttc" id="aclass_obstacle_html_ab596bd7dafe002c3495566bfadcc1255"><div class="ttname"><a href="class_obstacle.html#ab596bd7dafe002c3495566bfadcc1255">Obstacle::~Obstacle</a></div><div class="ttdeci">virtual ~Obstacle()</div><div class="ttdoc">default destructor</div><div class="ttdef"><b>Definition:</b> <a href="_obstacle_8h_source.html#l00032">Obstacle.h:32</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_5deb40e966bbc7648c89e58bc8346c43.html">Obstacles</a></li><li class="navelem"><b>Obstacle.h</b></li>
+    <li class="navelem"><a class="el" href="dir_7d4236fd01dc7483281b59277e61c00f.html">PROJECT-TOTM</a></li><li class="navelem"><a class="el" href="dir_e13fb4fa60af49f95f6039072c35f976.html">Obstacles</a></li><li class="navelem"><b>Obstacle.h</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

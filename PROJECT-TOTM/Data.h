@@ -6,21 +6,39 @@
 struct Data
 {
 
-	unsigned int level_no; // 1
-	sf::Vector2u Playerposition;// like 1 2
-	std::vector<std::pair<sf::Vector2u, std::pair<int, int>>> wall_cordinates_sing; //like 1 2,3 2,3 4,4 3,2 3,1 2,8 7
+	unsigned int level_no; 
+	sf::Vector2u Playerposition;
+	std::vector<std::pair<sf::Vector2u, std::pair<int, int>>> wall_cordinates_sing;
 	std::vector<std::vector<sf::Vector2u>> wall_cordinates_mult;
 
 	std::vector<sf::Vector2f> marker_pos_sing;
 	std::vector<std::vector<sf::Vector2f>> marker_pos_mult;
 
 
-	std::vector<std::pair<sf::Vector2u, sf::Vector2u>> gun_arg; //like 1 2,3 4:1 2,3 4
-	std::vector<std::pair<sf::Vector2u, sf::Vector2u>> dragon_arg; //like 1 2,3 4:1 2,3 4
-	std::vector<sf::Vector2u> Pfish_arg; //like 1 2,3 4,2 3
-	std::vector<std::pair<sf::Vector2u, sf::Vector2u>> teleportal_arg; //like 1 2,3 4:1 2,3 4
-	std::vector<std::pair<sf::Vector2u, int>> spring_arg; //like 1 2,3 4,2 3
+	std::vector<std::pair<sf::Vector2u, sf::Vector2u>> gun_arg; 
+	std::vector<std::pair<sf::Vector2u, sf::Vector2u>> dragon_arg;
+	std::vector<sf::Vector2u> Pfish_arg;
+	std::vector<std::pair<sf::Vector2u, sf::Vector2u>> teleportal_arg; 
+	std::vector<std::pair<sf::Vector2u, int>> spring_arg;
 
-	static bool read(std::vector<Data>&); //it will read all object once 
+
+	///////////////////////////////////////////////////
+	///	
+	///	\brief read the details from the file
+	///	
+	///	\param data std::vector<Data>& A vector of data storing all the data
+	///	
+	///	
+	///////////////////////////////////////////////////
+	static bool read(std::vector<Data>& data); 
 };
-
+////////////////////////////////////////////////////////////
+/// 
+/// \struct Data
+///
+/// \brief information/data format used for storing level information
+///		   it deals with data stored in a data.txt file 
+///
+///
+///
+////////////////////////////////////////////////////////////

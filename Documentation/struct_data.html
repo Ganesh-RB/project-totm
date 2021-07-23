@@ -91,12 +91,17 @@ $(document).ready(function(){initNavTree('struct_data.html',''); initResizable()
 <div class="title">Data Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>information/data format used for storing level information it deals with data stored in a data.txt file  
+ <a href="struct_data.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_data_8h_source.html">Data.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aa3f216f5f5a583f572a0e9b4d2b4003d"><td class="memItemLeft" align="right" valign="top"><a id="aa3f216f5f5a583f572a0e9b4d2b4003d"></a>
-static bool&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> (std::vector&lt; <a class="el" href="struct_data.html">Data</a> &gt; &amp;)</td></tr>
-<tr class="separator:aa3f216f5f5a583f572a0e9b4d2b4003d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36b41b92f5752a3f44ce9195f829700f"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_data.html#a36b41b92f5752a3f44ce9195f829700f">read</a> (std::vector&lt; <a class="el" href="struct_data.html">Data</a> &gt; &amp;data)</td></tr>
+<tr class="memdesc:a36b41b92f5752a3f44ce9195f829700f"><td class="mdescLeft">&#160;</td><td class="mdescRight">read the details from the file  <a href="struct_data.html#a36b41b92f5752a3f44ce9195f829700f">More...</a><br /></td></tr>
+<tr class="separator:a36b41b92f5752a3f44ce9195f829700f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -134,9 +139,50 @@ std::vector&lt; std::pair&lt; sf::Vector2u, sf::Vector2u &gt; &gt;&#160;</td><td
 std::vector&lt; std::pair&lt; sf::Vector2u, int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>spring_arg</b></td></tr>
 <tr class="separator:a6569332bd0fc66b51c5ae1ab27f9f507"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>information/data format used for storing level information it deals with data stored in a data.txt file </p>
+
+<p class="definition">Definition at line <a class="el" href="_data_8h_source.html#l00006">6</a> of file <a class="el" href="_data_8h_source.html">Data.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a36b41b92f5752a3f44ce9195f829700f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36b41b92f5752a3f44ce9195f829700f">&#9670;&nbsp;</a></span>read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Data::read </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="struct_data.html">Data</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>read the details from the file </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>std::vector&lt;Data&gt;&amp; A vector of data storing all the data </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_data_8cpp_source.html#l00010">10</a> of file <a class="el" href="_data_8cpp_source.html">Data.cpp</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following files:<ul>
-<li><a class="el" href="_data_8h_source.html">Data.h</a></li>
-<li>Data.cpp</li>
+<li>PROJECT-TOTM/<a class="el" href="_data_8h_source.html">Data.h</a></li>
+<li>PROJECT-TOTM/<a class="el" href="_data_8cpp_source.html">Data.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

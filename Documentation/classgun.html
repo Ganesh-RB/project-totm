@@ -102,7 +102,7 @@ Inheritance diagram for gun:</div>
  <div class="center">
   <img src="classgun.png" usemap="#gun_map" alt=""/>
   <map id="gun_map" name="gun_map">
-<area href="class_obstacle.html" alt="Obstacle" shape="rect" coords="0,0,62,24"/>
+<area href="class_obstacle.html" title="Base class defining interface for all the obstacle." alt="Obstacle" shape="rect" coords="0,0,62,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -120,9 +120,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afe0d4d9b8d13688691df7f228df6711f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgun.html#afe0d4d9b8d13688691df7f228df6711f">update</a> (const float dt)</td></tr>
 <tr class="memdesc:afe0d4d9b8d13688691df7f228df6711f"><td class="mdescLeft">&#160;</td><td class="mdescRight">function fires a gun  <a href="classgun.html#afe0d4d9b8d13688691df7f228df6711f">More...</a><br /></td></tr>
 <tr class="separator:afe0d4d9b8d13688691df7f228df6711f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18ae5c8d39ee7860cdad3c52c4133c41"><td class="memItemLeft" align="right" valign="top"><a id="a18ae5c8d39ee7860cdad3c52c4133c41"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgun.html#a18ae5c8d39ee7860cdad3c52c4133c41">render</a> (sf::RenderTarget *window)</td></tr>
-<tr class="memdesc:a18ae5c8d39ee7860cdad3c52c4133c41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw everything for given gun. <br /></td></tr>
+<tr class="memitem:a18ae5c8d39ee7860cdad3c52c4133c41"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgun.html#a18ae5c8d39ee7860cdad3c52c4133c41">render</a> (sf::RenderTarget *window)</td></tr>
+<tr class="memdesc:a18ae5c8d39ee7860cdad3c52c4133c41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw everything for given gun.  <a href="classgun.html#a18ae5c8d39ee7860cdad3c52c4133c41">More...</a><br /></td></tr>
 <tr class="separator:a18ae5c8d39ee7860cdad3c52c4133c41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2499ef0dbf6d75f944da37d91ade8fc8"><td class="memItemLeft" align="right" valign="top">const sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgun.html#a2499ef0dbf6d75f944da37d91ade8fc8">getGunPosition</a> ()</td></tr>
 <tr class="memdesc:a2499ef0dbf6d75f944da37d91ade8fc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">gives position of gun  <a href="classgun.html#a2499ef0dbf6d75f944da37d91ade8fc8">More...</a><br /></td></tr>
@@ -133,6 +132,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a8cb97dbe1da62b09ae106ec5e3423d01"><td class="memItemLeft" align="right" valign="top">const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgun.html#a8cb97dbe1da62b09ae106ec5e3423d01">isCollide</a> (const sf::FloatRect &amp;shape)</td></tr>
 <tr class="memdesc:a8cb97dbe1da62b09ae106ec5e3423d01"><td class="mdescLeft">&#160;</td><td class="mdescRight">check collision between bullets and shape  <a href="classgun.html#a8cb97dbe1da62b09ae106ec5e3423d01">More...</a><br /></td></tr>
 <tr class="separator:a8cb97dbe1da62b09ae106ec5e3423d01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_obstacle"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_obstacle')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_obstacle.html">Obstacle</a></td></tr>
+<tr class="memitem:a8f734072321fa06a7b7dae2d5f50f352 inherit pub_methods_class_obstacle"><td class="memItemLeft" align="right" valign="top"><a id="a8f734072321fa06a7b7dae2d5f50f352"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_obstacle.html#a8f734072321fa06a7b7dae2d5f50f352">Obstacle</a> ()</td></tr>
+<tr class="memdesc:a8f734072321fa06a7b7dae2d5f50f352 inherit pub_methods_class_obstacle"><td class="mdescLeft">&#160;</td><td class="mdescRight">default constructor <br /></td></tr>
+<tr class="separator:a8f734072321fa06a7b7dae2d5f50f352 inherit pub_methods_class_obstacle"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab596bd7dafe002c3495566bfadcc1255 inherit pub_methods_class_obstacle"><td class="memItemLeft" align="right" valign="top"><a id="ab596bd7dafe002c3495566bfadcc1255"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_obstacle.html#ab596bd7dafe002c3495566bfadcc1255">~Obstacle</a> ()</td></tr>
+<tr class="memdesc:ab596bd7dafe002c3495566bfadcc1255 inherit pub_methods_class_obstacle"><td class="mdescLeft">&#160;</td><td class="mdescRight">default destructor <br /></td></tr>
+<tr class="separator:ab596bd7dafe002c3495566bfadcc1255 inherit pub_methods_class_obstacle"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -143,7 +151,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> (std:
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_types_class_obstacle"><td colspan="2" onclick="javascript:toggleInherit('pub_types_class_obstacle')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_obstacle.html">Obstacle</a></td></tr>
-<tr class="memitem:a148a2954137cdbdebe646565c805b296 inherit pub_types_class_obstacle"><td class="memItemLeft" align="right" valign="top"><a id="a148a2954137cdbdebe646565c805b296"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>obstacle_type</b> { <br />
+<tr class="memitem:a148a2954137cdbdebe646565c805b296 inherit pub_types_class_obstacle"><td class="memItemLeft" align="right" valign="top"><a id="a148a2954137cdbdebe646565c805b296"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_obstacle.html#a148a2954137cdbdebe646565c805b296">obstacle_type</a> { <br />
 &#160;&#160;<b>Gun</b> = 1
 , <b>Dragon</b>
 , <b>Pufferfish</b>
@@ -153,10 +161,11 @@ Additional Inherited Members</h2></td></tr>
 , <b>Teleporter</b>
 <br />
  }</td></tr>
+<tr class="memdesc:a148a2954137cdbdebe646565c805b296"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enum class dealing with obstacle type. <br /></td></tr>
 <tr class="separator:a148a2954137cdbdebe646565c805b296 inherit pub_types_class_obstacle"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_obstacle"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_obstacle')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_obstacle.html">Obstacle</a></td></tr>
 <tr class="memitem:a7974efc7ffd8aa6b73506b51577d4152 inherit pub_attribs_class_obstacle"><td class="memItemLeft" align="right" valign="top"><a id="a7974efc7ffd8aa6b73506b51577d4152"></a>
-enum Obstacle::obstacle_type&#160;</td><td class="memItemRight" valign="bottom"><b>Type</b></td></tr>
+enum <a class="el" href="class_obstacle.html#a148a2954137cdbdebe646565c805b296">Obstacle::obstacle_type</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Type</b></td></tr>
 <tr class="separator:a7974efc7ffd8aa6b73506b51577d4152 inherit pub_attribs_class_obstacle"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -169,10 +178,12 @@ enum Obstacle::obstacle_type&#160;</td><td class="memItemRight" valign="bottom">
 <div class="line">Gun1.render(this-&gt;window);</div>
 <div class="line"><span class="keywordflow">if</span>(Gun1.isCollide(<a class="code" href="classplayer.html">player</a>.<a class="code" href="classplayer.html#a1b3d10ffb857c1b7adb1de744d690299">shape</a>.getglobalound()))</div>
 <div class="line">    <span class="comment">//end game</span></div>
-<div class="ttc" id="aclassgun_html"><div class="ttname"><a href="classgun.html">gun</a></div><div class="ttdoc">gun a obstacle which fires bullets regularly</div><div class="ttdef"><b>Definition:</b> gun.h:9</div></div>
-<div class="ttc" id="aclassplayer_html"><div class="ttname"><a href="classplayer.html">player</a></div><div class="ttdoc">class dealing with player movement,collision and markers</div><div class="ttdef"><b>Definition:</b> player.h:15</div></div>
-<div class="ttc" id="aclassplayer_html_a1b3d10ffb857c1b7adb1de744d690299"><div class="ttname"><a href="classplayer.html#a1b3d10ffb857c1b7adb1de744d690299">player::shape</a></div><div class="ttdeci">sf::RectangleShape shape</div><div class="ttdoc">used for square shaped player</div><div class="ttdef"><b>Definition:</b> player.h:366</div></div>
-</div><!-- fragment --> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<div class="ttc" id="aclassgun_html"><div class="ttname"><a href="classgun.html">gun</a></div><div class="ttdoc">gun a obstacle which fires bullets regularly</div><div class="ttdef"><b>Definition:</b> <a href="gun_8h_source.html#l00008">gun.h:9</a></div></div>
+<div class="ttc" id="aclassplayer_html"><div class="ttname"><a href="classplayer.html">player</a></div><div class="ttdoc">class dealing with player movement,collision and markers</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00014">player.h:15</a></div></div>
+<div class="ttc" id="aclassplayer_html_a1b3d10ffb857c1b7adb1de744d690299"><div class="ttname"><a href="classplayer.html#a1b3d10ffb857c1b7adb1de744d690299">player::shape</a></div><div class="ttdeci">sf::RectangleShape shape</div><div class="ttdoc">used for square shaped player</div><div class="ttdef"><b>Definition:</b> <a href="player_8h_source.html#l00366">player.h:366</a></div></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="gun_8h_source.html#l00008">8</a> of file <a class="el" href="gun_8h_source.html">gun.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad020260889f06aaa11e80aff0c6979c6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad020260889f06aaa11e80aff0c6979c6">&#9670;&nbsp;</a></span>gun()</h2>
 
@@ -215,6 +226,8 @@ enum Obstacle::obstacle_type&#160;</td><td class="memItemRight" valign="bottom">
   </dd>
 </dl>
 
+<p class="definition">Definition at line <a class="el" href="gun_8cpp_source.html#l00124">124</a> of file <a class="el" href="gun_8cpp_source.html">gun.cpp</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -237,6 +250,8 @@ enum Obstacle::obstacle_type&#160;</td><td class="memItemRight" valign="bottom">
 <dl class="section return"><dt>Returns</dt><dd>Gunposition sf::Vector2f</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classgun.html#a978097877c4e57f134cc044356a4dcc3" title="sets a gun position">setGunPosition</a> </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="gun_8cpp_source.html#l00250">250</a> of file <a class="el" href="gun_8cpp_source.html">gun.cpp</a>.</p>
+
 </div>
 </div>
 <a id="a3f626f4f5537b79b3ef2d3f50281a766"></a>
@@ -257,6 +272,8 @@ enum Obstacle::obstacle_type&#160;</td><td class="memItemRight" valign="bottom">
 <p>gives position of Target </p>
 <dl class="section return"><dt>Returns</dt><dd>TargetPosition sf::Vector2f</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classgun.html#addf5d20febed421366ebdb8b470e35ee" title="sets a target or wall position">setTargetPosition</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="gun_8cpp_source.html#l00255">255</a> of file <a class="el" href="gun_8cpp_source.html">gun.cpp</a>.</p>
 
 </div>
 </div>
@@ -293,7 +310,47 @@ enum Obstacle::obstacle_type&#160;</td><td class="memItemRight" valign="bottom">
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if collide else false </dd></dl>
 
-<p>Implements <a class="el" href="class_obstacle.html">Obstacle</a>.</p>
+<p>Implements <a class="el" href="class_obstacle.html#a3638096ebdb2ae8de9d71d69f1e0101b">Obstacle</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="gun_8cpp_source.html#l00260">260</a> of file <a class="el" href="gun_8cpp_source.html">gun.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a18ae5c8d39ee7860cdad3c52c4133c41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18ae5c8d39ee7860cdad3c52c4133c41">&#9670;&nbsp;</a></span>render()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gun::render </td>
+          <td>(</td>
+          <td class="paramtype">sf::RenderTarget *&#160;</td>
+          <td class="paramname"><em>window</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Draw everything for given gun. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">window</td><td>sf::RenderTarget* target for drawing things </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="class_obstacle.html#a1312548aaa0dec64272bf6589965418f">Obstacle</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="gun_8cpp_source.html#l00242">242</a> of file <a class="el" href="gun_8cpp_source.html">gun.cpp</a>.</p>
 
 </div>
 </div>
@@ -322,6 +379,8 @@ enum Obstacle::obstacle_type&#160;</td><td class="memItemRight" valign="bottom">
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classgun.html#a2499ef0dbf6d75f944da37d91ade8fc8" title="gives position of gun">getGunPosition</a> </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="gun_8cpp_source.html#l00145">145</a> of file <a class="el" href="gun_8cpp_source.html">gun.cpp</a>.</p>
+
 </div>
 </div>
 <a id="addf5d20febed421366ebdb8b470e35ee"></a>
@@ -347,6 +406,8 @@ enum Obstacle::obstacle_type&#160;</td><td class="memItemRight" valign="bottom">
   </table>
   </dd>
 </dl>
+
+<p class="definition">Definition at line <a class="el" href="gun_8cpp_source.html#l00152">152</a> of file <a class="el" href="gun_8cpp_source.html">gun.cpp</a>.</p>
 
 </div>
 </div>
@@ -383,13 +444,15 @@ enum Obstacle::obstacle_type&#160;</td><td class="memItemRight" valign="bottom">
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="class_obstacle.html">Obstacle</a>.</p>
+<p>Implements <a class="el" href="class_obstacle.html#a87813a0fa7dcf6bce011e19a1c68444f">Obstacle</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="gun_8cpp_source.html#l00159">159</a> of file <a class="el" href="gun_8cpp_source.html">gun.cpp</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>Obstacles/<a class="el" href="gun_8h_source.html">gun.h</a></li>
-<li>Obstacles/gun.cpp</li>
+<li>PROJECT-TOTM/Obstacles/<a class="el" href="gun_8h_source.html">gun.h</a></li>
+<li>PROJECT-TOTM/Obstacles/<a class="el" href="gun_8cpp_source.html">gun.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

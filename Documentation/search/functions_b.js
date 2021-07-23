@@ -1,11 +1,6 @@
 var searchData=
 [
-  ['set_5fplayer_5fdead_153',['set_player_dead',['../classplayer.html#a791dc424a4c6bf04f5e72d437a083ec2',1,'player']]],
-  ['setgunposition_154',['setGunPosition',['../classgun.html#a978097877c4e57f134cc044356a4dcc3',1,'gun']]],
-  ['setposition_155',['setPosition',['../classplayer.html#ac06b21a000a6837d7f50918d95fb48e3',1,'player']]],
-  ['settargetposition_156',['setTargetPosition',['../classgun.html#addf5d20febed421366ebdb8b470e35ee',1,'gun']]],
-  ['spring_157',['spring',['../classspring.html#a3d9620280ec4be2b6a89bc9e59a3002f',1,'spring']]],
-  ['start_158',['start',['../class_level.html#af2d87b5a29788eb7946c3cc4e0ccc698',1,'Level::start()'],['../classstate.html#a97f9fa3caf2ecdf7b88846cfd2b5ebf5',1,'state::start()']]],
-  ['state_159',['state',['../classstate.html#aee920d9f534640451f22b3525f9cb9de',1,'state']]],
-  ['stateman_160',['stateman',['../classstateman.html#a64f90fdcc9c3fd112380307a5b29bf84',1,'stateman']]]
+  ['read_155',['read',['../struct_data.html#a36b41b92f5752a3f44ce9195f829700f',1,'Data']]],
+  ['render_156',['render',['../classgen__menu.html#a5422674d2fd38948da9defee8df538a0',1,'gen_menu::render()'],['../classhelp__screen.html#aa9d27292796cb5920378ec292e148987',1,'help_screen::render()'],['../class_level.html#a7e3afa83490da2ae38e2a1c6e0322657',1,'Level::render()'],['../classlevel__selector.html#a42c78f4a3330b42f7fa7272dec4a2f70',1,'level_selector::render()'],['../class_dragon.html#a76ee7312b2230a86499cd7491810f1ec',1,'Dragon::render()'],['../classgun.html#a18ae5c8d39ee7860cdad3c52c4133c41',1,'gun::render()'],['../class_obstacle.html#a1312548aaa0dec64272bf6589965418f',1,'Obstacle::render()'],['../classpufferfish.html#a644753fb0d892fc556d7a6f7924fcdee',1,'pufferfish::render()'],['../classspring.html#a68452b114835a564d9a71e722cb032e7',1,'spring::render()'],['../classteleporter.html#a168be2731daca51ab9e1a1cf3c6ba637',1,'teleporter::render()'],['../classplayer.html#a5ec1b389a9cf7d9b4f3515a7b37f17e0',1,'player::render()'],['../classstate.html#ad6d33c174bf3f234a5cea405c95109bc',1,'state::render()'],['../classwall__gen.html#a2f75a3dbaa41677045c84196072bbbc1',1,'wall_gen::render()']]],
+  ['run_157',['run',['../classgame.html#ac0989b3bcd3a7a806cd7c3211bc339e8',1,'game']]]
 ];

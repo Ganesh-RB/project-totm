@@ -119,4 +119,13 @@ public:
 	static void read(std::ifstream &fin, Data &data, size_t &size);
 };
 
+////////////////////////////////////////////////////////////
+/// 
+/// \class pufferfish
+///
+/// \brief pufferfish a obstacle which grow in size regularly 
+///			this obstacle is i n silent position for some time
+///
+/// 
+////////////////////////////////////////////////////////////
 #endif

@@ -6,7 +6,7 @@
 #include "Data.h"
 
 ////////////////////////////////////////////////////////////
-/// \struct 
+/// \struct context
 /// \brief contains all info needed for state implementation
 /// 
 /// \param m_states unique ptr to a statestack

@@ -87,6 +87,8 @@ public:
 	///////////////////////////////////////////////////
 	///	\brief Draw everything for given gun
 	///
+	///	\param window sf::RenderTarget* target for drawing things
+	///
 	///////////////////////////////////////////////////
 	void render(sf::RenderTarget* window);
 

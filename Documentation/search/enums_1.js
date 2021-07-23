@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['spring_5fdir_196',['spring_dir',['../classspring.html#af572d5bb1f370b151fb26a95229052f2',1,'spring']]]
+  ['obstacle_5ftype_202',['obstacle_type',['../class_obstacle.html#a148a2954137cdbdebe646565c805b296',1,'Obstacle']]]
 ];

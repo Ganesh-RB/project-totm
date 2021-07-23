@@ -113,7 +113,7 @@ public:
 /// 
 /// \class Dragon
 ///
-/// \brief DRagon a obstacle flies regularly between two blocks ( initialposition and finalposition )
+/// \brief bat/dragon a obstacle flies regularly between two blocks ( initialposition and finalposition )
 ///
 /// 
 ///
