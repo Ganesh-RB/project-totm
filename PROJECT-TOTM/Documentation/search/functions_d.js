@@ -1,6 +1,0 @@
-var searchData=
-[
-  ['update_162',['update',['../class_dragon.html#a1da15f441115c3059df9d3778f3e1811',1,'Dragon::update()'],['../classgen__menu.html#a28f7b0503741264bcc5c1e48738109aa',1,'gen_menu::update()'],['../classgun.html#afe0d4d9b8d13688691df7f228df6711f',1,'gun::update()'],['../classhelp__screen.html#a30cf3ae16ce91107d2145ca409b30c8f',1,'help_screen::update()'],['../class_level.html#a1d45f9581a83481fa32d59e6fab473e7',1,'Level::update()'],['../classlevel__selector.html#a6f5b72d45292aaa6d465202f33eb1d21',1,'level_selector::update()'],['../classplayer.html#ad76bde554e86d90e6e7d5e8e60430fb2',1,'player::update()'],['../classpufferfish.html#a40a484e793f58628fe86b9d677ff401e',1,'pufferfish::update()'],['../classspring.html#a507b5d13764c32848e744cf2c7d56bd9',1,'spring::update()'],['../classstate.html#ac397774e90a515cdba118789d6544bf7',1,'state::update()'],['../classteleporter.html#a28a7ce3fff2d22f2083bfabd8619a54e',1,'teleporter::update()']]],
-  ['update_5fanim_163',['update_anim',['../classgen__menu.html#ae008568d98cc4658460f17fc5aadb58d',1,'gen_menu::update_anim()'],['../classvictory__menu.html#a69c1d0c3ec04ee874cc17cfd313695b6',1,'victory_menu::update_anim()']]],
-  ['update_5fcollision_164',['update_collision',['../classplayer.html#a192a59270dd181e293003f09ccd6c553',1,'player']]]
-];
