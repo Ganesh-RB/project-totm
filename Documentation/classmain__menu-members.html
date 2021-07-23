@@ -5,10 +5,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: Member List</title>
+<title>PROJECT TOTM: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -21,8 +25,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">PROJECT TOTM
+   &#160;<span id="projectnumber">1.0.0</span>
    </div>
+   <div id="projectbrief">A simple 2D game using SFML library</div>
   </td>
  </tr>
  </tbody>
@@ -45,6 +51,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classmain__menu.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,7 +82,6 @@ $(function() {
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">main_menu Member List</div>  </div>
@@ -70,7 +92,7 @@ $(function() {
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="classgen__menu.html#aa39d5b217b2a939145f2985683c465a7">color_text</a></td><td class="entry"><a class="el" href="classgen__menu.html">gen_menu</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr><td class="entry"><a class="el" href="classgen__menu.html#affa1f0d5244db9a60f7ae9fb3403cef4">gen_menu</a>(std::shared_ptr&lt; context &gt; &amp;context)</td><td class="entry"><a class="el" href="classgen__menu.html">gen_menu</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classgen__menu.html#ad7ac6bf50138ae25404d9f3a6ef7da14">init</a>() override</td><td class="entry"><a class="el" href="classgen__menu.html">gen_menu</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classgen__menu.html#adb871d54555b4551fea848ea933a3f87">init</a>() override</td><td class="entry"><a class="el" href="classgen__menu.html">gen_menu</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="classgen__menu.html#a0a84ef217c44ba06dfa5e7a282f1dadf">m_context</a></td><td class="entry"><a class="el" href="classgen__menu.html">gen_menu</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classmain__menu.html#a038c37c54a7d37a174894e42703de8e4">main_menu</a>(std::shared_ptr&lt; context &gt; &amp;context)</td><td class="entry"><a class="el" href="classmain__menu.html">main_menu</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="classgen__menu.html#a7ed65411bdbe9f1e0313a8c087bc3aa5">menu_title</a></td><td class="entry"><a class="el" href="classgen__menu.html">gen_menu</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
@@ -80,20 +102,23 @@ $(function() {
   <tr><td class="entry"><a class="el" href="classgen__menu.html#abcbc2090a5fe8efe054a8a54297d36ff">options</a></td><td class="entry"><a class="el" href="classgen__menu.html">gen_menu</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classstate.html#ace78bc3bbf8cc1ec2cc9027426afdf9b">pause</a>()</td><td class="entry"><a class="el" href="classstate.html">state</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="classmain__menu.html#a17c3be044cb23ea5617cd26636d7228f">pollevents</a>() override</td><td class="entry"><a class="el" href="classmain__menu.html">main_menu</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classgen__menu.html#a13b3d2f05d8afcbceadf2405fedfd8a9">render</a>() override</td><td class="entry"><a class="el" href="classgen__menu.html">gen_menu</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classgen__menu.html#a5422674d2fd38948da9defee8df538a0">render</a>() override</td><td class="entry"><a class="el" href="classgen__menu.html">gen_menu</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="classstate.html#a97f9fa3caf2ecdf7b88846cfd2b5ebf5">start</a>()</td><td class="entry"><a class="el" href="classstate.html">state</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classstate.html#aee920d9f534640451f22b3525f9cb9de">state</a>()</td><td class="entry"><a class="el" href="classstate.html">state</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr><td class="entry"><a class="el" href="classgen__menu.html#ad33c669285fcaf53f49b97cb51de5478">title_font</a></td><td class="entry"><a class="el" href="classgen__menu.html">gen_menu</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classgen__menu.html#a28f7b0503741264bcc5c1e48738109aa">update</a>(float &amp;deltatime) override</td><td class="entry"><a class="el" href="classgen__menu.html">gen_menu</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classgen__menu.html#a20fe9259ae3cfaa91816166245b2b264">update</a>(float &amp;deltatime) override</td><td class="entry"><a class="el" href="classgen__menu.html">gen_menu</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="classgen__menu.html#ae008568d98cc4658460f17fc5aadb58d">update_anim</a>(float dt)</td><td class="entry"><a class="el" href="classgen__menu.html">gen_menu</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classmain__menu.html#a203d0b4e1700f311265de6d59a158993">variable_init</a>() override</td><td class="entry"><a class="el" href="classmain__menu.html">main_menu</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classgen__menu.html#af9fa6cc2544faca96d43aa296c19a1a2">~gen_menu</a>()</td><td class="entry"><a class="el" href="classgen__menu.html">gen_menu</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classmain__menu.html#a649ddc586294c0134c87a5188c7bdaa8">~main_menu</a>()</td><td class="entry"><a class="el" href="classmain__menu.html">main_menu</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classgen__menu.html#a7aca02c426c5a7a33a65f7e24848510c">~gen_menu</a>()</td><td class="entry"><a class="el" href="classgen__menu.html">gen_menu</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classmain__menu.html#a3f3182ffd508dc9efa0fe3123df8a5db">~main_menu</a>()</td><td class="entry"><a class="el" href="classmain__menu.html">main_menu</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="classstate.html#a313fdbe592e4426caf41148b22b45b10">~state</a>()</td><td class="entry"><a class="el" href="classstate.html">state</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

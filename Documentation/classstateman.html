@@ -5,10 +5,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: stateman Class Reference</title>
+<title>PROJECT TOTM: stateman Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -21,8 +25,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">PROJECT TOTM
+   &#160;<span id="projectnumber">1.0.0</span>
    </div>
+   <div id="projectbrief">A simple 2D game using SFML library</div>
   </td>
  </tr>
  </tbody>
@@ -45,6 +51,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classstateman.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,7 +82,6 @@ $(function() {
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -71,6 +93,8 @@ $(function() {
 
 <p>state manager  
  <a href="classstateman.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="stateman_8h_source.html">stateman.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -91,10 +115,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a456f673c1717dbe7e724ccc0aa34bcae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstateman.html#a456f673c1717dbe7e724ccc0aa34bcae">ProcessStatechange</a> ()</td></tr>
 <tr class="memdesc:a456f673c1717dbe7e724ccc0aa34bcae"><td class="mdescLeft">&#160;</td><td class="mdescRight">processes all the state changes  <a href="classstateman.html#a456f673c1717dbe7e724ccc0aa34bcae">More...</a><br /></td></tr>
 <tr class="separator:a456f673c1717dbe7e724ccc0aa34bcae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7ca3abb7c581d1d26fdc71de2d99462"><td class="memItemLeft" align="right" valign="top"><a id="af7ca3abb7c581d1d26fdc71de2d99462"></a>
-std::unique_ptr&lt; <a class="el" href="classstate.html">state</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstateman.html#af7ca3abb7c581d1d26fdc71de2d99462">Getcurrent</a> ()</td></tr>
-<tr class="memdesc:af7ca3abb7c581d1d26fdc71de2d99462"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns refernce to current state <br /></td></tr>
-<tr class="separator:af7ca3abb7c581d1d26fdc71de2d99462"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb2ed9db09f318f7149fd9e8fd7d6f6f"><td class="memItemLeft" align="right" valign="top"><a id="aeb2ed9db09f318f7149fd9e8fd7d6f6f"></a>
+std::unique_ptr&lt; <a class="el" href="classstate.html">state</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstateman.html#aeb2ed9db09f318f7149fd9e8fd7d6f6f">Getcurrent</a> ()</td></tr>
+<tr class="memdesc:aeb2ed9db09f318f7149fd9e8fd7d6f6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns refernce to current state <br /></td></tr>
+<tr class="separator:aeb2ed9db09f318f7149fd9e8fd7d6f6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d7e01da647daa906b8429b21753eebf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstateman.html#a4d7e01da647daa906b8429b21753eebf">is_empty</a> ()</td></tr>
 <tr class="memdesc:a4d7e01da647daa906b8429b21753eebf"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns bool showing if statestack is empty  <a href="classstateman.html#a4d7e01da647daa906b8429b21753eebf">More...</a><br /></td></tr>
 <tr class="separator:a4d7e01da647daa906b8429b21753eebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -226,10 +250,18 @@ std::unique_ptr&lt; <a class="el" href="classstate.html">state</a> &gt; &amp;&#1
 
 </div>
 </div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="stateman_8h_source.html">stateman.h</a></li>
+<li>stateman.cpp</li>
+</ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="classstateman.html">stateman</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>

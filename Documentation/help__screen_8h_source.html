@@ -5,10 +5,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: help_screen.h Source File</title>
+<title>PROJECT TOTM: help_screen.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -21,8 +25,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">PROJECT TOTM
+   &#160;<span id="projectnumber">1.0.0</span>
    </div>
+   <div id="projectbrief">A simple 2D game using SFML library</div>
   </td>
  </tr>
  </tbody>
@@ -45,6 +51,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('help__screen_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,11 +82,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_e6bb53534ac0e427887cf7a94c0c004e.html">C:</a></li><li class="navelem"><a class="el" href="dir_8ceffd4ee35c3518d4e8bdc7e638efe8.html">Users</a></li><li class="navelem"><a class="el" href="dir_a6ed6f5eeaa036acaf45112b594cc013.html">Ojjas</a></li><li class="navelem"><a class="el" href="dir_1dae4da4b021df33e3c2fa7b44e2a5b3.html">Desktop</a></li><li class="navelem"><a class="el" href="dir_9b6f17e1b6ad12b9c3d9b80bcc489395.html">SFML environment</a></li><li class="navelem"><a class="el" href="dir_6e0fab42c1cb1509c63afb34851d8511.html">SFML_visual</a></li><li class="navelem"><a class="el" href="dir_f99f4864a2abf9198db578ce30f7dcaf.html">SFML_visual</a></li><li class="navelem"><a class="el" href="dir_2ff91b20c98e5a5772e68fe7d0c88dd9.html">doc_source</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">help_screen.h</div>  </div>
@@ -80,35 +98,39 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    sf::Text Helpfull_text;</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classhelp__screen.html#a9d7f9cded7884fd6df544eaf40c6781b">   18</a></span>&#160;    <a class="code" href="classhelp__screen.html#a9d7f9cded7884fd6df544eaf40c6781b">help_screen</a>(std::shared_ptr&lt;context&gt;&amp; <a class="code" href="structcontext.html">context</a>);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="classhelp__screen.html#a9d7f9cded7884fd6df544eaf40c6781b">help_screen</a>(std::shared_ptr&lt;context&gt;&amp; <a class="code" href="structcontext.html">context</a>);</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classhelp__screen.html#a54576e4882147a3bc49ccf9381d0d9a3">   24</a></span>&#160;    <a class="code" href="classhelp__screen.html#a54576e4882147a3bc49ccf9381d0d9a3">~help_screen</a>();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="classhelp__screen.html#a54576e4882147a3bc49ccf9381d0d9a3">~help_screen</a>();</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="comment">// overrides of state pure virtuals </span></div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classhelp__screen.html#aecf57b610c3253ab5ccc1e49b387c221">   32</a></span>&#160;<span class="comment"></span>    <span class="keywordtype">void</span> <a class="code" href="classhelp__screen.html#aecf57b610c3253ab5ccc1e49b387c221">init</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"></span>    <span class="keywordtype">void</span> <a class="code" href="classhelp__screen.html#aecf57b610c3253ab5ccc1e49b387c221">init</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classhelp__screen.html#a9fa636322a2875df498183f07d2b8745">   39</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classhelp__screen.html#a9fa636322a2875df498183f07d2b8745">pollevents</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classhelp__screen.html#a9fa636322a2875df498183f07d2b8745">pollevents</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classhelp__screen.html#a30cf3ae16ce91107d2145ca409b30c8f">   46</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classhelp__screen.html#a30cf3ae16ce91107d2145ca409b30c8f">update</a>(<span class="keywordtype">float</span>&amp; deltatime) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classhelp__screen.html#a30cf3ae16ce91107d2145ca409b30c8f">update</a>(<span class="keywordtype">float</span>&amp; deltatime) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classhelp__screen.html#aa9d27292796cb5920378ec292e148987">   53</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classhelp__screen.html#aa9d27292796cb5920378ec292e148987">render</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classhelp__screen.html#aa9d27292796cb5920378ec292e148987">render</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;};</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclasshelp__screen_html"><div class="ttname"><a href="classhelp__screen.html">help_screen</a></div><div class="ttdoc">class for the help screen</div><div class="ttdef"><b>Definition:</b> help_screen.h:6</div></div>
-<div class="ttc" id="aclasshelp__screen_html_a30cf3ae16ce91107d2145ca409b30c8f"><div class="ttname"><a href="classhelp__screen.html#a30cf3ae16ce91107d2145ca409b30c8f">help_screen::update</a></div><div class="ttdeci">void update(float &amp;deltatime) override</div><div class="ttdoc">override of pure virtual state class function update(float&amp; dt) this takes deltatime as float for the...</div></div>
-<div class="ttc" id="aclasshelp__screen_html_a54576e4882147a3bc49ccf9381d0d9a3"><div class="ttname"><a href="classhelp__screen.html#a54576e4882147a3bc49ccf9381d0d9a3">help_screen::~help_screen</a></div><div class="ttdeci">~help_screen()</div><div class="ttdoc">destructor</div></div>
-<div class="ttc" id="aclasshelp__screen_html_a9d7f9cded7884fd6df544eaf40c6781b"><div class="ttname"><a href="classhelp__screen.html#a9d7f9cded7884fd6df544eaf40c6781b">help_screen::help_screen</a></div><div class="ttdeci">help_screen(std::shared_ptr&lt; context &gt; &amp;context)</div><div class="ttdoc">constructor</div></div>
-<div class="ttc" id="aclasshelp__screen_html_a9fa636322a2875df498183f07d2b8745"><div class="ttname"><a href="classhelp__screen.html#a9fa636322a2875df498183f07d2b8745">help_screen::pollevents</a></div><div class="ttdeci">void pollevents() override</div><div class="ttdoc">override of pure virtual state class function pollevents() this takes input for the class</div></div>
-<div class="ttc" id="aclasshelp__screen_html_aa9d27292796cb5920378ec292e148987"><div class="ttname"><a href="classhelp__screen.html#aa9d27292796cb5920378ec292e148987">help_screen::render</a></div><div class="ttdeci">void render() override</div><div class="ttdoc">override of pure virtual state class function render() this renders the class on context's window</div></div>
-<div class="ttc" id="aclasshelp__screen_html_aecf57b610c3253ab5ccc1e49b387c221"><div class="ttname"><a href="classhelp__screen.html#aecf57b610c3253ab5ccc1e49b387c221">help_screen::init</a></div><div class="ttdeci">void init() override</div><div class="ttdoc">override of pure virtual state class function init() this initializes the class</div></div>
+<div class="ttc" id="aclasshelp__screen_html_a30cf3ae16ce91107d2145ca409b30c8f"><div class="ttname"><a href="classhelp__screen.html#a30cf3ae16ce91107d2145ca409b30c8f">help_screen::update</a></div><div class="ttdeci">void update(float &amp;deltatime) override</div><div class="ttdoc">override of pure virtual state class function update(float&amp; dt) this takes deltatime as float for the...</div><div class="ttdef"><b>Definition:</b> help_screen.cpp:40</div></div>
+<div class="ttc" id="aclasshelp__screen_html_a54576e4882147a3bc49ccf9381d0d9a3"><div class="ttname"><a href="classhelp__screen.html#a54576e4882147a3bc49ccf9381d0d9a3">help_screen::~help_screen</a></div><div class="ttdeci">~help_screen()</div><div class="ttdoc">destructor</div><div class="ttdef"><b>Definition:</b> help_screen.cpp:8</div></div>
+<div class="ttc" id="aclasshelp__screen_html_a9d7f9cded7884fd6df544eaf40c6781b"><div class="ttname"><a href="classhelp__screen.html#a9d7f9cded7884fd6df544eaf40c6781b">help_screen::help_screen</a></div><div class="ttdeci">help_screen(std::shared_ptr&lt; context &gt; &amp;context)</div><div class="ttdoc">constructor</div><div class="ttdef"><b>Definition:</b> help_screen.cpp:4</div></div>
+<div class="ttc" id="aclasshelp__screen_html_a9fa636322a2875df498183f07d2b8745"><div class="ttname"><a href="classhelp__screen.html#a9fa636322a2875df498183f07d2b8745">help_screen::pollevents</a></div><div class="ttdeci">void pollevents() override</div><div class="ttdoc">override of pure virtual state class function pollevents() this takes input for the class</div><div class="ttdef"><b>Definition:</b> help_screen.cpp:22</div></div>
+<div class="ttc" id="aclasshelp__screen_html_aa9d27292796cb5920378ec292e148987"><div class="ttname"><a href="classhelp__screen.html#aa9d27292796cb5920378ec292e148987">help_screen::render</a></div><div class="ttdeci">void render() override</div><div class="ttdoc">override of pure virtual state class function render() this renders the class on context's window</div><div class="ttdef"><b>Definition:</b> help_screen.cpp:44</div></div>
+<div class="ttc" id="aclasshelp__screen_html_aecf57b610c3253ab5ccc1e49b387c221"><div class="ttname"><a href="classhelp__screen.html#aecf57b610c3253ab5ccc1e49b387c221">help_screen::init</a></div><div class="ttdeci">void init() override</div><div class="ttdoc">override of pure virtual state class function init() this initializes the class</div><div class="ttdef"><b>Definition:</b> help_screen.cpp:12</div></div>
 <div class="ttc" id="aclassstate_html"><div class="ttname"><a href="classstate.html">state</a></div><div class="ttdoc">state class for game</div><div class="ttdef"><b>Definition:</b> state.h:13</div></div>
 <div class="ttc" id="astructcontext_html"><div class="ttname"><a href="structcontext.html">context</a></div><div class="ttdef"><b>Definition:</b> context.h:20</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>help_screen.h</b></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+  </ul>
+</div>
 </body>
 </html>
