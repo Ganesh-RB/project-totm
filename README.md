@@ -1,4 +1,4 @@
-# TOM OF THE MASK - COLORS
+# TOMB OF THE MASK - COLORS
 ![Language (C++)](https://img.shields.io/badge/powered_by-C++-brightgreen.svg?style=flat-square)  [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)  
 
  A simple 2D game using SFML library.
