@@ -1,4 +1,4 @@
-#include "..\stdafx.h"
+#include "../stdafx.h"
 #include "teleporter.h"
 
 void teleporter::init_variables()

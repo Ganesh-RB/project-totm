@@ -15,7 +15,7 @@ void Level::initvariables()
 	this->victory = false;
 	this->time_mult = 60.f;
 #if defined(_DEBUG)
-	this->player.display_markers = true;
+	this->Player.display_markers = true;
 #endif
 }
 
@@ -46,7 +46,7 @@ void Level::defeat()
 	m_context->m_assets->play_sound(asset_holder::group_member_name::OJJAS, asset_holder::ojjas_sounds::DEATH);
 	endlevel_timer.restart();
 	end_game_text.setString("GAME OVER!");
-	this->player.set_player_dead();
+	this->Player.set_player_dead();
 }
 void Level::win()
 {
@@ -83,7 +83,7 @@ const bool Level::assign(int lev_no)
         if(_data->level_no==lev_no)
         {
             is_assign=true;
-            this->player.setPosition(_data->Playerposition);
+            this->Player.setPosition(_data->Playerposition);
 
             for (auto coord = _data->wall_cordinates_sing.begin(); coord != _data->wall_cordinates_sing.end(); coord++)
             {
@@ -97,12 +97,12 @@ const bool Level::assign(int lev_no)
             
             for (auto coord = _data->marker_pos_sing.begin(); coord != _data->marker_pos_sing.end(); _data++)
             {
-                this->player.add_marker_single(*coord);
+                this->Player.add_marker_single(*coord);
             }
 
             for (size_t i = 0; i < _data->marker_pos_mult.size(); i++)
             {
-                this->player.add_marker_chain(_data->marker_pos_mult.at(i));
+                this->Player.add_marker_chain(_data->marker_pos_mult.at(i));
             }
         
             for (auto obs = _data->gun_arg.begin(); obs != _data->gun_arg.end(); obs++)
@@ -122,12 +122,12 @@ const bool Level::assign(int lev_no)
 
             for (auto obs = _data->teleportal_arg.begin(); obs != _data->teleportal_arg.end(); obs++)
 			{
-				this->obstacles.push_back(new teleporter(obs->first,obs->second,player,m_context->m_assets.get() ));
+				this->obstacles.push_back(new teleporter(obs->first,obs->second,Player,m_context->m_assets.get() ));
 			}		
 		
 			for (auto obs = _data->spring_arg.begin(); obs != _data->spring_arg.end(); obs++)
 			{
-				this->obstacles.push_back(new spring(obs->first,obs->second,player,m_context->m_assets.get() ));
+				this->obstacles.push_back(new spring(obs->first,obs->second,Player,m_context->m_assets.get() ));
 			}
 		}
     }
@@ -174,9 +174,9 @@ void Level::pollevents()
 void Level::update(float& _dt)
 {
 	dt = _dt;
-	if (((!is_pause) && alive) && (!player.level_complete())) {
+	if (((!is_pause) && alive) && (!Player.level_complete())) {
 
-		this->player.update(m_context->m_window.get(), &dt, &time_mult);
+		this->Player.update(m_context->m_window.get(), &dt, &time_mult);
 
 		for (auto obs : obstacles)
 		{
@@ -184,23 +184,23 @@ void Level::update(float& _dt)
 		}
 		
 		for (auto i : wall_generator.walls) {
-			player.update_collision(&i);
+			Player.update_collision(&i);
 		}
 
 		for (auto obs : obstacles)
 		{
-			if (obs->isCollide(player.shape.getGlobalBounds())) {
+			if (obs->isCollide(Player.shape.getGlobalBounds())) {
 				this->defeat();
 				break;
 			}
 		}
 		
-		victory = player.level_complete();
+		victory = Player.level_complete();
 		if (victory && alive) { 
 			this->win();
 		}
 	}
-	if (!alive) { player.update(m_context->m_window.get(), &dt, &time_mult); }
+	if (!alive) { Player.update(m_context->m_window.get(), &dt, &time_mult); }
 	if (!alive && endlevel_timer.getElapsedTime().asSeconds() > 2.f) {
 		m_context->m_states->Add(std::make_unique<death_menu>(m_context), true);
 	}
@@ -214,7 +214,7 @@ void Level::render()
 	this->m_context->m_window->clear();
 	//draw game objects
 
-	this->player.render(this->m_context->m_window.get());
+	this->Player.render(this->m_context->m_window.get());
 	this->wall_generator.render(this->m_context->m_window.get());
 
 	

@@ -31,7 +31,7 @@ private:
 	sf::Clock pause_timer;
 	sf::Clock endlevel_timer;
 
-	player player{m_context->m_assets.get()};
+	player Player{m_context->m_assets.get()};
 	
 
     std::vector<Obstacle*> obstacles;

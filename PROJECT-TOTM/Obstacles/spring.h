@@ -1,8 +1,8 @@
 #ifndef SPRING_H
 #define SPRING_H
 
-#include "..\player.h"
-#include "..\asset_holder.h"
+#include "../player.h"
+#include "../asset_holder.h"
 #include "Obstacle.h"
 
 class spring : public Obstacle
